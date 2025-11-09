@@ -1,0 +1,18 @@
+name               = "syncer"
+main               = "syncer.js"
+compatibility_date = "2025-11-09"
+
+# Enable scheduled trigger for hourly sync
+[triggers]
+crons = ["5 * * * *"]
+
+[[kv_namespaces]]
+binding = "MODELS_JSON"
+id      = "d0da5b35794c4ac093710e7c9370ad71"
+
+[[kv_namespaces]]
+binding = "LOCKS"
+id      = "837fd02245b0423bb9e3bd6926a6e3ca"
+
+[observability.logs]
+enabled = true # Keep logging enabled for monitoring in production

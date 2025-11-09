@@ -1,0 +1,65 @@
+{
+  "name": "models",
+  "version": "1.0.0",
+  "scripts": {
+    "deploy": "wrangler publish"
+  },
+  "devDependencies": {
+    "@cloudflare/kv-asset-handler": "^0.3.0",
+    "wrangler": "^4.15.2"
+  },
+  "main": "index.js",
+  "dependencies": {
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.2",
+    "as-table": "^1.0.55",
+    "blake3-wasm": "^2.1.5",
+    "color": "^4.2.3",
+    "color-convert": "^2.0.1",
+    "color-name": "^1.1.4",
+    "color-string": "^1.9.1",
+    "cookie": "^0.7.2",
+    "data-uri-to-buffer": "^2.0.2",
+    "defu": "^6.1.4",
+    "detect-libc": "^2.0.4",
+    "esbuild": "^0.25.4",
+    "exit-hook": "^2.2.1",
+    "exsolve": "^1.0.5",
+    "get-source": "^2.0.12",
+    "glob-to-regexp": "^0.4.1",
+    "is-arrayish": "^0.3.2",
+    "jose": "^6.0.11",
+    "mime": "^3.0.0",
+    "miniflare": "^4.20250508.2",
+    "mustache": "^4.2.0",
+    "ohash": "^2.0.11",
+    "path-to-regexp": "^6.3.0",
+    "pathe": "^2.0.3",
+    "printable-characters": "^1.0.42",
+    "semver": "^7.7.2",
+    "sharp": "^0.33.5",
+    "simple-swizzle": "^0.2.2",
+    "source-map": "^0.6.1",
+    "stacktracey": "^2.1.8",
+    "stoppable": "^1.1.0",
+    "ufo": "^1.6.1",
+    "undici": "^5.29.0",
+    "unenv": "^2.0.0-rc.15",
+    "workerd": "^1.20250508.0",
+    "ws": "^8.18.0",
+    "youch": "^3.3.4",
+    "zod": "^3.22.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mustawtfa/syncer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mustawtfa/syncer/issues"
+  },
+  "homepage": "https://github.com/mustawtfa/syncer#readme",
+  "description": ""
+}

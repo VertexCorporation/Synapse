@@ -1,0 +1,13 @@
+name               = "curator"
+main               = "curator.js"
+compatibility_date = "2025-11-09"
+
+[[kv_namespaces]]
+binding = "MODELS_JSON"
+id      = "d0da5b35794c4ac093710e7c9370ad71"
+
+[vars]
+FIREBASE_PROJECT_ID = "vertex-ai-1618"
+
+[observability.logs]
+enabled = true # Keep logging enabled for monitoring in production

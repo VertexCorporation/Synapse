@@ -1,0 +1,21 @@
+name = "supervisor" 
+main = "supervisor.js"
+compatibility_date = "2024-11-09" 
+
+[[kv_namespaces]]
+binding = "MODELS_JSON"
+id      = "d0da5b35794c4ac093710e7c9370ad71"
+
+[[kv_namespaces]]
+binding = "LOCKS"
+id      = "837fd02245b0423bb9e3bd6926a6e3ca" 
+
+[vars]
+OPENROUTER_REFERER = "https://vertexishere.com"
+OPENROUTER_TITLE = "Cortex Supervisor"
+
+[triggers]
+crons = ["*/10 * * * *"]
+
+[observability.logs]
+enabled = true
