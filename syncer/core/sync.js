@@ -14,6 +14,7 @@ import { rehydrateAndMergeProducers } from '../processing/merge.js'; // Will cre
 import { hashJson, mergeDeep } from '../utils/helpers.js';
 
 const LOCK_KEY = "syncer_lock";
+const DATA_WRITE_LOCK_KEY = "data_write_lock";
 
 /**
  * The main synchronization function that runs on a schedule.
@@ -23,13 +24,19 @@ const LOCK_KEY = "syncer_lock";
 export async function syncModels(env, context) {
     const opId = `sync-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`;
     console.log(`🔄 [${opId}] Starting sync process...`);
-    
+
     const MODELS_KV = env.MODELS_JSON;
     if (!MODELS_KV?.put) {
         console.error(`❌ [${opId}] MODELS_JSON KV is invalid.`);
         throw new Error("MODELS_JSON KV is invalid.");
     }
-    
+
+    const dataWriteLockHolder = await env.LOCKS?.get(DATA_WRITE_LOCK_KEY);
+    if (dataWriteLockHolder) {
+        console.log(`🔶 [${opId}] Data is locked by another process (${dataWriteLockHolder}). Skipping sync run.`);
+        return;
+    }
+
     if (!await acquireLock(env.LOCKS, opId, LOCK_KEY)) {
         return; // Exit if lock is not acquired
     }
@@ -38,7 +45,7 @@ export async function syncModels(env, context) {
         // STAGE 1: FETCH DATA
         console.log(`[${opId}] Stage 1: Fetching all source models and current list.`);
         const { currentListStr, initialVersion } = await readCurrentData(MODELS_KV);
-        
+
         const blacklist = await MODELS_KV.get("model_blacklist", "json") || [];
         const blacklistedIds = new Set(blacklist);
 
@@ -46,12 +53,12 @@ export async function syncModels(env, context) {
             buildGroupedOnlineModels(env, opId, blacklistedIds),
             processManualModels(MODELS_KV, opId),
         ]);
-        
+
         // STAGE 2: PROCESS AND MERGE DATA
         console.log(`[${opId}] Stage 2: Pruning, merging, and preparing final data.`);
         const freshProducers = mergeDeep(onlineGrouped, manualGrouped);
         let workingData = currentListStr ? JSON.parse(currentListStr) : { producers: {} };
-        
+
         const finalProducers = rehydrateAndMergeProducers(workingData.producers, freshProducers);
 
         const finalData = {
@@ -62,28 +69,27 @@ export async function syncModels(env, context) {
 
         // STAGE 3: COMPARE AND SAVE
         console.log(`[${opId}] Stage 3: Comparing hashes and saving if changes detected.`);
-        const { json: newJson, hex: newHex } = await hashJson(finalData, opId);
+
+        const { hex: newHex } = await hashJson(finalData, opId);
         const currentHash = await MODELS_KV.get("hash");
 
         if (newHex === currentHash) {
             console.log(`⚖️ [${opId}] No significant changes detected (hash match). Sync complete.`);
             return;
         }
-        
-        // Check for version conflict before writing
-        const currentVersionInKV = await MODELS_KV.get('version');
-        if (currentListStr && currentVersionInKV !== initialVersion) {
+
+        const currentVersionInKV = await MODELS_KV.get("version");
+        if (workingData && workingData.version && currentVersionInKV !== initialVersion) {
             console.warn(`🔶 [${opId}] VERSION CONFLICT! Data was modified by another process. Aborting save.`);
             return;
         }
 
         console.log(`✍️ [${opId}] Changes detected. Preparing to update KV.`);
         createBackups(MODELS_KV, currentListStr, opId, context);
-        
-        // Finalize version right before write
+
         finalData.version = new Date().toISOString();
         const finalJsonToWrite = JSON.stringify(finalData);
-        
+
         writeNewData(MODELS_KV, finalJsonToWrite, newHex, opId, context);
 
     } catch (error) {

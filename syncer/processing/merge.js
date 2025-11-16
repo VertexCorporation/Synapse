@@ -11,6 +11,8 @@
  * @typedef {import('../types.js').ProducersData} ProducersData
  */
 
+import { mergeDeep } from '../utils/helpers.js';
+
 /**
  * Prunes producers, series, and variants from `workingProducers` that do not exist in `freshProducers`.
  * @param {ProducersData} workingProducers - The existing data from KV.
@@ -18,6 +20,7 @@
  * @returns {ProducersData} The pruned `workingProducers` object.
  */
 function pruneStaleModels(workingProducers, freshProducers) {
+    if (!workingProducers || typeof workingProducers !== 'object') return {};
     let prunedItems = 0;
     for (const pName in workingProducers) {
         if (!freshProducers[pName]) {
@@ -60,37 +63,13 @@ function pruneStaleModels(workingProducers, freshProducers) {
  * @returns {ProducersData} The fully merged and rehydrated producers object.
  */
 export function rehydrateAndMergeProducers(workingProducers, freshProducers) {
-    const pruned = pruneStaleModels(workingProducers, freshProducers);
-    const finalProducers = JSON.parse(JSON.stringify(freshProducers)); // Start with a fresh copy
+    // First, prune models from the old data that no longer exist in the fresh data.
+    const prunedWorkingProducers = pruneStaleModels(workingProducers, freshProducers);
 
-    for (const pName in finalProducers) {
-        if (!pruned[pName]) continue;
-        for (const sName in finalProducers[pName]) {
-            if (sName === 'series_description') continue;
-            if (!pruned[pName][sName]) continue;
-
-            const workingSeries = pruned[pName][sName];
-            const finalSeries = finalProducers[pName][sName];
-
-            if (workingSeries.series_description) finalSeries.series_description = workingSeries.series_description;
-            if (workingSeries.hidden === true) finalSeries.hidden = true;
-
-            for (const vName in finalSeries[vName]) {
-                if (!workingSeries[vName]) continue;
-                const workingVariant = workingSeries[vName];
-                const finalVariant = finalSeries[vName];
-
-                // Merge description or details, preserving translations.
-                if (finalVariant.source === 'manual') {
-                    finalVariant.details = { ...(workingVariant.details || {}), ...(finalVariant.details || {}) };
-                } else {
-                    finalVariant.description = { ...(workingVariant.description || {}), ...(finalVariant.description || {}) };
-                }
-
-                // Carry over any other custom properties from the working variant.
-                finalSeries[vName] = { ...workingVariant, ...finalVariant };
-            }
-        }
-    }
-    return finalProducers;
+    // Then, deep merge the pruned old data INTO the new data.
+    // This ensures that fresh core data from the API is present, but any existing enriched data
+    // (like translations, statuses, or manual edits from the Curator) from the old data is preserved.
+    // The `mergeDeep` function will let properties from the second argument (prunedWorkingProducers)
+    // overwrite properties in the first (freshProducers), preserving manual changes.
+    return mergeDeep(freshProducers, prunedWorkingProducers);
 }

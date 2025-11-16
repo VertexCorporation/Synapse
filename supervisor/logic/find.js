@@ -77,11 +77,14 @@ export function findTranslationTasks(data, targetLanguages) {
                     const details = variant.details;
                     details.processing_status ??= {};
                     const fields = [
-                        { key: 'title', text: details.en.title },
                         { key: 'summary', text: details.en.summary },
                         { key: 'description', text: details.en.description },
                         { key: 'role', text: details.en.role },
                     ];
+
+                    if (variant.type === 'roleplay' && details.en.title) {
+                        fields.unshift({ key: 'title', text: details.en.title })
+                    }
 
                     for (const lang of targetLanguages) {
                         details.processing_status[lang] ??= {};
@@ -113,7 +116,6 @@ export function findTranslationTasks(data, targetLanguages) {
             }
         }
     }
-
     // Prioritize tasks: stale/new items first, then retries, then EN verification.
     return tasks.sort((a, b) => {
         const getPriority = (task) => {

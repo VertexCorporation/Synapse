@@ -43,15 +43,22 @@ export const cleanNameForVariant = (n) =>
  * @param {object} pricing - The pricing object from the API.
  * @param {number} textLimit - The maximum allowed cost for text-based pricing.
  * @param {number} imageLimit - The maximum allowed cost for image-based pricing.
+ * @param {number} webSearchLimit - The maximum allowed cost for web search or per-request pricing.
  * @returns {boolean} True if the model is too expensive, false otherwise.
  */
-export function isTooExpensive(pricing, textLimit, imageLimit) {
+export function isTooExpensive(pricing, textLimit, imageLimit, webSearchLimit) {
     if (!pricing || typeof pricing !== "object") return false;
+
     for (const [key, val] of Object.entries(pricing)) {
         const cost = Number(val) || 0;
-        if (key.toLowerCase().includes("image")) {
+        const lowerKey = key.toLowerCase();
+
+        if (lowerKey.includes("image")) {
             if (cost > imageLimit) return true;
+        } else if (lowerKey.includes("web_search") || lowerKey.includes("request")) {
+            if (cost > webSearchLimit) return true;
         } else {
+            // This covers "prompt", "completion", "input_cache_read", etc.
             if (cost > textLimit) return true;
         }
     }
@@ -59,37 +66,45 @@ export function isTooExpensive(pricing, textLimit, imageLimit) {
 }
 
 /**
- * Generates an MD5 hash of a JSON object for change detection.
+ * Generates a SHA-256 hash of a JSON object for change detection.
  * @param {object} obj - The JSON object to hash.
  * @param {string} operationId - The operation ID for logging potential errors.
  * @returns {Promise<{json: string, hex: string}>} A promise that resolves to the JSON string and its hex hash.
  */
 export async function hashJson(obj, operationId) {
-    try {
-        const jsonString = JSON.stringify(obj);
-        const data = new TextEncoder().encode(jsonString);
-        const hashBuffer = await crypto.subtle.digest("MD5", data);
-        const hex = Array.from(new UintArray(hashBuffer))
-            .map((b) => b.toString(16).padStart(2, "0"))
-            .join("");
-        return { json: jsonString, hex };
-    } catch (e) {
-        console.error(`❌ [${operationId}] Hashing failed: ${e.message}`);
-        throw e; // Re-throw to be handled by the caller
-    }
+  try {
+    const jsonString = JSON.stringify(obj);
+    const data = new TextEncoder().encode(jsonString);
+
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    const hex = hashArray
+      .map((b) => b.toString(16).padStart(2, "0"))
+      .join("");
+
+    return { json: jsonString, hex };
+  } catch (e) {
+    console.error(`❌ [${operationId}] Hashing failed: ${e.message}`);
+    throw e; // Re-throw to be handled by the caller
+  }
 }
 
 /**
  * Deeply merges two objects, combining their properties. `source` properties overwrite `target` properties.
+ * This version includes protection against Prototype Pollution.
  * @param {object} target - The object to merge into.
  * @param {object} source - The object to merge from.
  * @returns {object} The new, merged object.
  */
 export function mergeDeep(target, source) {
     const output = { ...target };
-    if (target instanceof Object && source instanceof Object) {
+    if (isObject(target) && isObject(source)) {
         Object.keys(source).forEach(key => {
-            if (source[key] instanceof Object && key in target && target[key] instanceof Object) {
+            if (key === '__proto__' || key === 'constructor' || key === 'prototype') {
+                return;
+            }
+            if (isObject(source[key]) && key in target && isObject(target[key])) {
                 output[key] = mergeDeep(target[key], source[key]);
             } else {
                 output[key] = source[key];
@@ -97,4 +112,13 @@ export function mergeDeep(target, source) {
         });
     }
     return output;
+}
+
+/**
+ * Helper function to check if a variable is a non-null object.
+ * @param {*} item The variable to check.
+ * @returns {boolean}
+ */
+function isObject(item) {
+    return (item && typeof item === 'object' && !Array.isArray(item));
 }

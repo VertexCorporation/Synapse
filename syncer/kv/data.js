@@ -50,7 +50,7 @@ export function writeNewData(kv, finalJsonToWrite, newHex, opId, context) {
     // Purge the public edge cache
     const cache = caches.default;
     // Note: The URL must match the one used in `serveLogic` for the cache key.
-    const cacheKey = new Request("https://syncer.mustawtfa.workers.dev/models.json"); 
+        const cacheKey = new Request("https://cortexishere.com/models");
 
     context.waitUntil(
         cache.delete(cacheKey).then(found => {

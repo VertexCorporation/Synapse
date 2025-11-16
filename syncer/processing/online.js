@@ -6,7 +6,7 @@
  * Transforms the raw API data into our standardized 'ProducersData' structure.
  */
 
-import { OPENROUTER_URL, ALLOWED_PROVIDER_IDS, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, PRODUCER_MAP, TIER_THRESHOLDS } from '../config.js';
+import { OPENROUTER_URL, ALLOWED_PROVIDER_IDS, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, WEB_SEARCH_COST_LIMIT, PRODUCER_MAP, TIER_THRESHOLDS } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
 import { isTooExpensive } from '../utils/helpers.js';
 import { extractSeriesVariant } from './parser.js';
@@ -66,7 +66,7 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             stats.provider++;
             continue;
         }
-        if (isTooExpensive(model.pricing, TEXT_COST_LIMIT, IMAGE_COST_LIMIT)) {
+        if (isTooExpensive(model.pricing, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, WEB_SEARCH_COST_LIMIT)) {
             stats.cost++;
             continue;
         }
@@ -79,17 +79,28 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             continue;
         }
 
-        // ... (The large block for determining modalities, reasoning, webSearch, tier goes here) ...
         const p = model.pricing;
         const mArch = model.architecture;
         const mCaps = model.capabilities || {};
         const description = model.description || model.name;
+
         // Determine modalities, outputs, reasoning, webSearch, tier
         const detailedModalities = { image: false, audio: false, file: false };
         if (mArch.input_modalities?.includes('image') || mArch.input_modalities?.includes('vision') || (p.image && +p.image > 0)) {
             detailedModalities.image = true;
         }
-        // ... (and so on for other properties)
+        if (mArch.input_modalities?.includes('audio')) {
+            detailedModalities.audio = true;
+        }
+        if (mArch.input_modalities?.includes('file')) {
+            detailedModalities.file = true;
+        }
+
+        const hasToolUse = model.supported_parameters?.includes('tools') || model.supported_parameters?.includes('tool_choice');
+        const hasReasoning = model.supported_parameters?.includes('reasoning') || model.supported_parameters?.includes('include_reasoning');
+        const supportsReasoning = hasToolUse || hasReasoning;
+
+        const hasWebSearch = model.supported_parameters?.includes('web_search_options') || (p.web_search && +p.web_search > 0);
         let tier = "free";
         if ((p.image && +p.image >= TIER_THRESHOLDS.IMAGE_PREMIUM) || (p.completion && +p.completion >= TIER_THRESHOLDS.TEXT_PREMIUM)) {
             tier = "premium";
@@ -104,13 +115,15 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             description: { en: description },
             context: model.context_length ?? 0,
             modalities: detailedModalities,
-            outputs: {}, // Simplified for brevity
-            reasoning: false, // Simplified for brevity
-            webSearch: false, // Simplified for brevity
+            outputs: {
+                image: mArch.output_modalities?.includes('image') || false
+            },
+            reasoning: supportsReasoning,
+            webSearch: hasWebSearch,
         };
         stats.kept++;
     }
 
-    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}. Filters: Prov=${stats.provider},Cost=${stats.cost},Free=${stats.free},Inv=${stats.invalid},NoSerVar=${stats.noSerVar}`);
+    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}. Filters: Prov=${stats.provider}, Cost=${stats.cost}, Free=${stats.free}, Inv=${stats.invalid}, NoSerVar=${stats.noSerVar}`);
     return grouped;
 }

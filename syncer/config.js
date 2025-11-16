@@ -10,7 +10,7 @@
  * Default settings for various operations. Can be overridden by environment variables.
  */
 export const DEFAULTS = {
-    COST_LIMIT: 0.000005,
+    COST_LIMIT: 0.0002,
     FETCH_TIMEOUT_MS: 60000, // 60 seconds
     CACHE_TTL_S: 3600, // 1 hour
     STALE_TTL_S: 86400, // 24 hours
@@ -27,7 +27,7 @@ export const OPENROUTER_URL = "https://openrouter.ai/api/v1/models";
  * Pricing thresholds for categorizing models into tiers.
  */
 export const TIER_THRESHOLDS = {
-    TEXT_PREMIUM: 0.0000007,
+    TEXT_PREMIUM: 0.000001,
     IMAGE_PREMIUM: 0.00001,
 };
 
@@ -49,7 +49,13 @@ export const PRODUCER_MAP = {
     cohere: "Cohere",
     amazon: "Amazon",
     perplexity: "Perplexity",
-    "arcee-ai": "Arcee AI"
+    "arcee-ai": "Arcee AI",
+    "moonshotai": "Moonshot AI",
+    "nvidia": "NVIDIA",
+    "inclusionai": "inclusionAI",
+    "z-ai": "Z.AI",
+    "liquid": "Liquid AI",
+    "ibm-granite": "IBM"
 };
 
 /**
@@ -62,4 +68,5 @@ export const ALLOWED_PROVIDER_IDS = Object.keys(PRODUCER_MAP);
  * Cost limits for filtering out models that are too expensive.
  */
 export const TEXT_COST_LIMIT = +(DEFAULTS.COST_LIMIT);
-export const IMAGE_COST_LIMIT = 0.0001;
+export const IMAGE_COST_LIMIT = 0.01;
+export const WEB_SEARCH_COST_LIMIT = 0.02;

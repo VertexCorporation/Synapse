@@ -2,14 +2,14 @@
  * Cortex - Syncer Worker - v7.0 (Modular)
  *
  * Module: Serve Logic
- * Description: Handles the fetch requests for the public /models.json endpoint.
+ * Description: Handles the fetch requests for the public /models endpoint.
  * Implements a highly efficient Cache-First strategy to minimize KV reads.
  */
 
 import { DEFAULTS } from '../config.js';
 
 /**
- * Serves the models.json file, prioritizing Edge Cache over KV reads.
+ * Serves the models file, prioritizing Edge Cache over KV reads.
  * @param {object} env - The environment object containing bindings.
  * @param {Request} request - The incoming request object.
  * @param {object} context - The worker execution context for `waitUntil`.
@@ -25,7 +25,7 @@ export async function serveModelsJson(env, request, context) {
     }
 
     const cache = caches.default;
-    const cacheKey = new Request(new URL(request.url).origin + "/models.json");
+    const cacheKey = new Request(new URL(request.url).origin + "/models");
 
     try {
         // FAST PATH: Serve from cache if available

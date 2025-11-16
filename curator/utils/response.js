@@ -14,13 +14,17 @@ const ALLOWED_ORIGINS = [
  */
 function getCorsHeaders(request) {
     const origin = request.headers.get('Origin');
-    if (ALLOWED_ORIGINS.includes(origin)) {
+    
+    // Check if the origin is in our allowed list
+    if (origin && ALLOWED_ORIGINS.includes(origin)) {
         return {
             'Access-Control-Allow-Origin': origin,
-            'Access-Control-Allow-Methods': 'GET, POST, DELETE, OPTIONS',
+            'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS', // Ensure PUT is included
             'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+            'Access-Control-Max-Age': '86400', // Optional: caches preflight response for 1 day
         };
     }
+    
     // No origin match, return empty object.
     return {};
 }
@@ -37,7 +41,7 @@ export function jsonResponse(data, status = 200, request) {
         status,
         headers: {
             'Content-Type': 'application/json;charset=UTF-8',
-            ...getCorsHeaders(request)
+            ...getCorsHeaders(request) // Apply CORS headers to all JSON responses
         }
     });
 }
@@ -55,11 +59,23 @@ export function errorResponse(message, status = 400, request) {
 
 /**
  * Handles CORS preflight (OPTIONS) requests.
+ * This is the key function to fix the error. It must return all necessary
+ * Access-Control-* headers for the browser to allow the subsequent request.
  * @param {Request} request The incoming OPTIONS request.
- * @returns {Response} A Response object with CORS headers.
+ * @returns {Response} A Response object with only CORS headers and a 204 status.
  */
 export function handleOptions(request) {
-    return new Response(null, {
-        headers: getCorsHeaders(request)
-    });
+    const headers = getCorsHeaders(request);
+    
+    // A preflight response should not have a body and should have a 204 "No Content" status.
+    // It's crucial that it returns the Allow-Methods and Allow-Headers.
+    if (headers['Access-Control-Allow-Origin']) {
+        return new Response(null, {
+            status: 204, // No Content
+            headers: headers
+        });
+    } else {
+        // If the origin is not allowed, return a plain response.
+        return new Response('Origin not allowed', { status: 403 });
+    }
 }
