@@ -45,7 +45,8 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
 
     /** @type {ProducersData} */
     const grouped = {};
-    let stats = { kept: 0, invalid: 0, blacklisted: 0, free: 0, provider: 0, cost: 0, noSerVar: 0 };
+    // Added 'imageGen' to stats to track filtered image generation models
+    let stats = { kept: 0, invalid: 0, blacklisted: 0, free: 0, provider: 0, cost: 0, research: 0, imageGen: 0, noSerVar: 0 };
 
     for (const model of models) {
         if (!model?.id || !model.name || !model.pricing || !model.architecture) {
@@ -56,7 +57,21 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             stats.blacklisted++;
             continue;
         }
-        if (model.id.endsWith(":free")) {
+        if (model.id.toLowerCase().includes("research")) {
+             stats.research++;
+             continue;
+        }
+
+        // --- NEW FILTER: Exclude models that output images ---
+        // We check 'output_modalities'. If it includes "image", we skip this model.
+        // This ensures models like 'Gemini Nano Banana' are excluded, while keeping models
+        // that only take images as input (like GPT-4o).
+        if (model.architecture.output_modalities && model.architecture.output_modalities.includes("image")) {
+            stats.imageGen++;
+            continue;
+        }
+
+        if (model.id.toLowerCase().endsWith(":free")) {
             stats.free++;
             continue;
         }
@@ -81,7 +96,6 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
 
         const p = model.pricing;
         const mArch = model.architecture;
-        const mCaps = model.capabilities || {};
         const description = model.description || model.name;
 
         // Determine modalities, outputs, reasoning, webSearch, tier
@@ -115,6 +129,7 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             description: { en: description },
             context: model.context_length ?? 0,
             modalities: detailedModalities,
+            // Since we filtered out image generators above, this will effectively always be false for kept models.
             outputs: {
                 image: mArch.output_modalities?.includes('image') || false
             },
@@ -124,6 +139,6 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
         stats.kept++;
     }
 
-    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}. Filters: Prov=${stats.provider}, Cost=${stats.cost}, Free=${stats.free}, Inv=${stats.invalid}, NoSerVar=${stats.noSerVar}`);
+    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}. Filters: Prov=${stats.provider}, Cost=${stats.cost}, Free=${stats.free}, ImgGen=${stats.imageGen}, Inv=${stats.invalid}, NoSerVar=${stats.noSerVar}`);
     return grouped;
 }

@@ -26,6 +26,7 @@ export async function processManualModels(kv, operationId) {
     
     let rawModels = [];
     try {
+        // KV içerisindeki 'model:' ile başlayan tüm kayıtları çeker
         const list = await kv.list({ prefix: "model:" });
         if (list.keys.length > 0) {
             const promises = list.keys.map(key => kv.get(key.name, 'json'));
@@ -41,6 +42,7 @@ export async function processManualModels(kv, operationId) {
         return {};
     }
 
+    // URL kontrolü (Health check)
     const checkPromises = rawModels.map(model => checkModelUrl(model, opId));
     const validModels = (await Promise.all(checkPromises)).filter(Boolean);
     console.log(`[${opId}] Found ${validModels.length} valid manual models (out of ${rawModels.length} total).`);
@@ -52,16 +54,36 @@ export async function processManualModels(kv, operationId) {
             console.warn(`[${opId}] Skipping manual model with invalid structure:`, JSON.stringify(model).substring(0, 150));
             continue;
         }
+        
+        // Eğer producer belirtilmemişse varsayılan olarak Vertex
         const provider = model.producer || 'Vertex';
         const series = model.id;
         const variant = "Default";
 
         grouped[provider] ??= {};
         grouped[provider][series] ??= {};
+        
+        // BURASI DEĞİŞTİRİLDİ: Eksik alanlar (chatFormat, licenseInfo vb.) eklendi.
         grouped[provider][series][variant] = {
-            id: model.id, source: 'manual', tier: model.tier || 'free', type: model.type,
-            ...(model.url && { url: model.url }), ...(model.imagePath && { imagePath: model.imagePath }),
-            ...(model.size && { size: model.size }), ...(model.ram && { ram: model.ram }),
+            id: model.id,
+            source: 'manual',
+            tier: model.tier || 'free',
+            type: model.type,
+            
+            // Temel Bilgiler
+            ...(model.url && { url: model.url }),
+            ...(model.imagePath && { imagePath: model.imagePath }),
+            ...(model.size && { size: model.size }),
+            ...(model.ram && { ram: model.ram }),
+            
+            // Offline Mod ve UI için Kritik Alanlar
+            ...(model.chatFormat && { chatFormat: model.chatFormat }),
+            ...(model.licenseInfo && { licenseInfo: model.licenseInfo }),
+            ...(model.modalities && { modalities: model.modalities }),
+            ...(model.outputs && { outputs: model.outputs }),
+            ...(model.producer && { producer: model.producer }), // Producer'ı obje içine de ekleyelim
+            
+            // Detaylar (i18n vb.)
             details: model.details
         };
     }
@@ -75,14 +97,22 @@ export async function processManualModels(kv, operationId) {
  * @returns {Promise<object|null>} The model if its URL is valid or absent, otherwise null.
  */
 async function checkModelUrl(model, opId) {
-    if (!model?.url) return model; // No URL to check, model is valid.
+    if (!model?.url) return model; 
     try {
         const res = await fetchWithTimeout(model.url, { method: 'HEAD' }, DEFAULTS.MANUAL_URL_CHECK_TIMEOUT_MS, opId);
+ 
         if (res.ok) return model;
-        console.warn(`[${opId}] Skipping model "${model.id}" - URL check failed (Status: ${res.status}): ${model.url}`);
-        return null;
+
+        if (res.status === 404 || res.status === 410) {
+            console.warn(`[${opId}] DELETE DECISION: Model "${model.id}" removed because link is dead (Status: ${res.status}): ${model.url}`);
+            return null; 
+        }
+
+        console.warn(`[${opId}] KEEPING Model "${model.id}" despite error (Status: ${res.status}). Assuming temporary issue.`);
+        return model; 
+
     } catch (err) {
-        console.warn(`[${opId}] Skipping model "${model.id}" - URL check error (${err.name}): ${model.url}`);
-        return null;
+        console.warn(`[${opId}] KEEPING Model "${model.id}" despite network error (${err.name}).`);
+        return model;
     }
 }

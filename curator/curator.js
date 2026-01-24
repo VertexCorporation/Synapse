@@ -52,9 +52,9 @@ export default {
         // e.g., for '.../curated/update-list', path is '/update-list'
         // e.g., for '.../curated/model-123', path is '/model-123'
         // e.g., for '.../curated', path is '/'
-        const path = url.pathname.startsWith('/curated') 
-    ? url.pathname.substring('/curated'.length) || '/' 
-    : url.pathname;
+        const path = url.pathname.startsWith('/curated')
+            ? url.pathname.substring('/curated'.length) || '/'
+            : url.pathname;
         const kv = env.MODELS_JSON;
         const opId = `curator-${Date.now()}`;
 
@@ -73,10 +73,18 @@ export default {
 
             // --- Granular Update (POST /curated/update-list) ---
             if (path === '/update-list' && request.method === 'POST') {
-                const updatePayload = await request.json();
-                await updateModelsList(kv, env.LOCKS, updatePayload, opId);
-                ctx.waitUntil(purgeEdgeCache(request, opId));
-                return jsonResponse({ success: true, message: `Data updated successfully.` }, 200, request);
+                const payload = await request.json();
+
+                if (payload.batch && Array.isArray(payload.batch)) {
+                    await updateModelsList(kv, env.LOCKS, payload.batch, opId);
+                    ctx.waitUntil(purgeEdgeCache(request, opId));
+                    return jsonResponse({ success: true, message: `Batch updated ${payload.batch.length} items.` }, 200, request);
+                }
+                else {
+                    await updateModelsList(kv, env.LOCKS, payload, opId);
+                    ctx.waitUntil(purgeEdgeCache(request, opId));
+                    return jsonResponse({ success: true, message: `Data updated successfully.` }, 200, request);
+                }
             }
 
             // --- Create a new model (POST /curated) ---
@@ -89,18 +97,18 @@ export default {
 
             // --- Update a model (PUT /curated/:id) ---
             if (request.method === 'PUT' && path.startsWith('/') && path.length > 1) {
-                 const modelId = sanitizePathSegment(path);
-                 if (!modelId) {
+                const modelId = sanitizePathSegment(path);
+                if (!modelId) {
                     return errorResponse("Invalid model ID provided.", 400, request);
-                 }
-                 const modelData = await request.json();
-                 // ID'nin payload içinde de tutarlı olmasını sağla
-                 if (modelData.id !== modelId) {
+                }
+                const modelData = await request.json();
+                // ID'nin payload içinde de tutarlı olmasını sağla
+                if (modelData.id !== modelId) {
                     return errorResponse(`Model ID in URL ('${modelId}') does not match payload ID ('${modelData.id}').`, 400, request);
-                 }
-                 await saveManualModel(kv, env.LOCKS, modelData, opId, true);
-                 ctx.waitUntil(purgeEdgeCache(request, opId));
-                 return jsonResponse({ success: true, message: `Model '${modelData.id}' updated successfully.` }, 200, request);
+                }
+                await saveManualModel(kv, env.LOCKS, modelData, opId, true);
+                ctx.waitUntil(purgeEdgeCache(request, opId));
+                return jsonResponse({ success: true, message: `Model '${modelData.id}' updated successfully.` }, 200, request);
             }
 
             // --- Delete a model (DELETE /curated/:id) ---
@@ -113,7 +121,7 @@ export default {
                 ctx.waitUntil(purgeEdgeCache(request, opId));
                 return jsonResponse({ success: true, message: `Model '${modelId}' deleted.` }, 200, request);
             }
-            
+
             return errorResponse("Curator endpoint not found or method not allowed.", 404, request);
 
         } catch (e) {
