@@ -10,7 +10,7 @@
  * Default settings for various operations. Can be overridden by environment variables.
  */
 export const DEFAULTS = {
-    COST_LIMIT: 0.00001,
+    COST_LIMIT: 0.00004,
     FETCH_TIMEOUT_MS: 60000, // 60 seconds
     CACHE_TTL_S: 3600, // 1 hour
     STALE_TTL_S: 86400, // 24 hours
@@ -68,5 +68,5 @@ export const ALLOWED_PROVIDER_IDS = Object.keys(PRODUCER_MAP);
  * Cost limits for filtering out models that are too expensive.
  */
 export const TEXT_COST_LIMIT = +(DEFAULTS.COST_LIMIT);
-export const IMAGE_COST_LIMIT = 0.05;
-export const WEB_SEARCH_COST_LIMIT = 0.02;
+export const IMAGE_COST_LIMIT = 0.07;
+export const WEB_SEARCH_COST_LIMIT = 0.07;
