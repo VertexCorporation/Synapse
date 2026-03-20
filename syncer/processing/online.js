@@ -45,8 +45,9 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
 
     /** @type {ProducersData} */
     const grouped = {};
+    const fallbackGrouped = {};
     // Added 'imageGen' to stats to track filtered image generation models
-    let stats = { kept: 0, invalid: 0, blacklisted: 0, free: 0, provider: 0, cost: 0, research: 0, imageGen: 0, noSerVar: 0 };
+    let stats = { kept: 0, fallback: 0, invalid: 0, blacklisted: 0, free: 0, provider: 0, cost: 0, research: 0, imageGen: 0, noSerVar: 0 };
 
     for (const model of models) {
         if (!model?.id || !model.name || !model.pricing || !model.architecture) {
@@ -71,19 +72,23 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             continue;
         }
 
+        let isFallbackFree = false;
         if (model.id.toLowerCase().endsWith(":free")) {
+            isFallbackFree = true;
             stats.free++;
-            continue;
+            // We do not continue, we keep processing to add it to fallbackGrouped
         }
 
         const providerId = model.id.split("/")[0];
-        if (!ALLOWED_PROVIDER_IDS.includes(providerId)) {
+        if (!ALLOWED_PROVIDER_IDS.includes(providerId) && !isFallbackFree) {
             stats.provider++;
             continue;
         }
         if (isTooExpensive(model.pricing, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, WEB_SEARCH_COST_LIMIT)) {
-            stats.cost++;
-            continue;
+            if (!isFallbackFree) {
+                stats.cost++;
+                continue;
+            }
         }
 
         const providerDisplayName = PRODUCER_MAP[providerId];
@@ -120,12 +125,14 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             tier = "premium";
         }
 
-        grouped[providerDisplayName] ??= {};
-        grouped[providerDisplayName][series] ??= {};
-        grouped[providerDisplayName][series][variant] = {
+        const targetGrouped = isFallbackFree ? fallbackGrouped : grouped;
+
+        targetGrouped[providerDisplayName] ??= {};
+        targetGrouped[providerDisplayName][series] ??= {};
+        targetGrouped[providerDisplayName][series][variant] = {
             id: model.id,
             source: 'openrouter',
-            tier: tier,
+            tier: isFallbackFree ? "fallback" : tier,
             description: { en: description },
             context: model.context_length ?? 0,
             modalities: detailedModalities,
@@ -136,9 +143,14 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
             reasoning: supportsReasoning,
             webSearch: hasWebSearch,
         };
-        stats.kept++;
+        
+        if (isFallbackFree) {
+            stats.fallback++;
+        } else {
+            stats.kept++;
+        }
     }
 
-    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}. Filters: Prov=${stats.provider}, Cost=${stats.cost}, Free=${stats.free}, ImgGen=${stats.imageGen}, Inv=${stats.invalid}, NoSerVar=${stats.noSerVar}`);
-    return grouped;
+    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}, Fallbacks: ${stats.fallback}. Filters: Prov=${stats.provider}, Cost=${stats.cost}, ImgGen=${stats.imageGen}, Inv=${stats.invalid}, NoSerVar=${stats.noSerVar}`);
+    return { grouped, fallbackGrouped };
 }

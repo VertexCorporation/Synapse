@@ -49,10 +49,13 @@ export async function syncModels(env, context) {
         const blacklist = await MODELS_KV.get("model_blacklist", "json") || [];
         const blacklistedIds = new Set(blacklist);
 
-        const [onlineGrouped, manualGrouped] = await Promise.all([
+        const [onlineResult, manualGrouped] = await Promise.all([
             buildGroupedOnlineModels(env, opId, blacklistedIds),
             processManualModels(MODELS_KV, opId),
         ]);
+        
+        const onlineGrouped = onlineResult.grouped || onlineResult;
+        const fallbackGrouped = onlineResult.fallbackGrouped || {};
 
         // STAGE 2: PROCESS AND MERGE DATA
         console.log(`[${opId}] Stage 2: Pruning, merging, and preparing final data.`);
@@ -60,10 +63,12 @@ export async function syncModels(env, context) {
         let workingData = currentListStr ? JSON.parse(currentListStr) : { producers: {} };
 
         const finalProducers = rehydrateAndMergeProducers(workingData.producers, freshProducers);
+        const finalFallbackProducers = rehydrateAndMergeProducers(workingData.fallback || {}, fallbackGrouped);
 
         const finalData = {
             last_syncer_run: opId,
             producers: finalProducers,
+            fallback: finalFallbackProducers,
             version: new Date().toISOString(), // This is temporary, will be updated on write
         };
 

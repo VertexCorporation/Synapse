@@ -10,7 +10,7 @@
  * Default settings for various operations. Can be overridden by environment variables.
  */
 export const DEFAULTS = {
-    COST_LIMIT: 0.00004,
+    COST_LIMIT: 0.00001,
     FETCH_TIMEOUT_MS: 60000, // 60 seconds
     CACHE_TTL_S: 3600, // 1 hour
     STALE_TTL_S: 86400, // 24 hours
@@ -27,7 +27,7 @@ export const OPENROUTER_URL = "https://openrouter.ai/api/v1/models";
  * Pricing thresholds for categorizing models into tiers.
  */
 export const TIER_THRESHOLDS = {
-    TEXT_PREMIUM: 0.000005,
+    TEXT_PREMIUM: 0.000002,
     IMAGE_PREMIUM: 0.00001,
 };
 
