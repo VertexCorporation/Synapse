@@ -22,8 +22,8 @@
  * Represents the structure of a single model variant in our final data format.
  * @typedef {object} ModelVariant
  * @property {string} id - The unique identifier of the model (e.g., "openai/gpt-4o").
- * @property {('openrouter'|'manual')} source - The origin of the model data.
- * @property {string} tier - The pricing tier ('free', 'premium').
+ * @property {('openrouter'|'manual'|'huggingface')} source - The origin of the model data.
+ * @property {string} tier - Catalog tier ('standard', 'fallback', or 'free' for offline models).
  * @property {object} [description] - Description for online models.
  * @property {string} [description.en] - The English description.
  * @property {number} [context] - The context length for online models.

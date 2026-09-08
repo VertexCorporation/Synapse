@@ -6,6 +6,8 @@
  * 2. Extensive logging for debugging race conditions and data corruption.
  */
 
+import { offlineGrouping, offlineEntries, putOffline } from '../../syncer/processing/offline.js';
+
 const DATA_WRITE_LOCK_KEY = "data_write_lock";
 const SYNCER_LOCK_KEY = "syncer_lock";
 const LOCK_TTL_S = 60;
@@ -83,12 +85,12 @@ export async function deleteManualModel(kv, locksKv, modelId, opId) {
                 break;
             }
         }
-        
+
         if (found) {
             const newVersion = new Date().toISOString();
             data.last_curator_update = opId;
             data.version = newVersion;
-            
+
             await Promise.all([
                 kv.put("list", JSON.stringify(data)),
                 kv.put("version", newVersion),
@@ -115,7 +117,7 @@ function mergeDeep(target, source) {
     const output = { ...target };
     Object.keys(source).forEach(key => {
         if (key === '__proto__' || key === 'constructor' || key === 'prototype') return;
-        
+
         if (isObject(source[key])) {
             if (!(key in target)) {
                 Object.assign(output, { [key]: source[key] });
@@ -139,27 +141,59 @@ export async function saveManualModel(kv, locksKv, modelData, opId, isUpdate = f
     await acquireLock(locksKv, opId);
     try {
         const { id, producer } = modelData;
-        if (!id || !producer) { 
-            const e = new Error("Model data is missing required fields."); 
-            e.status = 400; throw e; 
+        if (!id || !producer) {
+            const e = new Error("Model data is missing required fields.");
+            e.status = 400; throw e;
         }
 
         const listStr = await kv.get("list");
         let data = listStr ? JSON.parse(listStr) : { producers: {} };
 
-        if (!isUpdate && data.producers[producer]?.[id]) {
-            console.error(`[${opId}] [Save] Conflict: Model already exists.`);
-            const e = new Error(`Model with ID '${id}' already exists.`); 
-            e.status = 409; throw e;
-        }
-        
-        const existingModel = data.producers?.[producer]?.[id]?.['Default'] || {};
-        const finalModelObject = mergeDeep(existingModel, modelData);
+        let finalModelObject;
+        if (modelData.type === 'offline') {
+            data.producers ??= {};
+            const previous = [...offlineEntries(data.producers)].find(entry => entry.model.id === id && entry.model.source === 'manual');
+            if (!isUpdate && previous) {
+                const e = new Error(`Model with ID '${id}' already exists.`);
+                e.status = 409; throw e;
+            }
+            finalModelObject = mergeDeep(previous?.model || {}, modelData);
+            finalModelObject.source = 'manual';
+            const location = finalModelObject.type === 'offline'
+                ? offlineGrouping(finalModelObject)
+                : { provider: producer, series: id, variant: 'Default' };
+            if (previous) {
+                delete data.producers[previous.p][previous.s][previous.v];
+            }
+            putOffline(data.producers, location, finalModelObject);
+            if (previous) {
+                const oldSeries = data.producers[previous.p][previous.s];
+                if (!Object.values(oldSeries).some(value => value?.id)) {
+                    const target = data.producers[location.provider][location.series];
+                    for (const key of ['series_description', 'hidden']) {
+                        if (oldSeries[key] !== undefined && target[key] === undefined) target[key] = oldSeries[key];
+                    }
+                    delete data.producers[previous.p][previous.s];
+                    if (!Object.keys(data.producers[previous.p]).length) delete data.producers[previous.p];
+                }
+            }
 
-        data.producers[producer] = data.producers[producer] || {};
-        data.producers[producer][id] = data.producers[producer][id] || {};
-        data.producers[producer][id]['Default'] = finalModelObject;
-        
+        } else {
+            if (!isUpdate && data.producers[producer]?.[id]) {
+                console.error(`[${opId}] [Save] Conflict: Model already exists.`);
+                const e = new Error(`Model with ID '${id}' already exists.`);
+                e.status = 409; throw e;
+            }
+
+            const existingModel = data.producers?.[producer]?.[id]?.['Default'] || {};
+            finalModelObject = mergeDeep(existingModel, modelData);
+
+            data.producers[producer] = data.producers[producer] || {};
+            data.producers[producer][id] = data.producers[producer][id] || {};
+            data.producers[producer][id]['Default'] = finalModelObject;
+
+        }
+
         const newVersion = new Date().toISOString();
         data.last_curator_update = opId;
         data.version = newVersion;
@@ -184,7 +218,7 @@ export async function saveManualModel(kv, locksKv, modelData, opId, isUpdate = f
  */
 export async function updateModelsList(kv, locksKv, updatesArray, opId) {
     console.log(`[${opId}] [BatchUpdate] Processing ${updatesArray.length} updates...`);
-    
+
     await acquireLock(locksKv, opId);
     try {
         const listStr = await kv.get("list");
@@ -195,11 +229,11 @@ export async function updateModelsList(kv, locksKv, updatesArray, opId) {
 
         for (const payload of updatesArray) {
             const { pName, sName, vName, fieldPath, value } = payload;
-            
+
             if (!pName || !sName || !fieldPath) continue;
 
             let targetModel = vName ? data.producers?.[pName]?.[sName]?.[vName] : null;
-            
+
             if (!targetModel && fieldPath.startsWith('series_description')) {
             } else if (!targetModel && vName) {
                 console.warn(`[${opId}] Target model not found: ${pName}/${sName}/${vName}`);
@@ -208,7 +242,7 @@ export async function updateModelsList(kv, locksKv, updatesArray, opId) {
 
             if (targetModel) {
                 const pathParts = fieldPath.split('.');
-                const rootField = pathParts[0]; 
+                const rootField = pathParts[0];
                 if (targetModel[rootField] && typeof targetModel[rootField] === 'string' && pathParts.length > 1) {
                     console.log(`[${opId}] Promoting '${rootField}' to Object for ${targetModel.id}`);
                     targetModel[rootField] = { en: targetModel[rootField] };
@@ -219,7 +253,7 @@ export async function updateModelsList(kv, locksKv, updatesArray, opId) {
             let current = updateObject;
             const keys = fieldPath.split('.');
             for (let i = 0; i < keys.length - 1; i++) {
-                current[keys[i]] = {}; 
+                current[keys[i]] = {};
                 current = current[keys[i]];
             }
             current[keys[keys.length - 1]] = value;

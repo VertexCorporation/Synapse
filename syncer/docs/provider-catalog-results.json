@@ -1,0 +1,5064 @@
+{
+  "counts": {
+    "openrouter": 263,
+    "fal": 493,
+    "cloudflare": 35,
+    "groq": 14,
+    "huggingface": 222,
+    "manual": 42,
+    "elevenlabs": 9,
+    "deepgram": 24
+  },
+  "unmatched": 0,
+  "rows": [
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-3-tts/text-to-speech/1.7b",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "Qwen 3 TTS - Text to Speech [1.7B]",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-3-tts/clone-voice/1.7b",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "Qwen 3 TTS - Clone Voice [1.7B]",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-3-tts/voice-design/1.7b",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "Qwen 3 TTS - Voice Design [1.7B]",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-3-tts/text-to-speech/0.6b",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "Qwen 3 TTS - Text to Speech [0.6B]",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-3-tts/clone-voice/0.6b",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "Qwen 3 TTS - Clone Voice [0.6B]",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/qwen/qwen3-embedding-0.6b",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "embedding 0.6b",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "coder 32b instruct",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/qwen/qwen3-30b-a3b-fp8",
+      "producer": "Qwen",
+      "series": "Qwen",
+      "variant": "30b a3b fp8",
+      "key": "qwen",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "meta/muse-image/edit",
+      "producer": "Meta",
+      "series": "Meta",
+      "variant": "Meta Muse Image Edit",
+      "key": "meta",
+      "asset": "assets/models/meta.webp"
+    },
+    {
+      "source": "fal",
+      "id": "meta/muse-image/text-to-image",
+      "producer": "Meta",
+      "series": "Meta",
+      "variant": "Meta Muse Image Text to Image",
+      "key": "meta",
+      "asset": "assets/models/meta.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-3.2-3b-instruct",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "3b instruct",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-guard-3-8b",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "guard 3 8b",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-3.1-8b-instruct-fp8",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "8b instruct fp8",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-3.2-1b-instruct",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "1b instruct",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta-llama/llama-2-7b-chat-hf-lora",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "7b chat hf lora",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "70b instruct fp8 fast",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-3.2-11b-vision-instruct",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "11b vision instruct",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/llama-4-scout-17b-16e-instruct",
+      "producer": "Meta",
+      "series": "Llama",
+      "variant": "scout 17b 16e instruct",
+      "key": "llama",
+      "asset": "assets/models/llama.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/meta/m2m100-1.2b",
+      "producer": "Meta",
+      "series": "Cloudflare",
+      "variant": "M2m100 1.2b",
+      "key": "meta",
+      "asset": "assets/models/meta.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/google/gemma-2b-it-lora",
+      "producer": "Google",
+      "series": "Gemma",
+      "variant": "b it lora",
+      "key": "gemma",
+      "asset": "assets/models/gemma.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/google/gemma-7b-it-lora",
+      "producer": "Google",
+      "series": "Gemma",
+      "variant": "b it lora [@cf/google/gemma-7b-it-lora]",
+      "key": "gemma",
+      "asset": "assets/models/gemma.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/google/gemma-4-26b-a4b-it",
+      "producer": "Google",
+      "series": "Gemma",
+      "variant": "26b a4b it",
+      "key": "gemma",
+      "asset": "assets/models/gemma.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/google/embeddinggemma-300m",
+      "producer": "Google",
+      "series": "Gemma",
+      "variant": "embeddinggemma 300m",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/nano-banana-2-lite",
+      "producer": "Google",
+      "series": "Nano Banana",
+      "variant": "Nano Banana 2 Lite",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/nano-banana-lite/edit",
+      "producer": "Google",
+      "series": "Nano Banana",
+      "variant": "Nano Banana Lite Edit",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/nano-banana-lite",
+      "producer": "Google",
+      "series": "Nano Banana",
+      "variant": "Nano Banana Lite",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/fast/image-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 Fast",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/image-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/lite/image-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo3.1 Lite Image to Video",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/v1.1/image-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash 1.1 Image to Video",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/fast",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 Fast [fal-ai/veo3.1/fast]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/v1.1/reference-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash 1.1 Reference to Video",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 [fal-ai/veo3.1]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/image-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/v1.1/edit",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash 1.1 Edit",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/v1.1/text-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash 1.1 Text to Video",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/reference-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash [google/gemini-omni-flash/reference-to-video]",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/fast/first-last-frame-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 Fast [fal-ai/veo3.1/fast/first-last-frame-to-video]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/lite",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo3.1 Lite Text to Video",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/first-last-frame-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 [fal-ai/veo3.1/first-last-frame-to-video]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/reference-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 [fal-ai/veo3.1/reference-to-video]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash [google/gemini-omni-flash]",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/gemini-omni-flash/edit",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Gemini Omni Flash [google/gemini-omni-flash/edit]",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/fast/reference-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 Fast [fal-ai/veo3.1/fast/reference-to-video]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/lite/first-last-frame-to-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo3.1 Lite FLF",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "google/virtual-try-on",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Google Virtual Try On",
+      "key": "google",
+      "asset": "assets/producers/google.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/extend-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 [fal-ai/veo3.1/extend-video]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/veo3.1/fast/extend-video",
+      "producer": "Google",
+      "series": "Veo",
+      "variant": "Veo 3.1 Fast [fal-ai/veo3.1/fast/extend-video]",
+      "key": "veo",
+      "asset": "assets/models/veo.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-image/edit",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Image",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/image-to-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Video",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-image",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Image [xai/grok-imagine-image]",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/v1.5/image-to-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Video 1.5",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-image/v2.0/edit",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Image 2.0",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-image/v2.0/text-to-image",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Image 2.0 [xai/grok-imagine-image/v2.0/text-to-image]",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-image/quality/edit",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Image Editing Quality",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/text-to-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Video [xai/grok-imagine-video/text-to-video]",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/reference-to-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Reference to Video",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-image/quality/text-to-image",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Image [xai/grok-imagine-image/quality/text-to-image]",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/v1.5/reference-to-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Video 1.5 Reference to Video",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/tts/v1",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "xAI Text to Speech",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/v1.5/text-to-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Video 1.5 Text to Video",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/edit-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Video [xai/grok-imagine-video/edit-video]",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "xai/grok-imagine-video/extend-video",
+      "producer": "xAI",
+      "series": "Grok Imagine",
+      "variant": "Grok Imagine Extend Video",
+      "key": "xai",
+      "asset": "assets/producers/xai.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/nvidia/nemotron-3-120b-a12b",
+      "producer": "NVIDIA",
+      "series": "Cloudflare",
+      "variant": "Nemotron 3 120b A12b",
+      "key": "nvidia",
+      "asset": "assets/producers/nvidia.webp"
+    },
+    {
+      "source": "fal",
+      "id": "openai/gpt-image-2/edit",
+      "producer": "OpenAI",
+      "series": "GPT Image",
+      "variant": "GPT Image 2 API",
+      "key": "openai",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "openai/gpt-image-2",
+      "producer": "OpenAI",
+      "series": "GPT Image",
+      "variant": "GPT Image 2 API [openai/gpt-image-2]",
+      "key": "openai",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "openai/gpt-image-2.5/sunburst/edit",
+      "producer": "OpenAI",
+      "series": "GPT Image",
+      "variant": "Gpt Image 2.5 Sunburst Edit",
+      "key": "openai",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "openai/gpt-image-2.5/sunburst/text-to-image",
+      "producer": "OpenAI",
+      "series": "GPT Image",
+      "variant": "Gpt Image 2.5 Sunburst Text to Image",
+      "key": "openai",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "openai/gpt-image-2.5/flare/edit",
+      "producer": "OpenAI",
+      "series": "GPT Image",
+      "variant": "Gpt Image 2.5 Flare Edit",
+      "key": "openai",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "openai/gpt-image-2.5/flare/text-to-image",
+      "producer": "OpenAI",
+      "series": "GPT Image",
+      "variant": "Gpt Image 2.5 Flare Text to Image",
+      "key": "openai",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/openai/whisper",
+      "producer": "OpenAI",
+      "series": "Whisper",
+      "variant": "whisper",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/openai/whisper-tiny-en",
+      "producer": "OpenAI",
+      "series": "Whisper",
+      "variant": "whisper tiny en",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/speech-02-hd",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Speech-02 HD",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/speech-2.8-hd",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Speech 2.8 [HD]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/voice-clone",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Voice Cloning",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/speech-02-turbo",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Speech-02 Turbo",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/speech-2.8-turbo",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Speech 2.8 [Turbo]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/voice-design",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Voice Design",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/speech-2.6-hd",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Speech 2.6 [HD]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/speech-2.6-turbo",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "MiniMax Speech 2.6 [Turbo]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/preview/speech-2.5-hd",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "Minimax",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/preview/speech-2.5-turbo",
+      "producer": "MiniMax",
+      "series": "MiniMax Speech",
+      "variant": "Minimax [fal-ai/minimax/preview/speech-2.5-turbo]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-02/standard/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 02 [Standard] (Image to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax-music/v2.6",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "Minimax Music 2.6",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax-music/v2",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "Minimax Music",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-2.3-fast/standard/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 2.3 Fast [Standard] (Image to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-02/pro/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 02 [Pro] (Image to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-2.3/pro/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 2.3 [Pro] (Image to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-02/standard/text-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 02 [Standard] (Text to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-2.3/standard/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 2.3 [Standard] (Image to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/image-01",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Text to Image",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-2.3/standard/text-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 2.3 [Standard] (Text to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax-music",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Music",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-2.3-fast/pro/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 2.3 Fast [Pro] (Image to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-02-fast/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "Minimax",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01 [fal-ai/minimax/video-01]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-2.3/pro/text-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 2.3 [Pro] (Text to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/hailuo-02/pro/text-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax Hailuo 02 [Pro] (Text to Video)",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax-music/v2.5",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "Minimax Music 2.5",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/image-01/subject-reference",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "Minimax Image Subject Reference",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01-live/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01 [fal-ai/minimax/video-01-live/image-to-video]",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01-live",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01 Live",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax-music/v1.5",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Music v1.5",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01-subject-reference",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01 Subject Reference",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01-director/image-to-video",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01 Director - Image to Video",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/minimax/video-01-director",
+      "producer": "MiniMax",
+      "series": "Hailuo Video",
+      "variant": "MiniMax (Hailuo AI) Video 01 Director",
+      "key": "minimax",
+      "asset": "assets/producers/minimax.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/mistral/mistral-7b-instruct-v0.2-lora",
+      "producer": "Mistral AI",
+      "series": "Mistral",
+      "variant": "b instruct v0.2 lora",
+      "key": "mistral",
+      "asset": "assets/models/mistral.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/mistralai/mistral-small-3.1-24b-instruct",
+      "producer": "Mistral AI",
+      "series": "Mistral",
+      "variant": "small 3.1 24b instruct",
+      "key": "mistral",
+      "asset": "assets/models/mistral.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedream/v4.5/edit",
+      "producer": "ByteDance",
+      "series": "Seedream",
+      "variant": "Bytedance Seedream V4.5 Edit",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedream/v4/edit",
+      "producer": "ByteDance",
+      "series": "Seedream",
+      "variant": "Bytedance Seedream V4 Edit",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedream/v4.5/text-to-image",
+      "producer": "ByteDance",
+      "series": "Seedream",
+      "variant": "Bytedance Seedream V4.5 Text To Image",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedream/v4/text-to-image",
+      "producer": "ByteDance",
+      "series": "Seedream",
+      "variant": "Bytedance Seedream V4 Text To Image",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedance/v1.5/pro/image-to-video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Seedance V1.5 Pro Image To Video",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedance/v1/pro/image-to-video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Seedance 1.0 Pro",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/omnihuman/v1.5",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Omnihuman V1.5",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedance/v1/pro/fast/image-to-video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Seedance V1 Pro Fast Image To Video",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance-upscaler/upscale/video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Upscaler Upscale Video",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedance/v1.5/pro/text-to-video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Seedance V1.5 Pro Text To Video",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedance/v1/pro/text-to-video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Seedance 1.0 Pro [fal-ai/bytedance/seedance/v1/pro/text-to-video]",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/omnihuman",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "OmniHuman",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/dreamactor/v2",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Dreamactor V2",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seedance/v1/pro/fast/text-to-video",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Seedance V1 Pro Fast Text To Video",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bytedance/seed-speech/tts/v2",
+      "producer": "ByteDance",
+      "series": "Seedance",
+      "variant": "Bytedance Seed Speech Text to Speech",
+      "key": "bytedance",
+      "asset": "assets/models/bytedance.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/bytedance/stable-diffusion-xl-lightning",
+      "producer": "ByteDance",
+      "series": "Stable Diffusion",
+      "variant": "stable diffusion xl lightning",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "microsoft/mai-image-2.5/edit",
+      "producer": "Microsoft",
+      "series": "Microsoft",
+      "variant": "Mai Image 2.5",
+      "key": "microsoft",
+      "asset": "assets/producers/microsoft.webp"
+    },
+    {
+      "source": "fal",
+      "id": "microsoft/mai-image-2.5",
+      "producer": "Microsoft",
+      "series": "Microsoft",
+      "variant": "Mai Image 2.5 Text to Image",
+      "key": "microsoft",
+      "asset": "assets/producers/microsoft.webp"
+    },
+    {
+      "source": "fal",
+      "id": "microsoft/mai-image-2.5-pro/edit",
+      "producer": "Microsoft",
+      "series": "Microsoft",
+      "variant": "MAI Image 2.5 Pro (Edit)",
+      "key": "microsoft",
+      "asset": "assets/producers/microsoft.webp"
+    },
+    {
+      "source": "fal",
+      "id": "microsoft/mai-image-2.5-pro",
+      "producer": "Microsoft",
+      "series": "Microsoft",
+      "variant": "MAI Image 2.5 Pro (Text to Image)",
+      "key": "microsoft",
+      "asset": "assets/producers/microsoft.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/microsoft/resnet-50",
+      "producer": "Microsoft",
+      "series": "Cloudflare",
+      "variant": "Resnet 50",
+      "key": "microsoft",
+      "asset": "assets/producers/microsoft.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/schnell",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [schnell]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/dev",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-pro",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 2 Pro",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/kontext",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [pro]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1.1",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX1.1 [pro]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-pro/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Pro Edit",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1.1-ultra",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX1.1 [pro] ultra",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/9b",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 9B",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/9b/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 9B [fal-ai/flux-2/klein/9b/edit]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/dev/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] [fal-ai/flux/dev/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/kontext/max",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [max]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1/fill",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [pro] Fill",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Edit",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/image-to-video",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 3 Image to Video",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/flash",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Flash",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/turbo",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Turbo",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-max/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 2 Max",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/schnell",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [schnell] [fal-ai/flux-1/schnell]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/flash/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Flash Edit",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-kontext/dev",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [dev]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-max",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 2 Max [fal-ai/flux-2-max]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pulid",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "PuLID Flux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/kontext/max/multi",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [max] [fal-ai/flux-pro/kontext/max/multi]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/turbo/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Turbo Edit",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/4b",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 4B",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/kontext/text-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [pro] [fal-ai/flux-pro/kontext/text-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/text-to-video",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Text to Video",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/4b/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 4B [fal-ai/flux-2/klein/4b/edit]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-flex/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 2 Flex",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-flex",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 2 Flex [fal-ai/flux-2-flex]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2-pro/outpaint",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX 2 Pro Outpaint",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/kontext/multi",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [pro] [fal-ai/flux-pro/kontext/multi]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-general",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] with Controlnets and Loras",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-video-upscale",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux Video Upscale",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/first-last-frame-to-video",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 First Last Frame to Video",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/text-to-video/draft",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Text To Video Draft",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1/erase",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux Pro Erase",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/9b/base/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 9B Base",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/image-to-video/draft",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Image To Video Draft",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/kontext/max/text-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Kontext [max] [fal-ai/flux-pro/kontext/max/text-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-general/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] with Controlnets and Loras [fal-ai/flux-general/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/krea",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Krea [dev]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-general/inpainting",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] with Controlnets and Loras [fal-ai/flux-general/inpainting]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/keyframes-to-video",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Image to Video",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/dev",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] [fal-ai/flux-1/dev]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/extend-video",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Extend Video",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/4b/base/edit",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 4B Base",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/9b/base",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 9B Base [fal-ai/flux-2/klein/9b/base]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1/vto",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX Virtual Try-On",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/krea",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Krea [dev] [fal-ai/flux-1/krea]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/realtime",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 2 [klein] Realtime",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1.1-ultra/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX1.1 [pro] ultra Redux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/krea/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Krea [dev] [fal-ai/flux/krea/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-2/klein/4b/base",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.2 [klein] 4B Base [fal-ai/flux-2/klein/4b/base]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-vision-upscaler",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux Vision Upscaler",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/srpo",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 SRPO [dev]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/srpo/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 SRPO [dev] [fal-ai/flux/srpo/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/first-last-frame-to-video/draft",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 First Last Frame to Video Draft",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/dev/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] [fal-ai/flux-1/dev/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-subject",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Subject",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1.1/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX1.1 [pro] Redux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/srpo",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 SRPO [dev] [fal-ai/flux-1/srpo]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/schnell/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [schnell] Redux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/schnell/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [schnell] Redux [fal-ai/flux-1/schnell/redux]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/extend-video/draft",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Extend Video Draft",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/dev/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] Redux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/srpo/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 SRPO [dev] [fal-ai/flux-1/srpo/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1.1-ultra-finetuned",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX1.1 [pro] ultra Fine-tuned",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/draft-enhance",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Draft Enhance",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "blackforestlabs/flux-3/keyframes-to-video/draft",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "Flux 3 Keyframes To Video Draft",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/krea/image-to-image",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Krea [dev] [fal-ai/flux-1/krea/image-to-image]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-pro/v1/fill-finetuned",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [pro] Fill Fine-tuned",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/krea/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Krea [dev] Redux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-general/differential-diffusion",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] with Controlnets and Loras [fal-ai/flux-general/differential-diffusion]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-general/rf-inversion",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] with Controlnets and Loras [fal-ai/flux-general/rf-inversion]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux-1/dev/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 [dev] Redux [fal-ai/flux-1/dev/redux]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/flux/krea/redux",
+      "producer": "Black Forest Labs",
+      "series": "Flux",
+      "variant": "FLUX.1 Krea [dev] Redux [fal-ai/flux/krea/redux]",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v3 Image to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.5-turbo/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v3 Image to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.6/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v2.6 Image to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.1/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 2.1 (standard)",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v3 Text to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Image to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Image to Video [Pro] [fal-ai/kling-video/o3/standard/image-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/pro/reference-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Reference to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/ai-avatar/v2/standard",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling AI Avatar v2 Standard",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/standard/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v3 Text to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/pro/video-to-video/edit",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Edit Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.5-turbo/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling v2.5 Text to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/pro/motion-control",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/v3/pro/motion-control]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/turbo/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video V3 Turbo Pro Image to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.6/standard/motion-control",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v2.6 Motion Control [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.5-turbo/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/v2.5-turbo/standard/image-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.1/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 2.1 (pro)",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/standard/reference-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Reference to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/turbo/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video V3 Standard Turbo Image to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/standard/motion-control",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/v3/standard/motion-control]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/lipsync/audio-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling LipSync Audio-to-Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/ai-avatar/v2/pro",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling AI Avatar v2 Pro",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.6/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v2.6 Text to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/4k/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/v3/4k/image-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.6/pro/motion-control",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video v2.6 Motion Control [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 [fal-ai/kling-video/v1.6/pro/image-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-image/o3/image-to-image",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Image",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/standard/video-to-video/edit",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Edit Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 First Frame Last Frame to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/video-to-video/edit",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Edit Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/pro/video-to-video/reference",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Reference Video to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/standard/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 [fal-ai/kling-video/v1.6/standard/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Text to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.1/master/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 2.1 Master",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/standard/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Text to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/4k/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/o3/4k/image-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/turbo/standard/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video V3 Standard Turbo Text to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-image/o3/text-to-image",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Image [fal-ai/kling-image/o3/text-to-image]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.0",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/4k/reference-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/o3/4k/reference-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/4k/video-to-video/reference",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video 4K Video to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/turbo/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video V3 Turbo Pro Text to Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/standard/video-to-video/reference",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O3 Reference Video to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-image/v3/image-to-image",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Image [fal-ai/kling-image/v3/image-to-image]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2/master/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 2.0 Master",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/4k/video-to-video/edit",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video 4K Video to Video Edit",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-image/v3/text-to-image",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Image [fal-ai/kling-image/v3/text-to-image]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/standard/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 First Frame Last Frame to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-image/o1",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Image",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/reference-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Reference Image to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling/v1-5/kolors-virtual-try-on",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Kolors Virtual TryOn v1.5",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/create-voice",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video Create Voice",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v3/4k/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video V3 Text to Video 4K",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1/pro/ai-avatar",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling AI Avatar Pro",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2.1/master/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 2.1 Master [fal-ai/kling-video/v2.1/master/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v2/master/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 2.0 Master [fal-ai/kling-video/v2/master/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.5/pro/image-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.5",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1/standard/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.0 [fal-ai/kling-video/v1/standard/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/video-to-audio",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/video-to-audio]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/video-to-video/reference",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Reference Video to Video [Pro]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/standard/video-to-video/edit",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Edit Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 [fal-ai/kling-video/v1.6/pro/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o3/4k/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling Video [fal-ai/kling-video/o3/4k/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1/standard/ai-avatar",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling AI Avatar",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/standard/reference-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Reference Image to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1/tts",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling TTS",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.5/pro/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.5 [fal-ai/kling-video/v1.5/pro/text-to-video]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/o1/standard/video-to-video/reference",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling O1 Reference Video to Video [Standard]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/standard/effects",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 [fal-ai/kling-video/v1.6/standard/effects]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/pro/elements",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 Elements",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/standard/elements",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 Elements [fal-ai/kling-video/v1.6/standard/elements]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/lipsync/text-to-video",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling LipSync Text-to-Video",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.6/pro/effects",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.6 [fal-ai/kling-video/v1.6/pro/effects]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1/standard/effects",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.0 [fal-ai/kling-video/v1/standard/effects]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/kling-video/v1.5/pro/effects",
+      "producer": "Kling",
+      "series": "Kling Video",
+      "variant": "Kling 1.5 [fal-ai/kling-video/v1.5/pro/effects]",
+      "key": "kling",
+      "asset": "assets/models/kling.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/seedvr/upscale/image",
+      "producer": "Seedvr",
+      "series": "Seedvr",
+      "variant": "SeedVR2",
+      "key": "seedvr",
+      "asset": "assets/producers/seedvr.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/seedvr/upscale/video",
+      "producer": "Seedvr",
+      "series": "Seedvr",
+      "variant": "SeedVR2 [fal-ai/seedvr/upscale/video]",
+      "key": "seedvr",
+      "asset": "assets/producers/seedvr.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/seedvr/upscale/image/seamless",
+      "producer": "Seedvr",
+      "series": "Seedvr",
+      "variant": "SeedVR2 [fal-ai/seedvr/upscale/image/seamless]",
+      "key": "seedvr",
+      "asset": "assets/producers/seedvr.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/background/remove",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria RMBG 2.0",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/expand",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Expand Image",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/eraser",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Eraser",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/background/replace",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Background Replace",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/product-shot",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Product Shot",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/genfill",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria GenFill",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/text-to-image/base",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Text-to-Image Base",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/text-to-image/fast",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Text-to-Image Fast",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/reimagine",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/bria/text-to-image/hd",
+      "producer": "Bria",
+      "series": "Bria",
+      "variant": "Bria Text-to-Image HD",
+      "key": "bria",
+      "asset": "assets/models/bria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/z-image/turbo",
+      "producer": "Z Image",
+      "series": "Z Image",
+      "variant": "Z Image Turbo",
+      "key": "z-image",
+      "asset": "assets/producers/z.ai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/z-image/turbo/image-to-image",
+      "producer": "Z Image",
+      "series": "Z Image",
+      "variant": "Z Image Turbo Image To Image",
+      "key": "z-image",
+      "asset": "assets/producers/z.ai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/z-image/base",
+      "producer": "Z Image",
+      "series": "Z Image",
+      "variant": "Z Image Base",
+      "key": "z-image",
+      "asset": "assets/producers/z.ai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/z-image/turbo/controlnet",
+      "producer": "Z Image",
+      "series": "Z Image",
+      "variant": "Z Image Turbo Controlnet",
+      "key": "z-image",
+      "asset": "assets/producers/z.ai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/z-image/turbo/inpaint",
+      "producer": "Z Image",
+      "series": "Z Image",
+      "variant": "Z Image Turbo Inpaint",
+      "key": "z-image",
+      "asset": "assets/producers/z.ai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/z-image/turbo/tiling",
+      "producer": "Z Image",
+      "series": "Z Image",
+      "variant": "Z-Image Turbo Seamless Tiling",
+      "key": "z-image",
+      "asset": "assets/producers/z.ai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-3-pro-image-preview/edit",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 3 Pro Image Preview",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-25-flash-image/edit",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 2.5 Flash Image",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-3.1-flash-tts",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 3.1 Flash Tts",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-3.1-flash-image-preview/edit",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 3.1 Flash Image Preview",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-25-flash-image",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 2.5 Flash Image [fal-ai/gemini-25-flash-image]",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-3-pro-image-preview",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 3 Pro Image Preview [fal-ai/gemini-3-pro-image-preview]",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-3.1-flash-image-preview",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini 3.1 Flash Image Preview [fal-ai/gemini-3.1-flash-image-preview]",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gemini-tts",
+      "producer": "Gemini",
+      "series": "Gemini",
+      "variant": "Gemini TTS",
+      "key": "gemini",
+      "asset": "assets/models/gemini.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gpt-image-1.5/edit",
+      "producer": "Gpt Image",
+      "series": "Gpt Image",
+      "variant": "GPT-Image 1.5",
+      "key": "gpt-image",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gpt-image-1.5",
+      "producer": "Gpt Image",
+      "series": "Gpt Image",
+      "variant": "GPT-Image 1.5 [fal-ai/gpt-image-1.5]",
+      "key": "gpt-image",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gpt-image-1/text-to-image",
+      "producer": "Gpt Image",
+      "series": "Gpt Image",
+      "variant": "gpt-image-1",
+      "key": "gpt-image",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gpt-image-1/edit-image",
+      "producer": "Gpt Image",
+      "series": "Gpt Image",
+      "variant": "gpt-image-1 [fal-ai/gpt-image-1/edit-image]",
+      "key": "gpt-image",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gpt-image-1-mini",
+      "producer": "Gpt Image",
+      "series": "Gpt Image",
+      "variant": "GPT Image 1 Mini",
+      "key": "gpt-image",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/gpt-image-1-mini/edit",
+      "producer": "Gpt Image",
+      "series": "Gpt Image",
+      "variant": "GPT Image 1 Mini [fal-ai/gpt-image-1-mini/edit]",
+      "key": "gpt-image",
+      "asset": "assets/producers/openai.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram Text to Image",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/remove-background",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram Remove Background",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/character",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V3 Character",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3/reframe",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3/edit",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V3 Edit",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3/generate-transparent",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram Transparent",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/character/edit",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V3 Character Edit",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3/remix",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram [fal-ai/ideogram/v3/remix]",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/object-removal",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram Object Removal",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3/layerize-text",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram [fal-ai/ideogram/v3/layerize-text]",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v3/replace-background",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram Replace Background",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/upscale",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram Upscale",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2a/turbo",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2A Turbo",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/character/remix",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V3 Character Remix",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2/turbo",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2 Turbo",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2/remix",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2 Remix",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2a",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2A",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2/edit",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2 Edit",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/custom-models/generate",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram [fal-ai/ideogram/custom-models/generate]",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2/turbo/remix",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2 Turbo Remix",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2/turbo/edit",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2 Turbo Edit",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2a/turbo/remix",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2A Turbo Remix",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ideogram/v2a/remix",
+      "producer": "Ideogram",
+      "series": "Ideogram",
+      "variant": "Ideogram V2A Remix",
+      "key": "ideogram",
+      "asset": "assets/models/ideogram.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/wan-3.0-prime/reference-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 3.0 Prime",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/wan-3.0/reference-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 3.0",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/wan-3.0/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 3.0 [alibaba/wan-3.0/image-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/wan-3.0-prime/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 3.0 Prime [alibaba/wan-3.0-prime/image-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-25-preview/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.5 Image to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/qwen-image-3/edit",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Qwen Image 3 Image Editing",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/wan-3.0/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan Text to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/image-to-video/turbo",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-a14b/image-to-video/turbo]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan v2.2 A14B",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/qwen-image-3/text-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Qwen Image 3 Text to Image",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/wan-3.0-prime/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 3.0 Prime [alibaba/wan-3.0-prime/text-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-i2v",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.1 Image-to-Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-14b/animate/replace",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.2 Animate Replace",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/edit",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.7/edit]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/pro/edit",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.7/pro/edit]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan Text to Video [fal-ai/wan/v2.7/text-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-25-preview/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.5 Text to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/v1.1/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse 1.1 Image to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/video-edit",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse Video Edit",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.2 Text-to-Video A14B",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/reference-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.7 Reference to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/reference-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse [alibaba/happy-horse/reference-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-14b/animate/move",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.2 Animate Move",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/v1.1/reference-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse 1.1 Reference to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-5b/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan v2.2 5B",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse [alibaba/happy-horse/text-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/text-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.7/text-to-image]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/edit-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.7/edit-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/text-to-video/turbo",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-a14b/text-to-video/turbo]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.7/pro/text-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.7/pro/text-to-image]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-motion",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan Motion",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/happy-horse/v1.1/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Happy Horse 1.1 Text to Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "alibaba/qwen-audio-3-tts",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Qwen Audio 3.0 TTS (Flash)",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-5b/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan v2.2 5B [fal-ai/wan/v2.2-5b/text-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-t2v",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.1 Text-to-Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-flf2v",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.1 First-Last-Frame-to-Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-14b",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE 14B",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-25-preview/image-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.5 Image to Image",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-25-preview/text-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.5 Text to Image",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-5b/text-to-video/fast-wan",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-5b/text-to-video/fast-wan]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/text-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-a14b/text-to-image]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/video-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-a14b/video-to-video]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-effects",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan Effects",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-14b/inpainting",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE 14B [fal-ai/wan-vace-14b/inpainting]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-14b/speech-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.2 Speech-to-Video 14B",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-pro/image-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.1 Pro Image-to-Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-apps/video-edit",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE Video Edit",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-14b/depth",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE 14B [fal-ai/wan-vace-14b/depth]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-22-vace-fun-a14b/depth",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.2 VACE Fun A14B",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-apps/long-reframe",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.1 VACE Long Reframe",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-14b/outpainting",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE 14B [fal-ai/wan-vace-14b/outpainting]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-22-vace-fun-a14b/inpainting",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.2 VACE Fun A14B [fal-ai/wan-22-vace-fun-a14b/inpainting]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-14b/reframe",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE 14B [fal-ai/wan-vace-14b/reframe]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-pro/text-to-video",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan-2.1 Pro Text-to-Video",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-a14b/image-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-a14b/image-to-image]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-5b/text-to-image",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-5b/text-to-image]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-22-vace-fun-a14b/outpainting",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.2 VACE Fun A14B [fal-ai/wan-22-vace-fun-a14b/outpainting]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan/v2.2-5b/text-to-video/distill",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan [fal-ai/wan/v2.2-5b/text-to-video/distill]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-22-vace-fun-a14b/reframe",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan 2.2 VACE Fun A14B [fal-ai/wan-22-vace-fun-a14b/reframe]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/wan-vace-14b/pose",
+      "producer": "Wan",
+      "series": "Wan Video",
+      "variant": "Wan VACE 14B [fal-ai/wan-vace-14b/pose]",
+      "key": "wan",
+      "asset": "assets/models/wan.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-25/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 2.5",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio Open",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small Music Text to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Text to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Audio to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-25/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 2.5 [fal-ai/stable-audio-25/audio-to-audio]",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/base/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Base Text to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/base/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 [fal-ai/stable-audio-3/small/music/base/text-to-audio]",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/base/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small Music Base Audio to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/base/text-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Base Text to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/base/audio-outpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small Music Base Audio Outpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/base/audio-outpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Base Audio Outpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/base/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Base Audio to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 [fal-ai/stable-audio-3/small/music/audio-to-audio]",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/audio-outpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Audio Outpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 [fal-ai/stable-audio-3/small/sfx/audio-to-audio]",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/audio-inpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Audio Inpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/medium/base/audio-inpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Medium Base Audio Inpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-25/inpaint",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 25",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/audio-outpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small Music Audio Outpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/audio-outpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Audio Outpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/base/audio-inpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small Music Base Audio Inpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/base/audio-to-audio",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Base Audio to Audio",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/music/audio-inpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small Music Audio Inpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/audio-inpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Audio Inpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/base/audio-inpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Base Audio Inpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-audio-3/small/sfx/base/audio-outpainting",
+      "producer": "Stability AI",
+      "series": "Stable Audio",
+      "variant": "Stable Audio 3 Small SFX Base Audio Outpainting",
+      "key": "stable-audio",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-diffusion-v35-large",
+      "producer": "Stability AI",
+      "series": "Stable Diffusion",
+      "variant": "Stable Diffusion 3.5 Large",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-diffusion-v3-medium",
+      "producer": "Stability AI",
+      "series": "Stable Diffusion",
+      "variant": "Stable Diffusion V3",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-diffusion-v35-medium",
+      "producer": "Stability AI",
+      "series": "Stable Diffusion",
+      "variant": "Stable Diffusion 3.5 Medium",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-diffusion-v15",
+      "producer": "Stability AI",
+      "series": "Stable Diffusion",
+      "variant": "Stable Diffusion v1.5",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-diffusion-v3-medium/image-to-image",
+      "producer": "Stability AI",
+      "series": "Stable Diffusion",
+      "variant": "Stable Diffusion V3 [fal-ai/stable-diffusion-v3-medium/image-to-image]",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/stabilityai/stable-diffusion-xl-base-1.0",
+      "producer": "Stability AI",
+      "series": "Stable Diffusion",
+      "variant": "stable diffusion xl base 1.0",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/sdxl-controlnet-union",
+      "producer": "Stability AI",
+      "series": "SDXL",
+      "variant": "SDXL ControlNet Union",
+      "key": "sdxl",
+      "asset": "assets/models/sdxl.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/sdxl-controlnet-union/image-to-image",
+      "producer": "Stability AI",
+      "series": "SDXL",
+      "variant": "SDXL ControlNet Union [fal-ai/sdxl-controlnet-union/image-to-image]",
+      "key": "sdxl",
+      "asset": "assets/models/sdxl.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/sdxl-controlnet-union/inpainting",
+      "producer": "Stability AI",
+      "series": "SDXL",
+      "variant": "SDXL ControlNet Union [fal-ai/sdxl-controlnet-union/inpainting]",
+      "key": "sdxl",
+      "asset": "assets/models/sdxl.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit-2511-multiple-angles",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit 2511 Multiple Angles",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit-2511",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit 2511",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-layered",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Layered",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit-plus",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit Plus",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-2512",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image 2512",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit/inpaint",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit [fal-ai/qwen-image-edit/inpaint]",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit/image-to-image",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit [fal-ai/qwen-image-edit/image-to-image]",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-edit-2509",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Edit 2509",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-max/edit",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Max",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image/image-to-image",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image [fal-ai/qwen-image/image-to-image]",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/qwen-image-max/text-to-image",
+      "producer": "Qwen Image",
+      "series": "Qwen Image",
+      "variant": "Qwen Image Max [fal-ai/qwen-image-max/text-to-image]",
+      "key": "qwen-image",
+      "asset": "assets/models/qwen.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v6/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V6 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v6/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V6 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/lipsync",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse Lipsync",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v6/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V6 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/c1/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse C1 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/swap",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse Swap",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4.5/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4.5 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.5/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.5 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/c1/reference-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse C1 Reference To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.5/effects",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.5 Effects",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/c1/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse C1 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v6/extend",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V6 Extend",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4.5/effects",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4.5 Effects",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4.5/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4.5 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.5/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.5 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5/effects",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5 Effects",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.5/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.5 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.6/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.6 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4.5/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4.5 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/sound-effects",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse Sound Effects",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/extend",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse Extend",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/c1/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse C1 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4/effects",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4 Effects",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.6/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.6 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4.5/text-to-video/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4.5 Text To Video Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v5.6/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V5.6 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v3.5/image-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V3.5 Image To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v3.5/transition",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V3.5 Transition",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/extend/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse Extend Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4.5/image-to-video/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4.5 Image To Video Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v3.5/text-to-video",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V3.5 Text To Video",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4/image-to-video/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4 Image To Video Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v3.5/effects",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V3.5 Effects",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v3.5/image-to-video/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V3.5 Image To Video Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v3.5/text-to-video/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V3.5 Text To Video Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/pixverse/v4/text-to-video/fast",
+      "producer": "PixVerse",
+      "series": "PixVerse",
+      "variant": "PixVerse V4 Text To Video Fast",
+      "key": "pixverse",
+      "asset": "assets/models/pixverse.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/fabric-1.0",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Fabric 1.0",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/lipsync",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Lipsync",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/subtitles",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Subtitles",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/lipsync/v2",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "VEED Lipsync",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/video-background-removal",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Video Background Removal",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/video-background-removal/fast",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Video Background Removal [veed/video-background-removal/fast]",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/fabric-1.0/fast",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Fabric 1.0 Fast",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/video-background-removal/green-screen",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Video Background Removal [veed/video-background-removal/green-screen]",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/avatars/text-to-video",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Avatars",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/fabric-1.0/text",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Fabric 1.0 [veed/fabric-1.0/text]",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "veed/avatars/audio-to-video",
+      "producer": "Veed",
+      "series": "Veed",
+      "variant": "Avatars [veed/avatars/audio-to-video]",
+      "key": "veed",
+      "asset": "assets/producers/veed.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/lyria2",
+      "producer": "Lyria",
+      "series": "Lyria",
+      "variant": "Lyria2",
+      "key": "lyria",
+      "asset": "assets/models/lyria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/lyria3/pro",
+      "producer": "Lyria",
+      "series": "Lyria",
+      "variant": "Lyria 3 Pro",
+      "key": "lyria",
+      "asset": "assets/models/lyria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/lyria3",
+      "producer": "Lyria",
+      "series": "Lyria",
+      "variant": "Lyria3",
+      "key": "lyria",
+      "asset": "assets/models/lyria.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ernie-image/turbo",
+      "producer": "Ernie",
+      "series": "Ernie",
+      "variant": "Ernie Image Turbo",
+      "key": "ernie",
+      "asset": "assets/models/ernie.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/ernie-image",
+      "producer": "Ernie",
+      "series": "Ernie",
+      "variant": "Ernie Image",
+      "key": "ernie",
+      "asset": "assets/models/ernie.webp"
+    },
+    {
+      "source": "fal",
+      "id": "nvidia/nemotron-3-nano-omni/vision",
+      "producer": "Nvidia",
+      "series": "Nvidia",
+      "variant": "Nemotron 3 Nano Omni",
+      "key": "nvidia",
+      "asset": "assets/producers/nvidia.webp"
+    },
+    {
+      "source": "fal",
+      "id": "nvidia/cosmos-3-super/text-to-image",
+      "producer": "Nvidia",
+      "series": "Nvidia",
+      "variant": "Cosmos 3 Super",
+      "key": "nvidia",
+      "asset": "assets/producers/nvidia.webp"
+    },
+    {
+      "source": "fal",
+      "id": "nvidia/cosmos-3-super/image-to-video",
+      "producer": "Nvidia",
+      "series": "Nvidia",
+      "variant": "Cosmos 3 Super Image to Video",
+      "key": "nvidia",
+      "asset": "assets/producers/nvidia.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-video",
+      "producer": "Stable",
+      "series": "Stable",
+      "variant": "High Quality Stable Video Diffusion",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-cascade",
+      "producer": "Stable",
+      "series": "Stable",
+      "variant": "Stable Cascade",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "fal",
+      "id": "fal-ai/stable-cascade/sote-diffusion",
+      "producer": "Stable",
+      "series": "Stable",
+      "variant": "SoteDiffusion",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_v3",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "v3",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_v3_conversational",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "v3 Conversational",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_multilingual_v2",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "Multilingual v2",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_flash_v2_5",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "Flash v2.5",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_turbo_v2_5",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "Turbo v2.5",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_turbo_v2",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "Turbo v2",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_flash_v2",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "Flash v2",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_english_sts_v2",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "English v2",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "elevenlabs",
+      "id": "eleven_multilingual_sts_v2",
+      "producer": "ElevenLabs",
+      "series": "Eleven Voice",
+      "variant": "Multilingual v2 [eleven_multilingual_sts_v2]",
+      "key": "elevenlabs",
+      "asset": "assets/models/elevenlabs.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-atc",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-atc",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-automotive",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-automotive",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-conversationalai",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-conversationalai",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-drivethru",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-drivethru",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-ea",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-ea",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-finance",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-finance",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-general",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-general",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-medical",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-medical",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-meeting",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-meeting",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-phonecall",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-phonecall",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-video",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-video",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-2-voicemail",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "2-voicemail",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-3-general",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "general",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-3-medical",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "medical",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-drivethru",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "drivethru",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-general",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "general [nova-general]",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-medical",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "medical [nova-medical]",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-phonecall",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "phonecall",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "nova-voicemail",
+      "producer": "Deepgram",
+      "series": "Nova",
+      "variant": "voicemail",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "whisper-base",
+      "producer": "Deepgram",
+      "series": "STT",
+      "variant": "base",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "whisper-large",
+      "producer": "Deepgram",
+      "series": "STT",
+      "variant": "large",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "whisper-medium",
+      "producer": "Deepgram",
+      "series": "STT",
+      "variant": "medium",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "whisper-small",
+      "producer": "Deepgram",
+      "series": "STT",
+      "variant": "small",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "deepgram",
+      "id": "whisper-tiny",
+      "producer": "Deepgram",
+      "series": "STT",
+      "variant": "tiny",
+      "key": "whisper",
+      "asset": "assets/models/whisper.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/deepgram/flux",
+      "producer": "Deepgram",
+      "series": "Flux",
+      "variant": "flux",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/deepgram/nova-3",
+      "producer": "Deepgram",
+      "series": "Cloudflare",
+      "variant": "Nova 3",
+      "key": "nova",
+      "asset": "assets/models/nova.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/black-forest-labs/flux-2-klein-9b",
+      "producer": "Black-forest-labs",
+      "series": "Flux",
+      "variant": "flux 2 klein 9b",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/black-forest-labs/flux-1-schnell",
+      "producer": "Black-forest-labs",
+      "series": "Flux",
+      "variant": "flux 1 schnell",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/black-forest-labs/flux-2-klein-4b",
+      "producer": "Black-forest-labs",
+      "series": "Flux",
+      "variant": "flux 2 klein 4b",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/black-forest-labs/flux-2-dev",
+      "producer": "Black-forest-labs",
+      "series": "Flux",
+      "variant": "flux 2 dev",
+      "key": "flux",
+      "asset": "assets/models/flux.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+      "producer": "Deepseek-ai",
+      "series": "Qwen",
+      "variant": "deepseek r1 distill qwen 32b",
+      "key": "deepseek",
+      "asset": "assets/models/deepseek.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+      "producer": "Deepseek-ai",
+      "series": "DeepSeek",
+      "variant": "v4 flash 0731",
+      "key": "deepseek",
+      "asset": "assets/models/deepseek.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+      "producer": "Deepseek-ai",
+      "series": "DeepSeek",
+      "variant": "v4 pro 0813",
+      "key": "deepseek",
+      "asset": "assets/models/deepseek.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/runwayml/stable-diffusion-v1-5-inpainting",
+      "producer": "Runwayml",
+      "series": "Stable Diffusion",
+      "variant": "stable diffusion v1 5 inpainting",
+      "key": "stable",
+      "asset": "assets/models/stable.webp"
+    },
+    {
+      "source": "cloudflare",
+      "id": "@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+      "producer": "Aisingapore",
+      "series": "Gemma",
+      "variant": "sea lion v4 27b it",
+      "key": "gemma",
+      "asset": "assets/models/gemma.webp"
+    }
+  ]
+}

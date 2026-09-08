@@ -2,11 +2,11 @@
   "name": "models",
   "version": "1.0.0",
   "scripts": {
-    "deploy": "wrangler publish"
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "@cloudflare/kv-asset-handler": "^0.3.0",
-    "wrangler": "^4.15.2"
+    "wrangler": "^4.129.1"
   },
   "main": "index.js",
   "dependencies": {

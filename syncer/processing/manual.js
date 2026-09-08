@@ -6,6 +6,7 @@
  * Includes a health check for model URLs to filter out unreachable ones.
  */
 
+import { offlineGrouping } from './offline.js';
 import { DEFAULTS } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
 
@@ -27,11 +28,12 @@ export async function processManualModels(kv, operationId) {
     let rawModels = [];
     try {
         // KV içerisindeki 'model:' ile başlayan tüm kayıtları çeker
-        const list = await kv.list({ prefix: "model:" });
-        if (list.keys.length > 0) {
-            const promises = list.keys.map(key => kv.get(key.name, 'json'));
-            rawModels = (await Promise.all(promises)).filter(Boolean);
-        }
+        let cursor;
+        do {
+            const list = await kv.list({ prefix: "model:", ...(cursor ? { cursor } : {}) });
+            rawModels.push(...(await Promise.all(list.keys.map(key => kv.get(key.name, 'json')))).filter(Boolean));
+            cursor = list.list_complete ? undefined : list.cursor;
+        } while (cursor);
     } catch (e) {
         console.error(`[${opId}] CRITICAL: Failed to fetch models from KV: ${e.message}`);
         return {};
@@ -56,9 +58,11 @@ export async function processManualModels(kv, operationId) {
         }
         
         // Eğer producer belirtilmemişse varsayılan olarak Vertex
-        const provider = model.producer || 'Vertex';
-        const series = model.id;
-        const variant = "Default";
+        const { provider, series, variant: baseVariant } = model.type === 'offline'
+            ? offlineGrouping(model)
+            : { provider: model.producer || 'Vertex', series: model.id, variant: 'Default' };
+        const variant = grouped[provider]?.[series]?.[baseVariant]
+            ? `${baseVariant} [${model.id}]` : baseVariant;
 
         grouped[provider] ??= {};
         grouped[provider][series] ??= {};

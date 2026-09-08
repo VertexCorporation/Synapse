@@ -6,7 +6,7 @@
  * Transforms the raw API data into our standardized 'ProducersData' structure.
  */
 
-import { OPENROUTER_URL, ALLOWED_PROVIDER_IDS, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, WEB_SEARCH_COST_LIMIT, PRODUCER_MAP, TIER_THRESHOLDS } from '../config.js';
+import { OPENROUTER_URL, ALLOWED_PROVIDER_IDS, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, WEB_SEARCH_COST_LIMIT, PRODUCER_MAP } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
 import { isTooExpensive } from '../utils/helpers.js';
 import { extractSeriesVariant } from './parser.js';
@@ -120,10 +120,6 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
         const supportsReasoning = hasToolUse || hasReasoning;
 
         const hasWebSearch = model.supported_parameters?.includes('web_search_options') || (p.web_search && +p.web_search > 0);
-        let tier = "free";
-        if ((p.image && +p.image >= TIER_THRESHOLDS.IMAGE_PREMIUM) || (p.completion && +p.completion >= TIER_THRESHOLDS.TEXT_PREMIUM)) {
-            tier = "premium";
-        }
 
         const targetGrouped = isFallbackFree ? fallbackGrouped : grouped;
 
@@ -132,7 +128,7 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
         targetGrouped[providerDisplayName][series][variant] = {
             id: model.id,
             source: 'openrouter',
-            tier: isFallbackFree ? "fallback" : tier,
+            tier: isFallbackFree ? "fallback" : "standard",
             description: { en: description },
             context: model.context_length ?? 0,
             modalities: detailedModalities,

@@ -1,0 +1,232 @@
+var CHAT_TEMPLATES = {
+  chatml: {
+    template: "chatml",
+    tokens: {
+      system_start: "<|im_start|>system\n",
+      system_end: "<|im_end|>\n",
+      user_start: "<|im_start|>user\n",
+      user_end: "<|im_end|>\n",
+      assistant_start: "<|im_start|>assistant\n",
+      assistant_end: "<|im_end|>\n",
+      stop_generation: ["<|im_end|>", "<|endoftext|>"]
+    }
+  },
+  "llama-3": {
+    template: "llama3",
+    tokens: {
+      system_start: "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n",
+      system_end: "<|eot_id|>",
+      user_start: "<|start_header_id|>user<|end_header_id|>\n\n",
+      user_end: "<|eot_id|>",
+      assistant_start: "<|start_header_id|>assistant<|end_header_id|>\n\n",
+      assistant_end: "<|eot_id|>",
+      stop_generation: ["<|eot_id|>", "<|end_of_text|>"]
+    }
+  },
+  gemma: {
+    template: "gemma",
+    tokens: {
+      user_start: "<start_of_turn>user\n",
+      user_end: "<end_of_turn>\n",
+      assistant_start: "<start_of_turn>model\n",
+      assistant_end: "<end_of_turn>\n",
+      stop_generation: ["<end_of_turn>", "<eos>"]
+    }
+  },
+  "phi-3_glm": {
+    template: "phi3",
+    tokens: {
+      system_start: "<|system|>\n",
+      system_end: "<|end|>\n",
+      user_start: "<|user|>\n",
+      user_end: "<|end|>\n",
+      assistant_start: "<|assistant|>\n",
+      assistant_end: "<|end|>\n",
+      stop_generation: ["<|end|>", "<|endoftext|>"]
+    }
+  }
+};
+function inferChatFormat(id, tags = []) {
+  const searchString = `${id.toLowerCase()} ${tags.join(" ").toLowerCase()}`;
+  if (searchString.includes("llama-3.2") || searchString.includes("llama-3.1") || searchString.includes("llama-3"))
+    return CHAT_TEMPLATES["llama-3"];
+  if (searchString.includes("gemma-2") || searchString.includes("gemma"))
+    return CHAT_TEMPLATES["gemma"];
+  if (searchString.includes("phi-4") || searchString.includes("phi-3"))
+    return CHAT_TEMPLATES["phi-3_glm"];
+  return CHAT_TEMPLATES["chatml"];
+}
+__name(inferChatFormat, "inferChatFormat");
+async function buildGroupedHuggingFaceModels(env, operationId) {
+  const opId = `${operationId}-huggingface`;
+  console.log(`\u{1F6E0}\uFE0F [${opId}] Starting HuggingFace model processing...`);
+  const url = "https://huggingface.co/api/models?filter=gguf,text-generation&sort=downloads&direction=-1&limit=2000&expand[]=gguf&expand[]=siblings&expand[]=likes";
+  const response = await fetchWithTimeout(
+    url,
+    {},
+    env.FETCH_TIMEOUT_MS || 6e4,
+    opId
+  );
+  if (!response.ok) {
+    const errorText = await response.text();
+    throw new Error(
+      `[${opId}] HuggingFace API request failed with status ${response.status}: ${errorText.substring(0, 200)}`
+    );
+  }
+  const models = await response.json();
+  console.log(
+    `\u{1F50D} [${opId}] Fetched ${models.length} raw GGUF models from HuggingFace.`
+  );
+  const grouped = {};
+  let stats = { kept: 0, invalid: 0, lowQuality: 0 };
+  for (const model of models) {
+    if (!model?.id || typeof model.downloads !== "number") {
+      stats.invalid++;
+      continue;
+    }
+    const MIN_LIKES = 50;
+    const MIN_DOWNLOADS = 1e3;
+    const HIGH_DOWNLOADS = 5e4;
+    const likes = model.likes || 0;
+    if (model.downloads < MIN_DOWNLOADS || likes < MIN_LIKES && model.downloads < HIGH_DOWNLOADS) {
+      stats.lowQuality++;
+      continue;
+    }
+    if (model.id.toLowerCase().includes("uncensored") || model.id.toLowerCase().includes("crack")) {
+      stats.invalid++;
+      continue;
+    }
+    let targetFileName = null;
+    if (model.siblings && Array.isArray(model.siblings)) {
+      const ggufFiles = model.siblings.filter(
+        (s) => s.rfilename && s.rfilename.toLowerCase().endsWith(".gguf")
+      );
+      if (ggufFiles.length > 0) {
+        const preferred = ["q4_k_m", "q4_0", "q5_k_m", "q5_0", "q3_k_m"];
+        for (const q of preferred) {
+          const found = ggufFiles.find(
+            (s) => s.rfilename.toLowerCase().includes(q)
+          );
+          if (found) {
+            targetFileName = found.rfilename;
+            break;
+          }
+        }
+        if (!targetFileName) {
+          targetFileName = ggufFiles[0].rfilename;
+        }
+      }
+    }
+    if (!targetFileName) {
+      stats.invalid++;
+      continue;
+    }
+    const parts = model.id.split("/");
+    let rawProviderName = parts[0] || "Community";
+    let rawSeriesName = parts[1] || model.id;
+    let providerDisplayName = rawProviderName;
+    let cleanSeries = rawSeriesName.replace(/-GGUF$/i, "").replace(/_GGUF$/i, "").replace(/-GGML$/i, "");
+    let variant = cleanSeries;
+    let series = "Other";
+    const nameForSeries = variant.toLowerCase();
+    if (nameForSeries.includes("nemotron")) {
+      series = "Nemotron";
+      providerDisplayName = "NVIDIA";
+    } else if (nameForSeries.includes("chatgpt") || nameForSeries.includes("gpt")) {
+      series = "ChatGPT";
+      providerDisplayName = "OpenAI";
+    } else if (nameForSeries.includes("llama")) {
+      series = "Llama";
+      providerDisplayName = "Meta";
+    } else if (nameForSeries.includes("gemma")) {
+      series = "Gemma";
+      providerDisplayName = "Google";
+    } else if (nameForSeries.includes("next")) {
+      series = "Next";
+    } else if (nameForSeries.includes("qwen")) {
+      series = "Qwen";
+      providerDisplayName = "Qwen";
+    } else if (nameForSeries.includes("mixtral")) {
+      series = "Mixtral";
+      providerDisplayName = "Mistral";
+    } else if (nameForSeries.includes("mistral")) {
+      series = "Mistral";
+      providerDisplayName = "Mistral";
+    } else if (nameForSeries.includes("phi")) {
+      series = "Phi";
+      providerDisplayName = "Microsoft";
+    } else if (nameForSeries.includes("command")) {
+      series = "Command";
+      providerDisplayName = "Cohere";
+    } else if (nameForSeries.includes("aya")) {
+      series = "Aya";
+      providerDisplayName = "Cohere";
+    } else if (nameForSeries.includes("deepseek")) {
+      series = "DeepSeek";
+      providerDisplayName = "DeepSeek";
+    }
+    if (providerDisplayName.toLowerCase() === "maziyarpanahi") providerDisplayName = "MazyarPanahi";
+    if (providerDisplayName.toLowerCase() === "bartowski") providerDisplayName = "Bartowski";
+    if (providerDisplayName.toLowerCase() === "nvidia") providerDisplayName = "NVIDIA";
+    if (providerDisplayName.toLowerCase() === "openai") providerDisplayName = "OpenAI";
+    if (providerDisplayName.toLowerCase() === "meta") providerDisplayName = "Meta";
+    if (providerDisplayName.toLowerCase() === "mistralai") providerDisplayName = "Mistral";
+    if (model.id.toLowerCase().includes("awq")) variant += " (AWQ)";
+    let modalities = { image: false, audio: false, file: true };
+    if (model.pipeline_tag === "image-text-to-text") modalities.image = true;
+    if (model.pipeline_tag === "text-to-speech") modalities.audio = true;
+    let context = 8192;
+    if (cleanSeries.toLowerCase().includes("128k")) context = 131072;
+    else if (cleanSeries.toLowerCase().includes("32k")) context = 32768;
+    else if (cleanSeries.toLowerCase().includes("16k")) context = 16384;
+    const chatFormatObj = inferChatFormat(model.id, model.tags || []);
+    const paramsCount = model.gguf?.total || 0;
+    let estimatedSizeMB = void 0;
+    let estimatedRamMB = void 0;
+    if (paramsCount > 0) {
+      estimatedSizeMB = Math.round(paramsCount * 0.6 / 1048576) + 150;
+      estimatedRamMB = estimatedSizeMB + 2e3;
+    } else {
+      const nameMatch = cleanSeries.toLowerCase().match(/([0-9\.]+)(b|m)/);
+      if (nameMatch) {
+        const val = parseFloat(nameMatch[1]);
+        const unit = nameMatch[2];
+        const inferredParams = unit === "b" ? val * 1e9 : val * 1e6;
+        estimatedSizeMB = Math.round(inferredParams * 0.6 / 1048576) + 150;
+        estimatedRamMB = estimatedSizeMB + 2e3;
+      }
+    }
+    grouped[providerDisplayName] ??= {};
+    grouped[providerDisplayName][series] ??= {};
+    grouped[providerDisplayName][series][variant] = {
+      id: model.id,
+      source: "huggingface",
+      // Important for Cortex to know it's HF offline node
+      tier: "free",
+      type: "offline",
+      // Tells UI it's an offline/downloadable model
+      description: {},
+      tags: model.tags || [],
+      context,
+      modalities,
+      outputs: {
+        image: false
+      },
+      ...estimatedSizeMB && { size: estimatedSizeMB },
+      ...estimatedRamMB && { ram: estimatedRamMB },
+      reasoning: false,
+      webSearch: false,
+      // Provide exact direct download URL to the .gguf file
+      url: `https://huggingface.co/${model.id}/resolve/main/${targetFileName}`,
+      chatFormat: chatFormatObj
+      // Dynamically inferred full chat format payload!
+    };
+    stats.kept++;
+  }
+  console.log(
+    `\u{1F4CA} [${opId}] Processed HuggingFace models. Kept: ${stats.kept} offline GGUF models. Filtered Low Quality: ${stats.lowQuality}, Invalid: ${stats.invalid}`
+  );
+  return { grouped, fallbackGrouped: {} };
+}
+__name(buildGroupedHuggingFaceModels, "buildGroupedHuggingFaceModels");
+

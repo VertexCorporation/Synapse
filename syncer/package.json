@@ -1,8 +1,9 @@
 {
   "name": "syncer",
   "version": "1.0.0",
+  "type": "module",
   "scripts": {
-    "deploy": "wrangler publish"
+    "deploy": "wrangler deploy"
   },
   "devDependencies": {
     "@cloudflare/kv-asset-handler": "^0.3.0",

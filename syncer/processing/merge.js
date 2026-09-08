@@ -73,3 +73,24 @@ export function rehydrateAndMergeProducers(workingProducers, freshProducers) {
     // overwrite properties in the first (freshProducers), preserving manual changes.
     return mergeDeep(freshProducers, prunedWorkingProducers);
 }
+// Pricing tiers are source-owned. Old KV enrichment must not revive retired premium tiers.
+export function applyFreshOnlineTiers(finalProducers, freshProducers, defaultTier = 'standard') {
+    const tiers = new Map();
+    for (const producer of Object.values(freshProducers || {})) {
+        for (const series of Object.values(producer || {})) {
+            for (const model of Object.values(series || {})) {
+                if (model?.id && ['standard', 'fallback'].includes(model.tier)) tiers.set(`${model.source}:${model.id}`, model.tier);
+            }
+        }
+    }
+    for (const producer of Object.values(finalProducers || {})) {
+        for (const series of Object.values(producer || {})) {
+            for (const model of Object.values(series || {})) {
+                if (!model?.id) continue;
+                const tier = tiers.get(`${model.source}:${model.id}`)
+                    || (model.tier === 'premium' && ['openrouter', 'fal', 'cloudflare', 'groq', 'elevenlabs', 'deepgram'].includes(model.source) ? defaultTier : null);
+                if (tier) model.tier = tier;
+            }
+        }
+    }
+}
