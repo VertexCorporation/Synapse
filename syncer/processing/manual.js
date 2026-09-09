@@ -87,6 +87,13 @@ export async function processManualModels(kv, operationId) {
             ...(model.outputs && { outputs: model.outputs }),
             ...(model.producer && { producer: model.producer }), // Producer'ı obje içine de ekleyelim
             
+            // Character / persona role: canonical English string (not a localized map).
+            ...(model.role && {
+                role: typeof model.role === 'string'
+                    ? model.role
+                    : (model.role.en || Object.values(model.role).find(v => typeof v === 'string' && v.trim()) || '')
+            }),
+            
             // Detaylar (i18n vb.)
             details: model.details
         };
