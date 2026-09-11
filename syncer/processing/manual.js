@@ -7,6 +7,7 @@
  */
 
 import { offlineGrouping } from './offline.js';
+import { inferChatFormat } from './huggingface-chat.js';
 import { DEFAULTS } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
 
@@ -81,7 +82,12 @@ export async function processManualModels(kv, operationId) {
             ...(model.ram && { ram: model.ram }),
             
             // Offline Mod ve UI için Kritik Alanlar
-            ...(model.chatFormat && { chatFormat: model.chatFormat }),
+            // (chatFormat: the curated KV value always wins; a missing one is
+            // inferred from the model family so EVERY offline model ships
+            // with canonical formatting metadata.)
+            ...(model.type === 'offline' && {
+                chatFormat: model.chatFormat || inferChatFormat(model.id, []),
+            }),
             ...(model.licenseInfo && { licenseInfo: model.licenseInfo }),
             ...(model.modalities && { modalities: model.modalities }),
             ...(model.outputs && { outputs: model.outputs }),

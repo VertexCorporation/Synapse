@@ -6,8 +6,11 @@
  * Transforms models into Cortex ProducersData format.
  */
 
+import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
 import { GROQ_URL } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
+import { normalizeModelId } from './dedup.js';
+import { normalizeGroqModel } from './normalize/groq.js';
 
 /**
  * Parses producer, series, and variant from Groq model ID.
@@ -16,7 +19,7 @@ import { fetchWithTimeout } from '../utils/api.js';
  * @param {string} ownedBy
  * @returns {{producer: string, series: string, variant: string}}
  */
-function parseGroqModelIdentity(modelId, ownedBy) {
+export function parseGroqModelIdentity(modelId, ownedBy) {
     const idLower = modelId.toLowerCase();
     let producer = "Groq";
     let series = "Groq";
@@ -76,6 +79,7 @@ export async function buildGroupedGroqModels(env, operationId, blacklistedIds) {
     };
 
     const grouped = {};
+    const records = [];
     let kept = 0;
 
     try {
@@ -90,22 +94,32 @@ export async function buildGroupedGroqModels(env, operationId, blacklistedIds) {
 
         for (const model of models) {
             const modelId = model.id;
-            if (!modelId) continue;
+            if (!modelId || !matchCatalogModel('groq', modelId)) {
+                if (modelId) console.warn(`🚨 [${opId}] ALARM[asset-missing]: groq model "${modelId}" has no catalog asset match; excluded.`);
+                continue;
+            }
             if (model.active === false) continue;
             if (blacklistedIds && blacklistedIds.has(modelId)) continue;
 
             const isVision = modelId.toLowerCase().includes("vision");
             const isAudio = modelId.toLowerCase().includes("whisper");
             const { producer, series, variant } = parseGroqModelIdentity(modelId, model.owned_by);
+            const features = Array.isArray(model.supported_features) ? model.supported_features : [];
 
-            grouped[producer] ??= {};
-            grouped[producer][series] ??= {};
-            grouped[producer][series][variant] = {
+            // Catalog record: canonical CortexModel with truthful limits/capabilities.
+            records.push(normalizeGroqModel(model, {
+                identity: { producer, series, variant },
+                canonicalKey: normalizeModelId(modelId, 'groq'),
+                catalogMatch: matchCatalogModel('groq', modelId),
+            }));
+
+            insertCatalogModel(grouped, producer, series, variant, {
                 id: modelId,
                 source: "groq",
                 tier: "standard",
                 description: { en: `Groq ultra-fast LPU inference for ${modelId}` },
-                context: model.context_window || 8192,
+                // Truthful context: null-safe (never the legacy invented 8192 default).
+                context: model.context_window ?? 0,
                 modalities: {
                     image: isVision,
                     video: false,
@@ -117,16 +131,17 @@ export async function buildGroupedGroqModels(env, operationId, blacklistedIds) {
                     video: false,
                     audio: false,
                 },
-                reasoning: true,
+                // Agentic capability = declared tools/reasoning features (no blanket true).
+                reasoning: features.includes("tools") || features.includes("reasoning"),
                 webSearch: false,
-            };
+            });
             kept++;
         }
 
         console.log(`⚡ [${opId}] Groq models complete: kept ${kept} models.`);
+        return { grouped, records, health: { ok: true, count: models.length, kept } };
     } catch (e) {
         console.warn(`⚠️ [${opId}] Groq fetching failed: ${e.message}`);
+        return { grouped, records, health: { ok: false, error: e.message } };
     }
-
-    return { grouped };
 }

@@ -1,5 +1,7 @@
 import { consolidateFalModels } from './fal-models.js';
-import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
+import { insertCatalogModel, matchCatalogModel, reportAssetAlarm } from './catalog-policy.js';
+import { offlineEntries } from './offline.js';
+import { normalizeFalModel } from './normalize/fal.js';
 /*
  * Cortex - Syncer Worker - v7.0 (Modular)
  *
@@ -77,6 +79,8 @@ const EXCLUDED_SUBSTRINGS = [
  * @returns {{producer: string, series: string, variant: string} | null}
  */
 export function parseFalModelIdentity(endpointId, metadata = {}) {
+    const catalogMatch = matchCatalogModel('fal', endpointId);
+    if (!catalogMatch) return null;
     const idLower = endpointId.toLowerCase();
     const parts = endpointId.split("/");
     const root = parts[0].toLowerCase();
@@ -93,7 +97,7 @@ export function parseFalModelIdentity(endpointId, metadata = {}) {
         const match = matchCatalogModel('fal', endpointId);
         if (!match) return null;
         const name = match.key.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        return { producer: name, series: name, variant: metadata.display_name || parts.slice(1).join(' ') };
+        return { producer: name, series: catalogMatch.series, variant: metadata.display_name || parts.slice(1).join(' ') };
     }
 
     const conf = TRUSTED_FAL_PRODUCERS[matchedKey];
@@ -131,7 +135,7 @@ export function parseFalModelIdentity(endpointId, metadata = {}) {
             .replace(/\b\w/g, c => c.toUpperCase());
     }
 
-    return { producer, series, variant };
+    return { producer, series: catalogMatch.series, variant };
 }
 
 /**
@@ -152,11 +156,13 @@ export async function buildGroupedFalModels(env, operationId, blacklistedIds) {
     }
 
     const grouped = {};
+    const alarmSeen = new Set();
     let cursor = null;
     let pageCount = 0;
     let totalFetched = 0;
     let kept = 0;
     let skippedNoise = 0;
+    let fetchFailed = null;
 
     try {
         do {
@@ -214,10 +220,18 @@ export async function buildGroupedFalModels(env, operationId, blacklistedIds) {
 
                 const { producer, series, variant } = identity;
 
-                insertCatalogModel(grouped, producer, series, variant, {
+                const inserted = insertCatalogModel(grouped, producer, series, variant, {
                     id: endpointId,
                     source: "fal",
-                    falEndpoint: { category, group: meta.group?.key || null },
+                    // Extra endpoint meta (license/status/dates) feeds the catalog records.
+                    falEndpoint: {
+                        category,
+                        group: meta.group?.key || null,
+                        ...(meta.status && { status: meta.status }),
+                        ...(meta.license_type && { license: meta.license_type }),
+                        ...(meta.date && { createdAt: meta.date }),
+                        ...(meta.updated_at && { updatedAt: meta.updated_at }),
+                    },
                     tier: "standard",
                     description: { en: meta.description || meta.display_name || endpointId },
                     context: 0,
@@ -235,7 +249,11 @@ export async function buildGroupedFalModels(env, operationId, blacklistedIds) {
                     reasoning: false,
                     webSearch: false,
                 });
-                kept++;
+                if (inserted) {
+                    kept++;
+                } else {
+                    reportAssetAlarm(alarmSeen, 'fal', endpointId, opId);
+                }
             }
 
             cursor = data.has_more && data.next_cursor ? data.next_cursor : null;
@@ -244,9 +262,13 @@ export async function buildGroupedFalModels(env, operationId, blacklistedIds) {
         console.log(`🎨 [${opId}] Fal.ai models complete: fetched ${totalFetched}, kept ${kept} curated models (${skippedNoise} noise/unlisted filtered) across ${pageCount} page(s).`);
     } catch (e) {
         console.warn(`⚠️ [${opId}] Fal.ai fetching ended with warning: ${e.message}`);
+        fetchFailed = e.message;
     }
 
     const consolidated = consolidateFalModels(grouped, blacklistedIds);
     console.log(`[${opId}] Consolidated task endpoints into base model records.`);
-    return { grouped: consolidated };
+    // Catalog records: one CortexModel per consolidated fal base model.
+    const records = [...offlineEntries(consolidated)].map(normalizeFalModel).filter(Boolean);
+    // A partially fetched page set must not look authoritative to the catalog merge.
+    return { grouped: consolidated, records, health: { ok: !fetchFailed, error: fetchFailed || null, count: totalFetched, kept } };
 }

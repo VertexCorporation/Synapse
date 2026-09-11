@@ -1,0 +1,1487 @@
+{
+  "models": [
+    {
+      "endpoint_id": "fal-ai/nano-banana-2/edit",
+      "metadata": {
+        "display_name": "Nano Banana 2",
+        "category": "image-to-image",
+        "description": "Nano Banana 2 is Google's new state-of-the-art image generation and editing model\n",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-08-19T19:54:05.061Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a900b75/DHb_RgXoXsYLdvzQz6mdn_95e87a44239c43448939b4c382dd957c.jpg",
+        "model_url": "https://fal.run/fal-ai/nano-banana-2/edit",
+        "license_type": "commercial",
+        "date": "2026-02-26T16:20:09.685Z",
+        "group": {
+          "key": "nano-banana-2",
+          "label": "Image Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/nano-banana-pro/edit",
+      "metadata": {
+        "display_name": "Nano Banana Pro",
+        "category": "image-to-image",
+        "description": "Nano Banana Pro is Google's new state-of-the-art image generation and editing model",
+        "status": "active",
+        "tags": [
+          "realism",
+          "typography"
+        ],
+        "updated_at": "2026-06-18T17:13:56.639Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9c2f0f/p3rXI18zMYTBz1M0qP2h4_b9a2087ce0b64cd788cb5ec067edc26e.jpg",
+        "model_url": "https://fal.run/fal-ai/nano-banana-pro/edit",
+        "license_type": "commercial",
+        "date": "2025-11-20T14:27:03.344Z",
+        "group": {
+          "key": "Nano-Banana-Pro",
+          "label": "Image Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux/schnell",
+      "metadata": {
+        "display_name": "FLUX.1 [schnell]",
+        "category": "text-to-image",
+        "description": "FLUX.1 [schnell] is a 12 billion parameter flow transformer that generates high-quality images from text in 1 to 4 steps, suitable for personal and commercial use.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-06-24T23:02:10.109Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9af64d/GxvCUPd3gO-MSYcy06g0x_1641cfe028c2429b8e12e4fc320eb0a8.jpg",
+        "model_url": "https://fal.run/fal-ai/flux/schnell",
+        "github_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+        "license_type": "commercial",
+        "date": "2024-11-25T00:00:00.000Z",
+        "group": {
+          "key": "flux-1",
+          "label": "Text to Image [schnell]"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/nano-banana-2",
+      "metadata": {
+        "display_name": "Nano Banana 2",
+        "category": "text-to-image",
+        "description": "Nano Banana 2 is Google's new state-of-the-art fast image generation and editing model",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-06-11T00:04:55.093Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a900b9e/ptbZcVWIQ_fXGGHfv8Zez_0ea5ca41bdf143a29e21e30a53120672.jpg",
+        "model_url": "https://fal.run/fal-ai/nano-banana-2",
+        "license_type": "commercial",
+        "date": "2026-02-26T16:08:01.361Z",
+        "group": {
+          "key": "nano-banana-2",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/nano-banana-pro",
+      "metadata": {
+        "display_name": "Nano Banana Pro",
+        "category": "text-to-image",
+        "description": "Nano Banana Pro is Google's new state-of-the-art image generation and editing model",
+        "status": "active",
+        "tags": [
+          "realism",
+          "typography"
+        ],
+        "updated_at": "2026-04-28T16:29:09.509Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8691ce/SR0_u1zPJbx8jCIO6bJR0_8c83f0d66bbd48f3b55f825117941f84.jpg",
+        "model_url": "https://fal.run/fal-ai/nano-banana-pro",
+        "license_type": "commercial",
+        "date": "2025-11-20T14:24:45.001Z",
+        "group": {
+          "key": "Nano-Banana-Pro",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux/dev",
+      "metadata": {
+        "display_name": "FLUX.1 [dev]",
+        "category": "text-to-image",
+        "description": "FLUX.1 [dev] is a 12 billion parameter flow transformer that generates high-quality images from text. It is suitable for personal and commercial use.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:47:32.206Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/fal_cdn/fal/Upscale-1.jpeg",
+        "model_url": "https://fal.run/fal-ai/flux/dev",
+        "license_type": "commercial",
+        "date": "2025-04-01T18:10:42.284Z",
+        "group": {
+          "key": "flux-1",
+          "label": "Text to Image [dev]"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "stream_url": "https://fal.run/fal-ai/flux/dev/stream",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/nano-banana/edit",
+      "metadata": {
+        "display_name": "Nano Banana",
+        "category": "image-to-image",
+        "description": "Google's famous original image generation and editing model",
+        "status": "active",
+        "tags": [
+          "image-editing"
+        ],
+        "updated_at": "2026-06-26T20:56:24.634Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f9a4a/mjFnPPGaaBaf5OHrDSoSO_ns4MA9ac.png",
+        "model_url": "https://fal.run/fal-ai/nano-banana/edit",
+        "license_type": "commercial",
+        "date": "2025-08-19T22:16:18.949Z",
+        "group": {
+          "key": "nano-banana",
+          "label": "Image Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v3/pro/image-to-video",
+      "metadata": {
+        "display_name": "Kling Video v3 Image to Video [Pro]",
+        "category": "image-to-video",
+        "description": "Kling 3.0 Pro: Top-tier image-to-video with cinematic visuals, fluid motion, and native audio generation, with custom element support.",
+        "status": "active",
+        "tags": [
+          "image-to-video"
+        ],
+        "updated_at": "2026-05-29T18:50:02.672Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9c2fb3/yPzcdzINnY5RdSoEqHc8G_382d4ec9337344ccaacf5599057f6cd0.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v3/pro/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-v3",
+          "label": "Image to Video (pro)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2-pro",
+      "metadata": {
+        "display_name": "Flux 2 Pro",
+        "category": "text-to-image",
+        "description": "Image editing with FLUX.2 [pro] from Black Forest Labs. Ideal for high-quality image manipulation, style transfer, and sequential editing workflows",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:46:42.940Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/penguin/UfryXXm9my6IM8HsoP9FL_054c2c2953dc491996904114c6e04836.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2-pro",
+        "license_type": "commercial",
+        "date": "2025-11-23T00:14:31.608Z",
+        "group": {
+          "key": "Flux2-Pro",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/nano-banana",
+      "metadata": {
+        "display_name": "Nano Banana",
+        "category": "text-to-image",
+        "description": "Google's famous original image generation and editing model",
+        "status": "active",
+        "tags": [
+          "image-generation"
+        ],
+        "updated_at": "2026-06-24T10:31:30.626Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91a7/UOFMBU7hW6hqvFYvXHH-o_MZBJlwLt.png",
+        "model_url": "https://fal.run/fal-ai/nano-banana",
+        "license_type": "commercial",
+        "date": "2025-08-19T22:11:04.357Z",
+        "group": {
+          "key": "nano-banana",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-pro/kontext",
+      "metadata": {
+        "display_name": "FLUX.1 Kontext [pro]",
+        "category": "image-to-image",
+        "description": "FLUX.1 Kontext [pro] handles both text and reference images as inputs, seamlessly enabling targeted, local edits and complex transformations of entire scenes.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:47:19.221Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/fal_cdn/fal/Training-2.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-pro/kontext",
+        "license_type": "commercial",
+        "date": "2025-05-28T18:30:52.718Z",
+        "group": {
+          "key": "flux-pro-kontext",
+          "label": "Kontext [pro] -- Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-pro/v1.1",
+      "metadata": {
+        "display_name": "FLUX1.1 [pro]",
+        "category": "text-to-image",
+        "description": "FLUX1.1 [pro] is an enhanced version of FLUX.1 [pro], improved image generation capabilities, delivering superior composition, detail, and artistic fidelity compared to its predecessor.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:47:23.571Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/turbo_thumbnail.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-pro/v1.1",
+        "license_type": "commercial",
+        "date": "2025-01-16T00:00:00.000Z",
+        "group": {
+          "key": "flux-pro",
+          "label": "FLUX 1.1 [pro]"
+        },
+        "highlighted": false,
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v2.5-turbo/pro/image-to-video",
+      "metadata": {
+        "display_name": "Kling Video",
+        "category": "image-to-video",
+        "description": "Kling 2.5 Turbo Pro: Top-tier image-to-video generation with unparalleled motion fluidity, cinematic visuals, and exceptional prompt precision.",
+        "status": "active",
+        "tags": [
+          "stylized",
+          "transform"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3.fal.media/files/rabbit/2KNBk1qkmEBXK0FLgfHCl_ee4bb1ada254433bbab296893a8636e3.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v2.5-turbo/pro/image-to-video",
+        "license_type": "commercial",
+        "date": "2025-09-22T22:51:16.379Z",
+        "group": {
+          "key": "kling-video-v25",
+          "label": "2.5 Turbo (Image to Video) Pro"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2-pro/edit",
+      "metadata": {
+        "display_name": "FLUX 2 Pro Edit",
+        "category": "image-to-image",
+        "description": "Text-to-image generation with FLUX.2 [pro] from Black Forest Labs. Optimized for maximum quality, exceptional photorealism and artistic images.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:46:43.441Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/penguin/eZetcrsZI6AQLCD3f5gaI_b173ae004bdd4108bd1be54eb6e49c7a.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2-pro/edit",
+        "license_type": "commercial",
+        "date": "2025-11-23T00:13:41.404Z",
+        "group": {
+          "key": "Flux2-Pro",
+          "label": "Image Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v3/standard/image-to-video",
+      "metadata": {
+        "display_name": "Kling Video v3 Image to Video [Standard]",
+        "category": "image-to-video",
+        "description": "Kling 3.0 Standard: Top-tier image-to-video with cinematic visuals, fluid motion, and native audio generation, with custom element support.",
+        "status": "active",
+        "tags": [
+          "image-to-video"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8cfcdb/TywpxxNj5_vDG8AUw3Yum_e2172b5c00e64a91a434ab5a38e496f0.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v3/standard/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-v3",
+          "label": "Image To Video (standard)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-pro/v1.1-ultra",
+      "metadata": {
+        "display_name": "FLUX1.1 [pro] ultra",
+        "category": "text-to-image",
+        "description": "FLUX1.1 [pro] ultra is the newest version of FLUX1.1 [pro], maintaining professional-grade image quality while delivering up to 2K resolution with improved photo realism.",
+        "status": "active",
+        "tags": [
+          "high-res",
+          "realism"
+        ],
+        "updated_at": "2026-04-21T17:47:24.374Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/flux-pro-v1-1-ultra.webp",
+        "model_url": "https://fal.run/fal-ai/flux-pro/v1.1-ultra",
+        "license_type": "commercial",
+        "date": "2024-12-17T00:00:00.000Z",
+        "group": {
+          "key": "flux-pro",
+          "label": "FLUX 1.1 [pro] (ultra)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/bria/background/remove",
+      "metadata": {
+        "display_name": "Bria RMBG 2.0",
+        "category": "image-to-image",
+        "description": "Bria RMBG 2.0 enables seamless removal of backgrounds from images, ideal for professional editing tasks. Trained exclusively on licensed data for safe and risk-free commercial use. Model weights for commercial use are available here: https://share-eu1.hsforms.com/2GLpEVQqJTI2Lj7AMYwgfIwf4e04",
+        "status": "active",
+        "tags": [
+          "background removal",
+          "image segmentation",
+          "high resolution",
+          "utility",
+          "rembg"
+        ],
+        "updated_at": "2026-06-24T10:32:00.775Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91b0/MLLgU8RVRvmMXjLkFNHwH_DWC4dcir.png",
+        "model_url": "https://fal.run/fal-ai/bria/background/remove",
+        "license_type": "commercial",
+        "date": "2024-12-19T00:00:00.000Z",
+        "group": {
+          "key": "bria",
+          "label": "Remove Background"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2/klein/9b",
+      "metadata": {
+        "display_name": "FLUX.2 [klein] 9B",
+        "category": "text-to-image",
+        "description": "Text-to-image generation with FLUX.2 [klein] 9B from Black Forest Labs. Enhanced realism, crisper text generation, and native editing capabilities.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-07-09T03:35:23.028Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8a7f3c/90FKDpwtSCZTqOu0jUI-V_64c1a6ec0f9343908d9efa61b7f2444b.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2/klein/9b",
+        "license_type": "commercial",
+        "date": "2026-01-15T12:24:18.909Z",
+        "group": {
+          "key": "klein",
+          "label": "9B Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "stream_url": "https://fal.ai/models/fal-ai/flux-2/klein/9b/stream",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v2.6/pro/image-to-video",
+      "metadata": {
+        "display_name": "Kling Video v2.6 Image to Video",
+        "category": "image-to-video",
+        "description": "Kling 2.6 Pro: Top-tier image-to-video with cinematic visuals, fluid motion, and native audio generation.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-07-21T18:22:42.212Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a84aa9c/tRb6fibztV71jrhSPfdqP_3359db6ee74a4e4e9fb408a00b02e114.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v2.6/pro/image-to-video",
+        "license_type": "commercial",
+        "date": "2025-12-02T09:01:46.898Z",
+        "group": {
+          "key": "kling-video/v2.6",
+          "label": "Image to Video"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-lora",
+      "metadata": {
+        "display_name": "FLUX.1 [dev] with LoRAs",
+        "category": "text-to-image",
+        "description": "Super fast endpoint for the FLUX.1 [dev] model with LoRA support, enabling rapid and high-quality image generation using pre-trained LoRA adaptations for personalization, specific styles, brand identities, and product-specific outputs.",
+        "status": "active",
+        "tags": [
+          "lora",
+          "personalization"
+        ],
+        "updated_at": "2026-06-24T10:31:43.297Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91af/UMrx6t6mc59z33d20WIQP_iBIZYKKq.png",
+        "model_url": "https://fal.run/fal-ai/flux-lora",
+        "license_type": "commercial",
+        "date": "2024-08-01T00:00:00.000Z",
+        "group": {
+          "key": "flux-lora",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false,
+        "training_endpoint_ids": [
+          "fal-ai/flux-lora-fast-training",
+          "fal-ai/turbo-flux-trainer",
+          "fal-ai/flux-lora-portrait-trainer"
+        ]
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/minimax/speech-02-hd",
+      "metadata": {
+        "display_name": "MiniMax Speech-02 HD",
+        "category": "text-to-speech",
+        "description": "Generate speech from text prompts and different voices using the MiniMax Speech-02 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+        "status": "active",
+        "tags": [
+          "speech"
+        ],
+        "updated_at": "2026-06-24T10:36:41.475Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91b5/Li_VoZtaOd5__F9GMv1O4_yPTcO4eQ.png",
+        "model_url": "https://fal.run/fal-ai/minimax/speech-02-hd",
+        "license_type": "commercial",
+        "date": "2025-05-06T16:17:49.560Z",
+        "group": {
+          "key": "minimax-speech",
+          "label": "Text To Speech 2.0 HD"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/veo3.1/fast/image-to-video",
+      "metadata": {
+        "display_name": "Veo 3.1 Fast",
+        "category": "image-to-video",
+        "description": "Generate videos from your image prompts using Veo 3.1 fast.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-28T16:29:09.509Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/tiger/CcVVXXOo5stpgsAJV_6UO_74aa2dbdc79447e7ae69b533a7863038.jpg",
+        "model_url": "https://fal.run/fal-ai/veo3.1/fast/image-to-video",
+        "license_type": "commercial",
+        "date": "2025-10-08T17:04:11.604Z",
+        "group": {
+          "key": "veo3.1",
+          "label": "Image to Video (Fast)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2",
+      "metadata": {
+        "display_name": "FLUX 2",
+        "category": "text-to-image",
+        "description": "Text-to-image generation with FLUX.2 [dev] from Black Forest Labs. Enhanced realism, crisper text generation, and native editing capabilities.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-05-27T00:51:44.726Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/penguin/zSBCJtPpeIQwR5AC_IamX_b1e1137961754e4d851907c21f8c20cd.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2",
+        "license_type": "commercial",
+        "date": "2025-11-23T00:15:07.672Z",
+        "group": {
+          "key": "Flux2",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "stream_url": "https://fal.ai/models/fal-ai/flux-2/stream",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/veo3.1/image-to-video",
+      "metadata": {
+        "display_name": "Veo 3.1",
+        "category": "image-to-video",
+        "description": "Veo 3.1 is the latest state-of-the art video generation model from Google DeepMind",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-28T16:29:09.509Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/zebra/G680VZS5VpMMQO1pSt2uj_dfbae33f738344aa98a62cf2022c427c.jpg",
+        "model_url": "https://fal.run/fal-ai/veo3.1/image-to-video",
+        "license_type": "commercial",
+        "date": "2025-10-08T17:02:47.996Z",
+        "group": {
+          "key": "veo3.1",
+          "label": "Image to Video"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2/klein/9b/edit",
+      "metadata": {
+        "display_name": "FLUX.2 [klein] 9B",
+        "category": "image-to-image",
+        "description": "Image-to-image editing with FLUX.2 [klein] 9B from Black Forest Labs. Precise modifications using natural language descriptions and hex color control.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-03-17T15:26:34.088Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8a7f50/X8ffS5h55gcigsNZoNC7O_52e6b383ac214d2abe0a2e023f03de88.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2/klein/9b/edit",
+        "license_type": "commercial",
+        "date": "2026-01-15T12:25:09.939Z",
+        "group": {
+          "key": "klein",
+          "label": "9B Image Edit"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/ideogram/v3",
+      "metadata": {
+        "display_name": "Ideogram Text to Image",
+        "category": "text-to-image",
+        "description": "Generate high-quality images, posters, and logos with Ideogram V3. Features exceptional typography handling and realistic outputs optimized for commercial and creative use.",
+        "status": "active",
+        "tags": [
+          "realism",
+          "typography"
+        ],
+        "updated_at": "2026-06-24T10:32:24.316Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91a8/JsTVqtZydplqvV_XGPvTV_5FOy6fcj.png",
+        "model_url": "https://fal.run/fal-ai/ideogram/v3",
+        "license_type": "commercial",
+        "date": "2025-05-01T16:04:02.805Z",
+        "group": {
+          "key": "ideogram-v3",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v2.1/standard/image-to-video",
+      "metadata": {
+        "display_name": "Kling 2.1 (standard)",
+        "category": "image-to-video",
+        "description": "Kling 2.1 Standard is a cost-efficient endpoint for the Kling 2.1 model, delivering high-quality image-to-video generation \n\n",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3.fal.media/files/elephant/5Yt8D9tl-IaGQ-6czSXL1_HHQ_VCby6xP_DFLkQQLpV_3c8622214c4c4ac29b4b64e157746507.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v2.1/standard/image-to-video",
+        "license_type": "commercial",
+        "date": "2025-05-28T20:59:07.301Z",
+        "group": {
+          "key": "kling-video-v21",
+          "label": "2.1 Standard (Image to Video)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/veo3.1/lite/image-to-video",
+      "metadata": {
+        "display_name": "Veo3.1 Lite Image to Video",
+        "category": "image-to-video",
+        "description": "Veo 3.1 Lite balances practical utility with professional capabilities, supporting Text-to-Video and Image-to-Video",
+        "status": "active",
+        "tags": [
+          "stylized",
+          "transform",
+          "lipsync"
+        ],
+        "updated_at": "2026-04-28T16:29:09.509Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a946101/jRTUp9enYBh3ypsb0Ux0a_fe5ca5e28e704976bfff127c5d23f6a9.jpg",
+        "model_url": "https://fal.run/fal-ai/veo3.1/lite/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-03-31T18:35:02.766Z",
+        "group": {
+          "key": "veo3.1",
+          "label": "Image to Video (Lite)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v3/pro/text-to-video",
+      "metadata": {
+        "display_name": "Kling Video v3 Text to Video [Pro]",
+        "category": "text-to-video",
+        "description": "Kling 3.0 Pro: Top-tier text-to-video with cinematic visuals, fluid motion, and native audio generation, with multi-shot support.",
+        "status": "active",
+        "tags": [
+          "text-to-video"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8cfd13/t6TSkWzl6cFAzvO1PCdDu_f38263f637d245929f03881454951540.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v3/pro/text-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-v3",
+          "label": "Text to Video (pro)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+      "metadata": {
+        "display_name": "Hunyuan 3D Pro Image to 3D",
+        "category": "image-to-3d",
+        "description": "Generate 3D models from images with Hunyuan 3D Pro",
+        "status": "active",
+        "tags": [
+          "3d",
+          "hunyuan",
+          "image-to-3d"
+        ],
+        "updated_at": "2026-04-28T16:47:25.903Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8c1eed/a9u-FinZ2o0AGqcGFlRoD_5c16e7c0e1ae412cacc53893cae95698.jpg",
+        "model_url": "https://fal.run/fal-ai/hunyuan-3d/v3.1/pro/image-to-3d",
+        "license_type": "commercial",
+        "date": "2026-01-27T22:01:04.639Z",
+        "group": {
+          "key": "hunyuan-3d",
+          "label": "Hunyuan 3D Pro Image to 3D"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/o3/pro/image-to-video",
+      "metadata": {
+        "display_name": "Kling O3 Image to Video [Pro]",
+        "category": "image-to-video",
+        "description": "Generate a video by taking a start frame and an end frame, animating the transition between them while following text-driven style and scene guidance.",
+        "status": "active",
+        "tags": [
+          "image-to-video"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8cfcae/X9YwYvvnjSHOx_K4G8s69_395daf17841f4097a7cff719154bfad4.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/o3/pro/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-o3",
+          "label": "Image To Video (pro)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux/dev/image-to-image",
+      "metadata": {
+        "display_name": "FLUX.1 [dev]",
+        "category": "image-to-image",
+        "description": "FLUX.1 Image-to-Image is a high-performance endpoint for the FLUX.1 [dev] model that enables rapid transformation of existing images, delivering high-quality style transfers and image modifications with the core FLUX capabilities.",
+        "status": "active",
+        "tags": [
+          "style transfer"
+        ],
+        "updated_at": "2026-06-24T10:32:41.401Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91a9/up8aXYeFDjcRbQZDxV7vK_Jo37PJhg.png",
+        "model_url": "https://fal.run/fal-ai/flux/dev/image-to-image",
+        "license_type": "commercial",
+        "date": "2024-07-11T00:00:00.000Z",
+        "group": {
+          "key": "flux-1",
+          "label": "Image to Image [dev]"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-pro/kontext/max",
+      "metadata": {
+        "display_name": "FLUX.1 Kontext [max]",
+        "category": "image-to-image",
+        "description": "FLUX.1 Kontext [max] is a model with greatly improved prompt adherence and typography generation meet premium consistency for editing without compromise on speed. \n ",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-06-24T10:34:48.394Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9f91ac/S_XdqqwSzXvTx90JvwNqA_74St34QO.png",
+        "model_url": "https://fal.run/fal-ai/flux-pro/kontext/max",
+        "license_type": "commercial",
+        "date": "2025-05-29T04:53:59.306Z",
+        "group": {
+          "key": "flux-pro-kontext",
+          "label": "Kontext [max] -- Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-pro/v1/fill",
+      "metadata": {
+        "display_name": "FLUX.1 [pro] Fill",
+        "category": "image-to-image",
+        "description": "FLUX.1 [pro] Fill is a high-performance endpoint for the FLUX.1 [pro] model that enables rapid transformation of existing images, delivering high-quality style transfers and image modifications with the core FLUX capabilities.",
+        "status": "active",
+        "tags": [
+          "editing"
+        ],
+        "updated_at": "2026-04-21T17:47:29.481Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/fluxpro.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-pro/v1/fill",
+        "license_type": "commercial",
+        "date": "2024-11-21T00:00:00.000Z",
+        "group": {
+          "key": "flux-pro",
+          "label": "FLUX.1 [pro] Fill"
+        },
+        "highlighted": false,
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/o3/standard/image-to-video",
+      "metadata": {
+        "display_name": "Kling O3 Image to Video [Pro]",
+        "category": "image-to-video",
+        "description": "Generate a video by taking a start frame and an end frame, animating the transition between them while following text-driven style and scene guidance.",
+        "status": "active",
+        "tags": [
+          "image-to-video"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8d2007/gV_LMXNrguqRaDB9sLqir_b5d36b36de5a40bdb5cb2cd3f8af29d7.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/o3/standard/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-o3",
+          "label": "Image to Video (standard)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2/edit",
+      "metadata": {
+        "display_name": "FLUX 2 Edit",
+        "category": "image-to-image",
+        "description": "Image-to-image editing with FLUX.2 [dev] from Black Forest Labs. Precise modifications using natural language descriptions and hex color control.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:46:46.279Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/panda/zYjw3YqOcfDQymX7cvMBl_3d76809c48f74eb9abe3e17e1bdd5d2d.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2/edit",
+        "license_type": "commercial",
+        "date": "2025-11-23T00:15:40.781Z",
+        "group": {
+          "key": "Flux2",
+          "label": "Image Editing"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "stream_url": "https://fal.ai/models/fal-ai/flux-2/edit/stream",
+        "pinned": false,
+        "training_endpoint_ids": [
+          "flux-2-trainer/edit"
+        ]
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/minimax/speech-2.8-hd",
+      "metadata": {
+        "display_name": "MiniMax Speech 2.8 [HD]",
+        "category": "text-to-speech",
+        "description": "Generate speech from text prompts and different voices using the MiniMax Speech-2.8 HD model, which leverages advanced AI techniques to create high-quality text-to-speech.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-05-07T21:20:34.572Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8d0e4a/5FhhsQ0BicVC_DZ_BDLGL_895a8e6af34848f8844c20244c3e4672.jpg",
+        "model_url": "https://fal.run/fal-ai/minimax/speech-2.8-hd",
+        "license_type": "commercial",
+        "date": "2026-02-04T00:13:29.621Z",
+        "group": {
+          "key": "minimax-speech",
+          "label": "Text To Speech 2.8 HD"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "stream_url": "https://fal.run/fal-ai/minimax/speech-2.8-hd/stream",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/recraft/v3/text-to-image",
+      "metadata": {
+        "display_name": "Recraft V3",
+        "category": "text-to-image",
+        "description": "Recraft V3 is a text-to-image model with the ability to generate long texts, vector art, images in brand style, and much more. As of today, it is SOTA in image generation, proven by Hugging Face's industry-leading Text-to-Image Benchmark by Artificial Analysis.",
+        "status": "active",
+        "tags": [
+          "vector",
+          "typography",
+          "style"
+        ],
+        "updated_at": "2026-04-21T17:54:01.874Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/recraft-v3.webp",
+        "model_url": "https://fal.run/fal-ai/recraft/v3/text-to-image",
+        "license_type": "commercial",
+        "date": "2025-05-07T11:59:27.643Z",
+        "group": {
+          "key": "fal-ai/recraft/v3",
+          "label": "Text to Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/veo3.1/fast",
+      "metadata": {
+        "display_name": "Veo 3.1 Fast",
+        "category": "text-to-video",
+        "description": "Faster and more cost effective version of Google's Veo 3.1! ",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-28T16:29:09.509Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/lion/o5x4rjXr3fAEwQgr4Y5vp_69ee214c658e428ba2f8f8b054d70a0e.jpg",
+        "model_url": "https://fal.run/fal-ai/veo3.1/fast",
+        "license_type": "commercial",
+        "date": "2025-10-08T17:05:11.177Z",
+        "group": {
+          "key": "veo3.1",
+          "label": "Text to Video (Fast)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/recraft/upscale/crisp",
+      "metadata": {
+        "display_name": "Recraft Crisp Upscale",
+        "category": "image-to-image",
+        "description": "Enhances a given raster image using 'crisp upscale' tool, boosting resolution with a focus on refining small details and faces.",
+        "status": "active",
+        "tags": [
+          "upscaling"
+        ],
+        "updated_at": "2026-07-17T00:27:26.426Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/recraft-creative-upscale.jpg",
+        "model_url": "https://fal.run/fal-ai/recraft/upscale/crisp",
+        "license_type": "commercial",
+        "date": "2025-05-07T13:07:59.554Z",
+        "group": {
+          "key": "fal-ai/recraft/upscale",
+          "label": "Crisp Upscale"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/o3/pro/reference-to-video",
+      "metadata": {
+        "display_name": "Kling O3 Reference to Video [Pro]",
+        "category": "image-to-video",
+        "description": "Transform images, elements, and text into consistent, high-quality video scenes, ensuring stable character identity, object details, and environments.",
+        "status": "active",
+        "tags": [
+          "reference-to-video",
+          ""
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8cfcbc/DK-poq8omK9dUDtf0KCbr_41eb518e86be4c40ac1864a4a4fba2be.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/o3/pro/reference-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-o3",
+          "label": "Reference I2V (pro)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2/flash",
+      "metadata": {
+        "display_name": "FLUX 2 Flash",
+        "category": "text-to-image",
+        "description": "Text-to-image generation with FLUX.2 [dev] from Black Forest Labs. Enhanced realism, crisper text generation, and native editing capabilities— in a flash.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:46:46.996Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a871486/tX7YdfQViGtCE7ZjxOCph_5f5262a21e9e426e8981ea9513d11999.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2/flash",
+        "license_type": "commercial",
+        "date": "2025-12-16T20:07:20.209Z",
+        "group": {
+          "key": "Flux2",
+          "label": "Text to Image (Flash)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/ideogram/remove-background",
+      "metadata": {
+        "display_name": "Ideogram Remove Background",
+        "category": "image-to-image",
+        "description": "Remove backgrounds from existing images with Ideogram's remove background feature. Isolate subjects cleanly for compositing and creative reuse.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-05-13T19:17:32.700Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a994224/Ges-wKqQd-Ohg9pgyRnB1_4c638022267d44ec9ae6617d3664f676.jpg",
+        "model_url": "https://fal.run/fal-ai/ideogram/remove-background",
+        "license_type": "commercial",
+        "date": "2026-05-07T13:39:49.003Z",
+        "group": {
+          "key": "ideogram-v3",
+          "label": "Remove Background"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2/turbo",
+      "metadata": {
+        "display_name": "FLUX 2 Turbo",
+        "category": "text-to-image",
+        "description": "Text-to-image generation with FLUX.2 [dev] from Black Forest Labs. Enhanced realism, crisper text generation, and native editing capabilities—all at turbo speed.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:46:49.887Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a871494/j8F-tmy_dz4TyImvIHj19_510cc93373ef451386734b7e05711de1.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2/turbo",
+        "license_type": "commercial",
+        "date": "2025-12-16T14:02:30.209Z",
+        "group": {
+          "key": "Flux2",
+          "label": "Text To Image (Turbo)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/ai-avatar/v2/standard",
+      "metadata": {
+        "display_name": "Kling AI Avatar v2 Standard",
+        "category": "image-to-video",
+        "description": "Kling AI Avatar v2 Standard:  Endpoint for creating avatar videos with realistic humans, animals, cartoons, or stylized characters",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a84f39a/V_Zy58fLpOlS1jN3balTm_bf4c62c984b34a1597340c007fac8fe8.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/ai-avatar/v2/standard",
+        "license_type": "commercial",
+        "date": "2025-12-04T12:58:33.998Z",
+        "group": {
+          "key": "Kling-Avatar",
+          "label": "Kling AI Avatar v2 Standard"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v3/standard/text-to-video",
+      "metadata": {
+        "display_name": "Kling Video v3 Text to Video [Standard]",
+        "category": "text-to-video",
+        "description": "Kling 3.0 Standard: Top-tier text-to-video with cinematic visuals, fluid motion, and native audio generation, with multi-shot support.",
+        "status": "active",
+        "tags": [
+          "text-to-video"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8cfc9f/dei5OqFRB9HK8AgSHwk8f_9a5eea197b3045d1be55aedb0213f6f9.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v3/standard/text-to-video",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-v3",
+          "label": "Text To Video (standard)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/o3/pro/video-to-video/edit",
+      "metadata": {
+        "display_name": "Kling O3 Edit Video [Pro]",
+        "category": "video-to-video",
+        "description": "Edit videos using Kling O3 from Kling Team!",
+        "status": "active",
+        "tags": [
+          "video-to-video"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8cfcd0/jgn9feXep4nJXWf0tg1cf_6867c6921b6a4015a1906c8e02a7ef9d.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/o3/pro/video-to-video/edit",
+        "license_type": "commercial",
+        "date": "2026-02-04T15:48:44.935Z",
+        "group": {
+          "key": "kling-o3",
+          "label": "Edit Video (pro)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v2.5-turbo/pro/text-to-video",
+      "metadata": {
+        "display_name": "Kling v2.5 Text to Video",
+        "category": "text-to-video",
+        "description": "Kling 2.5 Turbo Pro: Top-tier text-to-video generation with unparalleled motion fluidity, cinematic visuals, and exceptional prompt precision.",
+        "status": "active",
+        "tags": [
+          "animation",
+          "stylized"
+        ],
+        "updated_at": "2026-04-26T22:25:17.147Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3.fal.media/files/panda/6YaK9lV7ySsUA9I3dUp5r_8a807b0c8e2641db9e345107ab8a809e.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v2.5-turbo/pro/text-to-video",
+        "license_type": "commercial",
+        "date": "2025-09-22T22:48:44.637Z",
+        "group": {
+          "key": "kling-video-v25",
+          "label": "2.5 Turbo (Text to Video) Pro"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/veo3.1",
+      "metadata": {
+        "display_name": "Veo 3.1",
+        "category": "text-to-video",
+        "description": "Veo 3.1 by Google, the most advanced AI video generation model in the world. With sound on!",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-28T16:29:09.509Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/tiger/TGTZBJyLk9HdwjB6SB90e.png",
+        "model_url": "https://fal.run/fal-ai/veo3.1",
+        "license_type": "commercial",
+        "date": "2025-10-08T17:01:21.561Z",
+        "group": {
+          "key": "veo3.1",
+          "label": "Text to Video"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v3/pro/motion-control",
+      "metadata": {
+        "display_name": "Kling Video",
+        "category": "video-to-video",
+        "description": "Transfer movements from a reference video to any character image. Cost-effective mode for motion transfer, perfect for portraits and simple animations.",
+        "status": "active",
+        "tags": [
+          "stylized",
+          "transform",
+          "editing"
+        ],
+        "updated_at": "2026-07-17T23:34:08.711Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a90eee3/9FBKg0W0qDGikoxwCWZ7P_9328cc2a34f044b29591eb247e8f2ee4.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v3/pro/motion-control",
+        "license_type": "commercial",
+        "date": "2026-03-05T10:04:10.677Z",
+        "group": {
+          "key": "Motion-Control-3",
+          "label": "Pro"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v3/turbo/pro/image-to-video",
+      "metadata": {
+        "display_name": "Kling Video V3 Turbo Pro Image to Video",
+        "category": "image-to-video",
+        "description": "Generate high quality 1080p videos from images using Kling's Turbo 3.0 model, with improved lipsync and multishot generation capabilities.",
+        "status": "active",
+        "tags": [
+          "kling",
+          "v3",
+          "turbo",
+          "1080p"
+        ],
+        "updated_at": "2026-06-24T00:21:44.881Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a9e8d44/5jNAG5z5SIpJ3reiFLvE9_0dd9aa0ccefd417db62e1249cd258693.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v3/turbo/pro/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-06-16T17:22:15.393Z",
+        "group": {
+          "key": "kling-v3-turbo",
+          "label": "Image to Video (Pro)"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/minimax/hailuo-02/standard/image-to-video",
+      "metadata": {
+        "display_name": "MiniMax Hailuo 02 [Standard] (Image to Video)",
+        "category": "image-to-video",
+        "description": "MiniMax Hailuo-02 Image To Video API (Standard, 768p, 512p): Advanced image-to-video generation model with 768p and 512p resolutions",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-04-21T17:52:01.440Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/fal_cdn/fal/Upscale.jpg",
+        "model_url": "https://fal.run/fal-ai/minimax/hailuo-02/standard/image-to-video",
+        "license_type": "commercial",
+        "date": "2025-06-18T00:47:27.952Z",
+        "group": {
+          "key": "hailuo-02",
+          "label": "Image to Video (standard) "
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "duration_estimate": 4,
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/minimax-music/v2.6",
+      "metadata": {
+        "display_name": "Minimax Music 2.6",
+        "category": "text-to-audio",
+        "description": "MiniMax Music 2.6 creates complete tracks with singing, backing music, and detailed arrangements from lyrics and a style description.",
+        "status": "active",
+        "tags": [
+          "stylized",
+          "transform",
+          "lipsync"
+        ],
+        "updated_at": "2026-04-21T02:05:12.810Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a959abf/bBuGvGbMCy6eYzC8n05Ql_7f5c08f2be3f495cb9847f89217309a8.jpg",
+        "model_url": "https://fal.run/fal-ai/minimax-music/v2.6",
+        "license_type": "commercial",
+        "date": "2026-04-11T06:21:38.930Z",
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/bria/expand",
+      "metadata": {
+        "display_name": "Bria Expand Image",
+        "category": "image-to-image",
+        "description": "Bria Expand expands images beyond their borders in high quality. Trained exclusively on licensed data for safe and risk-free commercial use. Access the model's source code and weights: https://bria.ai/contact-us",
+        "status": "active",
+        "tags": [
+          "outpainting"
+        ],
+        "updated_at": "2026-07-25T00:34:11.218Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0aa39a0b/u8UzBIeqFp9gmGGgwbbEi.jpg",
+        "model_url": "https://fal.run/fal-ai/bria/expand",
+        "license_type": "commercial",
+        "date": "2024-12-19T00:00:00.000Z",
+        "group": {
+          "key": "bria",
+          "label": "Expand Image"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-2-max/edit",
+      "metadata": {
+        "display_name": "Flux 2 Max",
+        "category": "image-to-image",
+        "description": "FLUX.2 [max] delivers state-of-the-art image generation and advanced image editing with exceptional realism, precision, and consistency.",
+        "status": "active",
+        "tags": [
+          "flux2",
+          "image-editing",
+          "high-quality"
+        ],
+        "updated_at": "2026-04-24T14:54:49.875Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a8689a8/bbcmo6U5xg_RxDXijtxNA_55df705e1b1b4535a90bccd70887680e.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-2-max/edit",
+        "license_type": "commercial",
+        "date": "2025-12-16T13:47:03.184Z",
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/kling-video/v2.6/standard/motion-control",
+      "metadata": {
+        "display_name": "Kling Video v2.6 Motion Control [Standard]",
+        "category": "video-to-video",
+        "description": "Transfer movements from a reference video to any character image. Cost-effective mode for motion transfer, perfect for portraits and simple animations.",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-07-21T18:22:08.641Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a875717/JVmIsgjXggpbFC-Szsr7q_8e01139cd9a1445facec60b125ca32c9.jpg",
+        "model_url": "https://fal.run/fal-ai/kling-video/v2.6/standard/motion-control",
+        "license_type": "commercial",
+        "date": "2025-12-21T20:50:57.333Z",
+        "group": {
+          "key": "kling-video/v2.6",
+          "label": "Motion Control [Standard]"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/recraft/vectorize",
+      "metadata": {
+        "display_name": "Recraft",
+        "category": "image-to-image",
+        "description": "Converts a given raster image to SVG format using Recraft model.",
+        "status": "active",
+        "tags": [
+          "stylized",
+          "transform"
+        ],
+        "updated_at": "2026-04-21T17:54:03.564Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/recraft-v3.webp",
+        "model_url": "https://fal.run/fal-ai/recraft/vectorize",
+        "license_type": "commercial",
+        "date": "2025-06-12T15:27:32.275Z",
+        "group": {
+          "key": "fal-ai/recraft/v3",
+          "label": "Vectorize"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/wan/v2.7/image-to-video",
+      "metadata": {
+        "display_name": "Wan",
+        "category": "image-to-video",
+        "description": "Wan 2.7 is the latest generation AI video model, delivering enhanced motion smoothness, superior scene fidelity, and greater visual coherence.",
+        "status": "active",
+        "tags": [
+          "stylized",
+          "transform",
+          "lipsync"
+        ],
+        "updated_at": "2026-04-26T23:07:28.840Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://v3b.fal.media/files/b/0a94048a/7oM_ro6v_fh2pGHvBbpyc_9db05a8e25034dcbb16db5192560d4af.jpg",
+        "model_url": "https://fal.run/fal-ai/wan/v2.7/image-to-video",
+        "license_type": "commercial",
+        "date": "2026-03-28T19:58:40.182Z",
+        "group": {
+          "key": "Wan27",
+          "label": "Image to Video"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-1/schnell",
+      "metadata": {
+        "display_name": "FLUX.1 [schnell]",
+        "category": "text-to-image",
+        "description": "Fastest inference in the world for the 12 billion parameter FLUX.1 [schnell] text-to-image model. ",
+        "status": "active",
+        "tags": [],
+        "updated_at": "2026-05-19T21:25:38.980Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/fal_cdn/fal/Upscale-2.jpg",
+        "model_url": "https://fal.run/fal-ai/flux-1/schnell",
+        "license_type": "commercial",
+        "date": "2025-06-02T18:15:06.266Z",
+        "group": {
+          "key": "flux-1-fast",
+          "label": "Text to Image [schnell]"
+        },
+        "highlighted": false,
+        "kind": "inference",
+        "pinned": false
+      }
+    },
+    {
+      "endpoint_id": "fal-ai/flux-lora-fast-training",
+      "metadata": {
+        "display_name": "Train Flux LoRA",
+        "category": "training",
+        "description": "Train styles, people and other subjects at blazing speeds.",
+        "status": "active",
+        "tags": [
+          "lora",
+          "personalization"
+        ],
+        "updated_at": "2026-07-27T21:06:11.451Z",
+        "is_favorited": null,
+        "thumbnail_url": "https://storage.googleapis.com/falserverless/gallery/video-training.webp",
+        "model_url": "https://fal.run/fal-ai/flux-lora-fast-training",
+        "license_type": "commercial",
+        "date": "2025-01-01T00:00:00.000Z",
+        "highlighted": false,
+        "kind": "training",
+        "pinned": false,
+        "inference_endpoint_ids": [
+          "fal-ai/flux-lora"
+        ]
+      }
+    }
+  ],
+  "_total": 600,
+  "_capturedAt": "2026-09-09T08:41:43.466Z"
+}

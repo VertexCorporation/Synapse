@@ -1,4 +1,4 @@
-import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
+import { insertCatalogModel, matchCatalogModel, reportAssetAlarm } from './catalog-policy.js';
 /*
  * Cortex - Syncer Worker - v7.0 (Modular)
  *
@@ -9,6 +9,8 @@ import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
 
 import { PRODUCER_MAP } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
+import { normalizeModelId } from './dedup.js';
+import { normalizeCloudflareModel } from './normalize/cloudflare.js';
 
 /**
  * Extracts producer, series, and variant from Cloudflare model name.
@@ -16,16 +18,14 @@ import { fetchWithTimeout } from '../utils/api.js';
  * @param {string} cfName
  * @returns {{producer: string, series: string, variant: string}}
  */
-function parseCloudflareModelIdentity(cfName) {
+export function parseCloudflareModelIdentity(cfName) {
     const raw = cfName.replace(/^@(?:cf|hf)\//i, "");
     const parts = raw.split("/");
     const org = parts[0] || "cloudflare";
     const slug = parts[1] || parts[0];
-
     let producer = PRODUCER_MAP[org.toLowerCase()] || org.charAt(0).toUpperCase() + org.slice(1);
     let series = "Cloudflare";
     let variant = slug.replace(/[-_]/g, " ").replace(/\b\w/g, c => c.toUpperCase());
-
     if (/llama/i.test(slug)) {
         series = "Llama";
         variant = slug.replace(/^llama-?[\d.]*-?/i, "").replace(/[-_]/g, " ").trim() || slug;
@@ -74,7 +74,7 @@ export async function buildGroupedCloudflareModels(env, operationId, blacklisted
 
     if (!accountId || !apiToken) {
         console.warn(`⚠️ [${opId}] CLOUDFLARE_ACCOUNT_ID or CLOUDFLARE_API_TOKEN is not configured. Skipping Cloudflare Workers AI.`);
-        return { grouped: {} };
+        return { grouped: {}, records: [], health: { ok: true, disabled: true } };
     }
 
     const headers = {
@@ -83,6 +83,8 @@ export async function buildGroupedCloudflareModels(env, operationId, blacklisted
     };
 
     const grouped = {};
+    const records = [];
+    const alarmSeen = new Set();
     let page = 1;
     let totalFetched = 0;
     let kept = 0;
@@ -106,7 +108,11 @@ export async function buildGroupedCloudflareModels(env, operationId, blacklisted
                 const modelId = item.name || item.id;
                 if (!modelId) continue;
                 if (blacklistedIds && blacklistedIds.has(modelId)) continue;
-                if (!matchCatalogModel('cloudflare', modelId)) continue;
+                const match = matchCatalogModel('cloudflare', modelId);
+                if (!match) {
+                    reportAssetAlarm(alarmSeen, 'cloudflare', modelId, opId);
+                    continue;
+                }
 
                 const taskName = String(item.task?.name || "").toLowerCase();
                 const isImageOutput = taskName.includes("text-to-image") || taskName.includes("image generation");
@@ -116,23 +122,39 @@ export async function buildGroupedCloudflareModels(env, operationId, blacklisted
 
                 const { producer, series, variant } = parseCloudflareModelIdentity(modelId);
 
+                const modalities = {
+                    image: isImageInput,
+                    video: false,
+                    audio: isAudioInput,
+                    file: false,
+                };
+                const outputs = {
+                    image: isImageOutput,
+                    video: false,
+                    audio: isAudioOutput,
+                };
+
+                // Catalog record: canonical CortexModel. Context comes from the
+                // (array-shaped) properties map — see normalize/cloudflare.js.
+                const record = normalizeCloudflareModel(item, {
+                    identity: { producer, series, variant },
+                    canonicalKey: normalizeModelId(modelId, 'cloudflare'),
+                    catalogMatch: match,
+                    modalities,
+                    outputs,
+                });
+                records.push(record);
+
                 insertCatalogModel(grouped, producer, series, variant, {
                     id: modelId,
                     source: "cloudflare",
                     tier: "standard",
                     description: { en: item.description || modelId },
-                    context: item.properties?.max_context || 0,
-                    modalities: {
-                        image: isImageInput,
-                        video: false,
-                        audio: isAudioInput,
-                        file: false,
-                    },
-                    outputs: {
-                        image: isImageOutput,
-                        video: false,
-                        audio: isAudioOutput,
-                    },
+                    // The legacy `item.properties?.max_context || 0` read the array as an
+                    // object, so context was ALWAYS 0. Use the normalized record value.
+                    context: record.limits?.contextTokens ?? 0,
+                    modalities,
+                    outputs,
                     reasoning: taskName.includes("text generation"),
                     webSearch: false,
                 });
@@ -148,9 +170,9 @@ export async function buildGroupedCloudflareModels(env, operationId, blacklisted
         }
 
         console.log(`☁️ [${opId}] Cloudflare models complete: fetched ${totalFetched}, kept ${kept} models across ${page} page(s).`);
+        return { grouped, records, health: { ok: true, count: totalFetched, kept } };
     } catch (e) {
         console.warn(`⚠️ [${opId}] Cloudflare fetching failed: ${e.message}`);
+        return { grouped, records, health: { ok: false, error: e.message } };
     }
-
-    return { grouped };
 }

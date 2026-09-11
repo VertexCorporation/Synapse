@@ -1,6 +1,14 @@
 // ModelDefaults.localAssetImageMap supplied by the user, 2026-09-08.
 // Character IDs and virtual Cortex entries are not external model providers.
 export const FAMILY_ASSETS = Object.freeze({
+    "arcee": "assets/producers/arceeai.webp",
+    "muse": "assets/models/muse.webp",
+    "nemotron": "assets/producers/nvidia.webp",
+    "mistral": "assets/models/mistral.webp",
+    "kimi": "assets/producers/moonshotai.webp",
+    "glm": "assets/producers/z.ai.webp",
+    "granite": "assets/producers/ibm.webp",
+    "runway": "assets/producers/runway.webp",
     "gpt": "assets/producers/openai.webp",
     "chatgpt": "assets/producers/openai.webp",
     "claude": "assets/models/claude.webp",
@@ -97,4 +105,24 @@ export const PRODUCER_ASSETS = Object.freeze({
     "ibm": "assets/producers/ibm.webp",
     "inclusion": "assets/producers/inclusionai.webp",
     "nvidia": "assets/producers/nvidia.webp"
+});
+
+// Explicit presentation identities. A producer logo never authorizes a family.
+export const FAMILY_NAMES = Object.freeze({
+    arcee: 'Arcee AI',
+    gpt: 'ChatGPT', chatgpt: 'ChatGPT', claude: 'Claude', codex: 'Codex',
+    deepseek: 'DeepSeek', 'gpt-image': 'GPT Image', qwen: 'Qwen', 'qwen-image': 'Qwen',
+    gemini: 'Gemini', lyria: 'Lyria', gemma: 'Gemma', grok: 'Grok', 'xai-image': 'Grok',
+    hermes: 'Hermes', mai: 'MAI', muse: 'Muse', nemotron: 'Nemotron',
+    mistral: 'Mistral', ministral: 'Ministral', mixtral: 'Mixtral', pixtral: 'Pixtral',
+    magistral: 'Magistral', devstral: 'Devstral', codestral: 'Codestral', phi: 'Phi',
+    wizardlm: 'WizardLM', tinyllama: 'TinyLlama', llama: 'Llama', command: 'Command',
+    nova: 'Nova', perplexity: 'Perplexity', lfm: 'LFM', flux: 'Flux', ideogram: 'Ideogram',
+    imagen: 'Imagen', kling: 'Kling', pixverse: 'PixVerse', sdxl: 'Stable', sora: 'Sora',
+    topaz: 'Topaz', wan: 'Wan', 'z-image': 'Z Image', bria: 'Bria',
+    seedance: 'Seedance', seedream: 'Seedream', minimax: 'MiniMax',
+    elevenlabs: 'ElevenLabs', ernie: 'Ernie', fabric: 'Fabric', veo: 'Veo', seedvr: 'SeedVR',
+    'grok-imagine': 'Grok', suno: 'Suno', musicgen: 'MusicGen', stable: 'Stable',
+    'stable-audio': 'Stable', whisper: 'Whisper', banana: 'Nano Banana',
+    kimi: 'Kimi', glm: 'GLM', granite: 'Granite', runway: 'Runway',
 });

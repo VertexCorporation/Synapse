@@ -1,4 +1,4 @@
-import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
+import { insertCatalogModel, matchCatalogModel, reportAssetAlarm } from './catalog-policy.js';
 /*
  * Cortex - Syncer Worker - v7.0 (Modular)
  *
@@ -9,6 +9,8 @@ import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
 
 import { ELEVENLABS_URL } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
+import { normalizeModelId } from './dedup.js';
+import { normalizeElevenLabsModel } from './normalize/elevenlabs.js';
 
 /**
  * Fetches models from ElevenLabs API.
@@ -24,7 +26,7 @@ export async function buildGroupedElevenLabsModels(env, operationId, blacklisted
     const apiKey = env.ELEVENLABS_KEY || env.ELEVENLABS_API_KEY;
     if (!apiKey) {
         console.warn(`⚠️ [${opId}] ELEVENLABS_KEY is not configured. Skipping ElevenLabs.`);
-        return { grouped: {} };
+        return { grouped: {}, records: [], health: { ok: true, disabled: true } };
     }
 
     const headers = {
@@ -33,6 +35,7 @@ export async function buildGroupedElevenLabsModels(env, operationId, blacklisted
     };
 
     const grouped = {};
+    const records = [];
     let kept = 0;
 
     try {
@@ -49,22 +52,36 @@ export async function buildGroupedElevenLabsModels(env, operationId, blacklisted
 
         const producer = "ElevenLabs";
         const series = "Eleven Voice";
+        const alarmSeen = new Set();
 
         for (const model of models) {
             const modelId = model.model_id;
             if (!modelId) continue;
             if (blacklistedIds && blacklistedIds.has(modelId)) continue;
-                if (!matchCatalogModel('elevenlabs', modelId)) continue;
+            const match = matchCatalogModel('elevenlabs', modelId);
+            if (!match) {
+                reportAssetAlarm(alarmSeen, 'elevenlabs', modelId, opId);
+                continue;
+            }
 
             const name = (model.name || modelId).trim();
             const variant = name.replace(/^Eleven\s+/i, "").trim() || name;
+
+            // Catalog record: character limits land in limits.maxInputCharacters.
+            records.push(normalizeElevenLabsModel(model, {
+                identity: { producer, series, variant },
+                canonicalKey: normalizeModelId(modelId, 'elevenlabs'),
+                catalogMatch: match,
+            }));
 
             insertCatalogModel(grouped, producer, series, variant, {
                 id: modelId,
                 source: "elevenlabs",
                 tier: "standard",
                 description: { en: model.description || name },
-                context: model.max_characters_request_subscribed_user || model.maximum_text_length_per_request || 10000,
+                // Character limits are NOT token context; the tree no longer
+                // fabricates a context number for them (0 == unknown).
+                context: 0,
                 modalities: {
                     image: false,
                     video: false,
@@ -83,9 +100,9 @@ export async function buildGroupedElevenLabsModels(env, operationId, blacklisted
         }
 
         console.log(`🎙️ [${opId}] ElevenLabs models complete: kept ${kept} models.`);
+        return { grouped, records, health: { ok: true, count: models.length, kept } };
     } catch (e) {
         console.warn(`⚠️ [${opId}] ElevenLabs fetching failed: ${e.message}`);
+        return { grouped, records, health: { ok: false, error: e.message } };
     }
-
-    return { grouped };
 }

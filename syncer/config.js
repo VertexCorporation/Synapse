@@ -100,8 +100,6 @@ export const PRODUCER_MAP = {
     "topaz": "Topaz",
     "runway": "Runway",
     "vidu": "Vidu",
-    "tencent": "Tencent",
-    "hunyuan": "Tencent",
     "kokoro": "Kokoro",
     "lightricks": "Lightricks",
     "meshy": "Meshy",

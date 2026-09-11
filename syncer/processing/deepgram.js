@@ -1,4 +1,4 @@
-import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
+import { insertCatalogModel, matchCatalogModel, reportAssetAlarm } from './catalog-policy.js';
 /*
  * Cortex - Syncer Worker - v7.0 (Modular)
  *
@@ -9,6 +9,8 @@ import { insertCatalogModel, matchCatalogModel } from './catalog-policy.js';
 
 import { DEEPGRAM_URL } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
+import { normalizeModelId } from './dedup.js';
+import { normalizeDeepgramModel } from './normalize/deepgram.js';
 
 /**
  * Fetches models from Deepgram API.
@@ -28,6 +30,8 @@ export async function buildGroupedDeepgramModels(env, operationId, blacklistedId
     }
 
     const grouped = {};
+    const records = [];
+    const alarmSeen = new Set();
     let kept = 0;
 
     try {
@@ -46,11 +50,22 @@ export async function buildGroupedDeepgramModels(env, operationId, blacklistedId
             const modelId = model.canonical_name || model.name;
             if (!modelId) continue;
             if (blacklistedIds && blacklistedIds.has(modelId)) continue;
-                if (!matchCatalogModel('deepgram', modelId)) continue;
+            const match = matchCatalogModel('deepgram', modelId);
+            if (!match) {
+                reportAssetAlarm(alarmSeen, 'deepgram', modelId, opId);
+                continue;
+            }
 
             const name = (model.name || modelId).trim();
             const series = modelId.toLowerCase().startsWith("nova") ? "Nova" : "STT";
             const variant = name.replace(/^nova\s*[-_]?/i, "Nova ").trim() || name;
+
+            records.push(normalizeDeepgramModel(model, {
+                kind: 'stt',
+                identity: { producer, series, variant },
+                canonicalKey: normalizeModelId(modelId, 'deepgram'),
+                catalogMatch: match,
+            }));
 
             insertCatalogModel(grouped, producer, series, variant, {
                 id: modelId,
@@ -81,11 +96,22 @@ export async function buildGroupedDeepgramModels(env, operationId, blacklistedId
             const modelId = model.canonical_name || model.name;
             if (!modelId) continue;
             if (blacklistedIds && blacklistedIds.has(modelId)) continue;
-                if (!matchCatalogModel('deepgram', modelId)) continue;
+            const match = matchCatalogModel('deepgram', modelId);
+            if (!match) {
+                reportAssetAlarm(alarmSeen, 'deepgram', modelId, opId);
+                continue;
+            }
 
             const name = (model.name || modelId).trim();
             const series = "Aura";
             const variant = name.charAt(0).toUpperCase() + name.slice(1);
+
+            records.push(normalizeDeepgramModel(model, {
+                kind: 'tts',
+                identity: { producer, series, variant },
+                canonicalKey: normalizeModelId(modelId, 'deepgram'),
+                catalogMatch: match,
+            }));
 
             insertCatalogModel(grouped, producer, series, variant, {
                 id: modelId,
@@ -111,9 +137,9 @@ export async function buildGroupedDeepgramModels(env, operationId, blacklistedId
         }
 
         console.log(`🔊 [${opId}] Deepgram models complete: kept ${kept} models.`);
+        return { grouped, records, health: { ok: true, count: sttList.length + ttsList.length, kept } };
     } catch (e) {
         console.warn(`⚠️ [${opId}] Deepgram fetching failed: ${e.message}`);
+        return { grouped, records, health: { ok: false, error: e.message } };
     }
-
-    return { grouped };
 }

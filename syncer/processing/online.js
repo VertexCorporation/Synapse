@@ -9,7 +9,10 @@
 import { OPENROUTER_URL, ALLOWED_PROVIDER_IDS, TEXT_COST_LIMIT, IMAGE_COST_LIMIT, WEB_SEARCH_COST_LIMIT, PRODUCER_MAP } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
 import { isTooExpensive } from '../utils/helpers.js';
+import { matchCatalogModel } from './catalog-policy.js';
 import { extractSeriesVariant } from './parser.js';
+import { normalizeModelId } from './dedup.js';
+import { normalizeOpenRouterModel } from './normalize/openrouter.js';
 
 /**
  * @typedef {import('../types.js').ProducersData} ProducersData
@@ -48,6 +51,8 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
     const fallbackGrouped = {};
     // Added 'imageGen' to stats to track filtered image generation models
     let stats = { kept: 0, fallback: 0, invalid: 0, blacklisted: 0, free: 0, provider: 0, cost: 0, research: 0, imageGen: 0, noSerVar: 0 };
+    // Catalog records (CortexModel[]) — same inclusion decisions as the tree above.
+    const records = [];
 
     for (const model of models) {
         if (!model?.id || !model.name || !model.pricing || !model.architecture) {
@@ -80,7 +85,7 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
         }
 
         const providerId = model.id.split("/")[0];
-        if (!ALLOWED_PROVIDER_IDS.includes(providerId) && !isFallbackFree) {
+        if (!ALLOWED_PROVIDER_IDS.includes(providerId) || !matchCatalogModel('openrouter', model.id)) {
             stats.provider++;
             continue;
         }
@@ -92,8 +97,9 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
         }
 
         const providerDisplayName = PRODUCER_MAP[providerId];
-        const { series, variant } = extractSeriesVariant({ rawName: model.name, providerId, providerDisplayName }, opId);
+        const { variant } = extractSeriesVariant({ rawName: model.name, providerId, providerDisplayName }, opId);
 
+        const series = matchCatalogModel('openrouter', model.id)?.series;
         if (!series || !variant) {
             stats.noSerVar++;
             continue;
@@ -145,8 +151,16 @@ export async function buildGroupedOnlineModels(env, operationId, blacklistedIds)
         } else {
             stats.kept++;
         }
+
+        // Catalog record: canonical CortexModel mirroring this inclusion decision.
+        records.push(normalizeOpenRouterModel(model, {
+            identity: { producer: providerDisplayName, series, variant },
+            canonicalKey: normalizeModelId(model.id, 'openrouter'),
+            tier: isFallbackFree ? 'fallback' : 'standard',
+            catalogMatch: matchCatalogModel('openrouter', model.id),
+        }));
     }
 
-    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}, Fallbacks: ${stats.fallback}. Filters: Prov=${stats.provider}, Cost=${stats.cost}, ImgGen=${stats.imageGen}, Inv=${stats.invalid}, NoSerVar=${stats.noSerVar}`);
-    return { grouped, fallbackGrouped };
+    console.log(`📊 [${opId}] Processed. Kept: ${stats.kept}, Fallbacks: ${stats.fallback}. Exclusions (reason-coded): excluded:invalid=${stats.invalid}, excluded:blacklisted=${stats.blacklisted}, excluded:research=${stats.research}, excluded:image-output=${stats.imageGen}, excluded:asset-or-producer=${stats.provider}, excluded:cost=${stats.cost}, excluded:no-series-variant=${stats.noSerVar}`);
+    return { grouped, fallbackGrouped, records };
 }

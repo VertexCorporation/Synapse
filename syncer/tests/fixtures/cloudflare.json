@@ -1,0 +1,1158 @@
+{
+  "result": [
+    {
+      "id": "f9f2250b-1048-4a52-9910-d0bf976616a1",
+      "source": 1,
+      "name": "@cf/openai/gpt-oss-120b",
+      "description": "OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases – gpt-oss-120b is for production, general purpose, high reasoning use-cases.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2025-08-05 10:27:29.131",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "128000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.35,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.75,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "eed32bc1-8775-4985-89ce-dd1405508ad8",
+      "source": 1,
+      "name": "@cf/baai/bge-m3",
+      "description": "Multi-Functionality, Multi-Linguality, and Multi-Granularity embeddings model.",
+      "task": {
+        "id": "0137cdcf-162a-4108-94f2-1ca59e8c65ee",
+        "name": "Text Embeddings",
+        "description": "Feature extraction models transform raw data into numerical features that can be processed while preserving the information in the original dataset. These models are ideal as part of building vector search applications or Retrieval Augmented Generation workflows with Large Language Models (LLM)."
+      },
+      "created_at": "2024-05-22 19:27:09.781",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "context_window",
+          "value": "60000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.0118,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "e8e8abe4-a372-4c13-815f-4688ba655c8e",
+      "source": 1,
+      "name": "@cf/google/gemma-2b-it-lora",
+      "description": "This is a Gemma-2B base model that Cloudflare dedicates for inference with LoRA adapters. Gemma is a family of lightweight, state-of-the-art open models from Google, built from the same research and technology used to create the Gemini models.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2024-04-02 00:19:34.669",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "beta",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "8192"
+        },
+        {
+          "property_id": "lora",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "e580c765-810c-4da3-936c-a2808892f14c",
+      "source": 1,
+      "name": "@cf/black-forest-labs/flux-2-klein-9b",
+      "description": "FLUX.2 [klein] 9B is a 9 billion parameter model that can generate images from text descriptions and supports multi-reference editing capabilities.",
+      "task": {
+        "id": "3d6e1f35-341b-4915-a6c8-9a7142a9033a",
+        "name": "Text-to-Image",
+        "description": "Generates images from input text. These models can be used to generate and modify images based on text prompts."
+      },
+      "created_at": "2026-01-14 12:55:54.294",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "partner",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://bfl.ai/legal/terms-of-service"
+        }
+      ]
+    },
+    {
+      "id": "cb254e3b-372b-4d4e-8526-ada79940427a",
+      "source": 1,
+      "name": "@cf/qwen/qwen3-embedding-0.6b",
+      "description": "The Qwen3 Embedding model series is the latest proprietary model of the Qwen family, specifically designed for text embedding and ranking tasks. ",
+      "task": {
+        "id": "0137cdcf-162a-4108-94f2-1ca59e8c65ee",
+        "name": "Text Embeddings",
+        "description": "Feature extraction models transform raw data into numerical features that can be processed while preserving the information in the original dataset. These models are ideal as part of building vector search applications or Retrieval Augmented Generation workflows with Large Language Models (LLM)."
+      },
+      "created_at": "2025-06-18 20:23:22.086",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "context_window",
+          "value": "8192"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.0118,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c29c7295-ff20-4b9b-bdcc-25136c19b21d",
+      "source": 1,
+      "name": "@cf/moonshotai/kimi-k2.7-code",
+      "description": "Kimi K2.7 is a frontier-scale open-source 1T parameter model with a 262.1k context window, multi-turn tool calling, vision inputs, and structured outputs for agentic workloads.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2026-06-12 11:45:20.582",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "require_workers_paid",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "262144"
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://huggingface.co/moonshotai/Kimi-K2.7-Code/blob/main/LICENSE"
+        },
+        {
+          "property_id": "vision",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.95,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 4,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M cached input tokens",
+              "price": 0.19,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c1c12ce4-c36a-4aa6-8da4-f63ba4b8984d",
+      "source": 1,
+      "name": "@cf/openai/whisper",
+      "description": "Whisper is a general-purpose speech recognition model. It is trained on a large dataset of diverse audio and is also a multitasking model that can perform multilingual speech recognition, speech translation, and language identification.",
+      "task": {
+        "id": "dfce1c48-2a81-462e-a7fd-de97ce985207",
+        "name": "Automatic Speech Recognition",
+        "description": "Automatic speech recognition (ASR) models convert a speech signal, typically an audio input, to text."
+      },
+      "created_at": "2023-09-25 19:21:11.898",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per audio minute",
+              "price": 0.000453,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "info",
+          "value": "https://openai.com/research/whisper"
+        }
+      ]
+    },
+    {
+      "id": "ad01ab83-baf8-4e7b-8fed-a0a219d4eb45",
+      "source": 1,
+      "name": "@cf/deepseek-ai/deepseek-r1-distill-qwen-32b",
+      "description": "DeepSeek-R1-Distill-Qwen-32B is a model distilled from DeepSeek-R1 based on Qwen2.5. It outperforms OpenAI-o1-mini across various benchmarks, achieving new state-of-the-art results for dense models.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2025-01-22 19:48:55.776",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "context_window",
+          "value": "80000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.497,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 4.881,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://github.com/deepseek-ai/DeepSeek-R1/blob/main/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "a2a2afba-b609-4325-8c41-5791ce962239",
+      "source": 1,
+      "name": "@cf/deepgram/flux",
+      "description": "Flux is the first conversational speech recognition model built specifically for voice agents.",
+      "task": {
+        "id": "dfce1c48-2a81-462e-a7fd-de97ce985207",
+        "name": "Automatic Speech Recognition",
+        "description": "Automatic speech recognition (ASR) models convert a speech signal, typically an audio input, to text."
+      },
+      "created_at": "2025-09-29 21:07:55.114",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per audio minute (websocket)",
+              "price": 0.0077,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "partner",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://deepgram.com/terms"
+        },
+        {
+          "property_id": "realtime",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "9e087485-23dc-47fa-997d-f5bfafc0c7cc",
+      "source": 1,
+      "name": "@cf/black-forest-labs/flux-1-schnell",
+      "description": "FLUX.1 [schnell] is a 12 billion parameter rectified flow transformer capable of generating images from text descriptions. ",
+      "task": {
+        "id": "3d6e1f35-341b-4915-a6c8-9a7142a9033a",
+        "name": "Text-to-Image",
+        "description": "Generates images from input text. These models can be used to generate and modify images based on text prompts."
+      },
+      "created_at": "2024-08-29 16:37:39.541",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "terms",
+          "value": "https://bfl.ai/legal/terms-of-service"
+        }
+      ]
+    },
+    {
+      "id": "8a5d00bd-de28-4a28-b37a-ce46d01ebaeb",
+      "source": 1,
+      "name": "@cf/moonshotai/kimi-k2.6",
+      "description": "Kimi K2.6 is a frontier-scale open-source 1T parameter model with a 262.1k context window, multi-turn tool calling, vision inputs, and structured outputs for agentic workloads.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2026-04-20 01:40:35.001",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "require_workers_paid",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "262144"
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://huggingface.co/moonshotai/Kimi-K2.6/blob/main/LICENSE"
+        },
+        {
+          "property_id": "vision",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.95,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 4,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M cached input tokens",
+              "price": 0.16,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "7a143886-c9bb-4a1c-be95-377b1973bc3b",
+      "source": 1,
+      "name": "@cf/meta/llama-3.3-70b-instruct-fp8-fast",
+      "description": "Llama 3.3 70B quantized to fp8 precision, optimized to be faster.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2024-12-06 17:09:18.338",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "24000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.293,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 2.253,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://github.com/meta-llama/llama-models/blob/main/models/llama3_3/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "7276b330-b4ae-4662-81d1-3a8bea8368f8",
+      "source": 1,
+      "name": "@cf/deepseek-ai/deepseek-v4-flash-0731",
+      "description": "DeepSeek-V4-Flash-0731 is the official release of DeepSeek-V4-Flash, superseding the preview version, with substantially enhanced agentic capabilities. ",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2026-07-31 14:10:43.440",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "require_workers_paid",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "1310720"
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.44,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 1.32,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M cached input tokens",
+              "price": 0.014,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "617e7ec3-bf8d-4088-a863-4f89582d91b5",
+      "source": 1,
+      "name": "@cf/meta/m2m100-1.2b",
+      "description": "Multilingual encoder-decoder (seq-to-seq) model trained for Many-to-Many multilingual translation",
+      "task": {
+        "id": "f57d07cb-9087-487a-bbbf-bc3e17fecc4b",
+        "name": "Translation",
+        "description": "Translation models convert a sequence of text from one language to another."
+      },
+      "created_at": "2023-09-25 19:21:11.898",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.342,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.342,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "info",
+          "value": "https://github.com/facebookresearch/fairseq/tree/main/examples/m2m_100"
+        },
+        {
+          "property_id": "languages",
+          "value": "english, chinese, french, spanish, arabic, russian, german, japanese, portuguese, hindi"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://github.com/facebookresearch/fairseq/blob/main/LICENSE"
+        }
+      ]
+    },
+    {
+      "id": "5cdffa8e-1b1e-48e8-85f1-ab9b943cdd32",
+      "source": 1,
+      "name": "@cf/black-forest-labs/flux-2-klein-4b",
+      "description": "FLUX.2 [klein] is an ultra-fast, distilled image model. It unifies image generation and editing in a single model, delivering state-of-the-art quality enabling interactive workflows, real-time previews, and latency-critical applications.",
+      "task": {
+        "id": "3d6e1f35-341b-4915-a6c8-9a7142a9033a",
+        "name": "Text-to-Image",
+        "description": "Generates images from input text. These models can be used to generate and modify images based on text prompts."
+      },
+      "created_at": "2026-01-14 12:54:55.024",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "partner",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://bfl.ai/legal/terms-of-service"
+        }
+      ]
+    },
+    {
+      "id": "57fbd08a-a4c4-411c-910d-b9459ff36c20",
+      "source": 1,
+      "name": "@cf/baai/bge-small-en-v1.5",
+      "description": "BAAI general embedding (Small) model that transforms any given text into a 384-dimensional vector",
+      "task": {
+        "id": "0137cdcf-162a-4108-94f2-1ca59e8c65ee",
+        "name": "Text Embeddings",
+        "description": "Feature extraction models transform raw data into numerical features that can be processed while preserving the information in the original dataset. These models are ideal as part of building vector search applications or Retrieval Augmented Generation workflows with Large Language Models (LLM)."
+      },
+      "created_at": "2023-11-07 15:43:58.042",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.0202,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "info",
+          "value": "https://huggingface.co/BAAI/bge-small-en-v1.5"
+        },
+        {
+          "property_id": "max_input_tokens",
+          "value": "512"
+        },
+        {
+          "property_id": "output_dimensions",
+          "value": "384"
+        }
+      ]
+    },
+    {
+      "id": "51b71d5b-8bc0-4489-a107-95e542b69914",
+      "source": 1,
+      "name": "@cf/qwen/qwen2.5-coder-32b-instruct",
+      "description": "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen). As of now, Qwen2.5-Coder has covered six mainstream model sizes, 0.5, 1.5, 3, 7, 14, 32 billion parameters, to meet the needs of different developers. Qwen2.5-Coder brings the following improvements upon CodeQwen1.5:",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2025-02-27 00:31:43.829",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "context_window",
+          "value": "32768"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.66,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 1,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "lora",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "429b9e8b-d99e-44de-91ad-706cf8183658",
+      "source": 1,
+      "name": "@cf/baai/bge-base-en-v1.5",
+      "description": "BAAI general embedding (Base) model that transforms any given text into a 768-dimensional vector",
+      "task": {
+        "id": "0137cdcf-162a-4108-94f2-1ca59e8c65ee",
+        "name": "Text Embeddings",
+        "description": "Feature extraction models transform raw data into numerical features that can be processed while preserving the information in the original dataset. These models are ideal as part of building vector search applications or Retrieval Augmented Generation workflows with Large Language Models (LLM)."
+      },
+      "created_at": "2023-09-25 19:21:11.898",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "153600"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.0666,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "info",
+          "value": "https://huggingface.co/BAAI/bge-base-en-v1.5"
+        },
+        {
+          "property_id": "max_input_tokens",
+          "value": "512"
+        },
+        {
+          "property_id": "output_dimensions",
+          "value": "768"
+        }
+      ]
+    },
+    {
+      "id": "41ca173f-72d5-4420-8915-49e835d2676e",
+      "source": 1,
+      "name": "@cf/aisingapore/gemma-sea-lion-v4-27b-it",
+      "description": "SEA-LION stands for Southeast Asian Languages In One Network, which is a collection of Large Language Models (LLMs) which have been pretrained and instruct-tuned for the Southeast Asia (SEA) region.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2025-09-23 19:27:30.468",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "context_window",
+          "value": "128000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.351,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.555,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4090e54c-eee4-4221-b410-10c1c0f92f17",
+      "source": 1,
+      "name": "@cf/qwen/qwen3-30b-a3b-fp8",
+      "description": "Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models. Built upon extensive training, Qwen3 delivers groundbreaking advancements in reasoning, instruction-following, agent capabilities, and multilingual support.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2025-04-30 21:36:10.009",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "32768"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.0509,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.335,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "3ae8936e-593e-4fb2-85ee-95dd8a057588",
+      "source": 1,
+      "name": "@cf/black-forest-labs/flux-2-dev",
+      "description": "FLUX.2 [dev] is an image model from Black Forest Labs where you can generate highly realistic and detailed images, with multi-reference support.",
+      "task": {
+        "id": "3d6e1f35-341b-4915-a6c8-9a7142a9033a",
+        "name": "Text-to-Image",
+        "description": "Generates images from input text. These models can be used to generate and modify images based on text prompts."
+      },
+      "created_at": "2025-11-24 15:44:06.050",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "partner",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://bfl.ai/legal/terms-of-service"
+        }
+      ]
+    },
+    {
+      "id": "337170b7-bd2f-4631-9a57-688b579cf6d3",
+      "source": 1,
+      "name": "@cf/google/gemma-7b-it-lora",
+      "description": "  This is a Gemma-7B base model that Cloudflare dedicates for inference with LoRA adapters. Gemma is a family of lightweight, state-of-the-art open models from Google, built from the same research and technology used to create the Gemini models.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2024-04-02 00:20:19.633",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "beta",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "3500"
+        },
+        {
+          "property_id": "lora",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "328adb49-4a7d-43e3-a2d5-802ae8100fe7",
+      "source": 1,
+      "name": "@cf/google/gemma-4-26b-a4b-it",
+      "description": "Gemma 4 is Google's most intelligent family of open models, built from Gemini 3 research to maximize intelligence-per-parameter.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2026-04-02 15:05:22.642",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "256000"
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://ai.google.dev/gemma/docs/gemma_4_license"
+        },
+        {
+          "property_id": "vision",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.1,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.3,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2d50837b-2dc7-4994-a690-a38e25c16d74",
+      "source": 1,
+      "name": "@cf/deepseek-ai/deepseek-v4-pro-0813",
+      "description": "DeepSeek V4 Pro is a high-capability reasoning model from DeepSeek with a one million token context window, built for long-horizon agentic workflows and complex, multi-step problem-solving",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2026-08-13 17:15:08.489",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "require_workers_paid",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "1048576"
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 1.32,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 3.96,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M cached input tokens",
+              "price": 0.044,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2cbc033b-ded8-4e02-bbb2-47cf05d5cfe5",
+      "source": 1,
+      "name": "@cf/meta/llama-3.2-11b-vision-instruct",
+      "description": " The Llama 3.2-Vision instruction-tuned models are optimized for visual recognition, image reasoning, captioning, and answering general questions about an image.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2024-09-25 05:36:04.547",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "context_window",
+          "value": "128000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.0485,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.676,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "lora",
+          "value": "true"
+        },
+        {
+          "property_id": "terms",
+          "value": "https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/LICENSE"
+        },
+        {
+          "property_id": "vision",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "22338608-b54d-4f04-884e-ab06f3dbbf3e",
+      "source": 1,
+      "name": "@cf/qwen/qwen3.8-27b",
+      "description": "Qwen 3.8 27B is a 27-billion-parameter instruction-tuned language model from Alibaba's Qwen family, designed for vision, efficient general-purpose text generation and agentic workloads.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2026-08-17 07:13:11.641",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "262144"
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        },
+        {
+          "property_id": "vision",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.45,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 3.2,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M cached input tokens",
+              "price": 0.05,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "2169496d-9c0e-4e49-8399-c44ee66bff7d",
+      "source": 1,
+      "name": "@cf/openai/whisper-tiny-en",
+      "description": "Whisper is a pre-trained model for automatic speech recognition (ASR) and speech translation. Trained on 680k hours of labelled data, Whisper models demonstrate a strong ability to generalize to many datasets and domains without the need for fine-tuning. This is the English-only version of the Whisper Tiny model which was trained on the task of speech recognition.",
+      "task": {
+        "id": "dfce1c48-2a81-462e-a7fd-de97ce985207",
+        "name": "Automatic Speech Recognition",
+        "description": "Automatic speech recognition (ASR) models convert a speech signal, typically an audio input, to text."
+      },
+      "created_at": "2024-04-22 20:59:02.731",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "beta",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "200f0812-148c-48c1-915d-fb3277a94a08",
+      "source": 1,
+      "name": "@cf/openai/whisper-large-v3-turbo",
+      "description": "Whisper is a pre-trained model for automatic speech recognition (ASR) and speech translation. ",
+      "task": {
+        "id": "dfce1c48-2a81-462e-a7fd-de97ce985207",
+        "name": "Automatic Speech Recognition",
+        "description": "Automatic speech recognition (ASR) models convert a speech signal, typically an audio input, to text."
+      },
+      "created_at": "2024-05-22 00:02:18.656",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per audio minute",
+              "price": 0.000513,
+              "currency": "USD"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "188a4e1e-253e-46d0-9616-0bf8c149763f",
+      "source": 1,
+      "name": "@cf/openai/gpt-oss-20b",
+      "description": "OpenAI’s open-weight models designed for powerful reasoning, agentic tasks, and versatile developer use cases – gpt-oss-20b is for lower latency, and local or specialized use-cases.",
+      "task": {
+        "id": "c329a1f9-323d-4e91-b2aa-582dd4188d34",
+        "name": "Text Generation",
+        "description": "Family of generative text models, such as large language models (LLM), that can be adapted for a variety of natural language tasks."
+      },
+      "created_at": "2025-08-05 10:49:53.265",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "async_queue",
+          "value": "true"
+        },
+        {
+          "property_id": "context_window",
+          "value": "128000"
+        },
+        {
+          "property_id": "price",
+          "value": [
+            {
+              "unit": "per M input tokens",
+              "price": 0.2,
+              "currency": "USD"
+            },
+            {
+              "unit": "per M output tokens",
+              "price": 0.3,
+              "currency": "USD"
+            }
+          ]
+        },
+        {
+          "property_id": "function_calling",
+          "value": "true"
+        },
+        {
+          "property_id": "reasoning",
+          "value": "true"
+        }
+      ]
+    },
+    {
+      "id": "15631501-2742-4346-a469-22fe202188a2",
+      "source": 1,
+      "name": "@cf/google/embeddinggemma-300m",
+      "description": "EmbeddingGemma is a 300M parameter, state-of-the-art for its size, open embedding model from Google, built from Gemma 3 (with T5Gemma initialization) and the same research and technology used to create Gemini models. EmbeddingGemma produces vector representations of text, making it well-suited for search and retrieval tasks, including classification, clustering, and semantic similarity search. This model was trained with data in 100+ spoken languages.",
+      "task": {
+        "id": "0137cdcf-162a-4108-94f2-1ca59e8c65ee",
+        "name": "Text Embeddings",
+        "description": "Feature extraction models transform raw data into numerical features that can be processed while preserving the information in the original dataset. These models are ideal as part of building vector search applications or Retrieval Augmented Generation workflows with Large Language Models (LLM)."
+      },
+      "created_at": "2025-09-04 16:38:44.980",
+      "tags": [],
+      "properties": [
+        {
+          "property_id": "beta",
+          "value": "true"
+        }
+      ]
+    }
+  ],
+  "result_info": {
+    "count": 65,
+    "page": 1,
+    "per_page": 100,
+    "total_count": 304
+  },
+  "_total": 65,
+  "_capturedAt": "2026-09-09T08:41:38.519Z"
+}

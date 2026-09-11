@@ -1,7 +1,7 @@
 // Restores discovery from deployed version 9f2e9f58 without reverting other providers.
 import { DEFAULTS, HUGGINGFACE_API_BASE } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
-import { offlineGrouping, offlineEntries, putOffline } from './offline.js';
+import { offlineGrouping, offlineEntries, putOffline, OFFLINE_FAMILIES } from './offline.js';
 import { inferChatFormat } from './huggingface-chat.js';
 
 const QUANTS = /(?:^|[.\-_])((?:IQ|Q)\d[\w]*|BF16|F16|F32)(?=[.\-]|$)/i;
@@ -17,7 +17,11 @@ export function eligibleRepository(model) {
         && Number.isFinite(model.downloads) && model.downloads >= 1000
         && (model.likes >= 50 || model.downloads >= 50000)
         && (!model.pipeline_tag || model.pipeline_tag === 'text-generation')
-        && !/uncensored|crack/i.test(model.id);
+        && !/uncensored|crack/i.test(model.id)
+        // Embedding/encoder models (e.g. "Qwen3-Embedding-...") are not chat
+        // models; publishing them as downloadable offline chat models only
+        // yields garbage generations.
+        && !/embed/i.test(model.id);
 }
 
 export function repositoryVariants(meta, opId = 'hf') {
@@ -31,6 +35,7 @@ export function repositoryVariants(meta, opId = 'hf') {
         const size = Math.round(file.size / 1048576);
         const url = `https://huggingface.co/${meta.id}/resolve/main/${path.split('/').map(encodeURIComponent).join('/')}`;
         const location = offlineGrouping({ repoId: meta.id, url });
+        if (!OFFLINE_FAMILIES.has(location.series)) continue;
         // Include the exact file identity: two recipes with the same quant must never overwrite each other.
         const id = `${meta.id}:${path}`;
         const license = meta.cardData?.license;
@@ -38,7 +43,7 @@ export function repositoryVariants(meta, opId = 'hf') {
         const model = {
             id, source: 'huggingface', type: 'offline', tier: 'free', url,
             size, ram: size + 2000, ramEstimated: true,
-            description: {}, details: { en: { title: `${location.series} ${location.variant}` } },
+            description: {}, details: { en: { title: location.variant } },
             modalities: { image: false, audio: false, file: true }, outputs: { text: true, image: false },
             reasoning: false, webSearch: false, chatFormat: inferChatFormat(meta.id, meta.tags || []),
             ...(Number.isFinite(context) && context > 0 ? { context } : {}),
@@ -61,7 +66,9 @@ export async function buildGroupedHuggingFaceModels(env, opId, blacklist = new S
         const query = new URLSearchParams({ filter: 'gguf', sort: 'downloads', direction: '-1', limit: String(DEFAULTS.HF_DISCOVERY_CANDIDATES), full: 'true' });
         const models = await hubJson(`${HUGGINGFACE_API_BASE}?${query}`, env, opId);
         if (!Array.isArray(models) || models.length === 0) throw new Error('Empty or invalid HF catalog');
-        candidates = models.filter(eligibleRepository).filter(m => !blacklist.has(m.id))
+        candidates = models.filter(eligibleRepository)
+            .filter(m => OFFLINE_FAMILIES.has(offlineGrouping({repoId: m.id}).series))
+            .filter(m => !blacklist.has(m.id))
             .sort((a, b) => (b.likes || 0) - (a.likes || 0) || b.downloads - a.downloads || a.id.localeCompare(b.id))
             .slice(0, DEFAULTS.HF_DISCOVERY_REPOS);
         if (!candidates.length) throw new Error('No eligible HF repositories; retaining previous catalog');
@@ -95,6 +102,10 @@ export function applyFreshHuggingFaceMetadata(final, fresh) {
         if (model.source !== 'huggingface') continue;
         const next = byId.get(model.id);
         if (!next) continue;
-        for (const field of ['url', 'size', 'ram', 'ramEstimated', 'huggingface']) model[field] = next[field];
+        // `chatFormat` and `context` are derived facts (model id/tags and
+        // GGUF metadata), not curation: refresh them so corrections to
+        // inferChatFormat / upstream metadata reach already-published entries
+        // instead of being frozen at first publication.
+        for (const field of ['url', 'size', 'ram', 'ramEstimated', 'chatFormat', 'context', 'huggingface']) model[field] = next[field];
     }
 }

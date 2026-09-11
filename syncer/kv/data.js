@@ -41,27 +41,26 @@ export function writeNewData(kv, finalJsonToWrite, newHex, opId, context) {
         kv.put("version", newVersion)
     ];
 
+    // Purge the public edge cache ONLY after the KV writes complete. Purging
+    // concurrently with the puts lets a request arriving in between re-cache
+    // the OLD document for a full cache TTL (observed in production with a
+    // 4h zone cache rule on cortexishere.com/models).
     context.waitUntil(
         Promise.all(writePromises)
-        .then(() => console.log(`✅ [${opId}] KV updated successfully. New version: ${newVersion}`))
-        .catch(e => console.error(`❌ [${opId}] CRITICAL: Failed to write to KV: ${e.message}`))
-    );
-
-    // Purge the public edge cache
-    const cache = caches.default;
-    // Note: The URL must match the one used in `serveLogic` for the cache key.
-        const cacheKey = new Request("https://cortexishere.com/models");
-
-    context.waitUntil(
-        cache.delete(cacheKey).then(found => {
-            if (found) {
-                console.log(`✅ [${opId}] Edge Cache for /models.json purged successfully.`);
-            } else {
-                console.warn(`⚠️ [${opId}] Edge Cache for /models.json was not found (normal if expired).`);
-            }
-        }).catch(err => {
-            console.error(`❌ [${opId}] CRITICAL: Failed to purge Edge Cache: ${err.message}`);
-        })
+            .then(async () => {
+                console.log(`✅ [${opId}] KV updated successfully. New version: ${newVersion}`);
+                const cache = caches.default;
+                // The URLs must match the cache keys used in `serveModelsJson`
+                // for every hostname that fronts this worker.
+                const cacheKeys = [
+                    new Request("https://cortexishere.com/models"),
+                    new Request("https://syncer.mustawtfa.workers.dev/models"),
+                ];
+                await Promise.all(cacheKeys.map(key =>
+                    cache.delete(key).catch(() => false)));
+                console.log(`✅ [${opId}] Edge cache purge completed after KV write.`);
+            })
+            .catch(e => console.error(`❌ [${opId}] CRITICAL: Failed to write to KV: ${e.message}`))
     );
 }
 

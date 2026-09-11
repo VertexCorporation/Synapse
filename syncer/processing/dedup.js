@@ -130,3 +130,34 @@ export function deduplicateProducers(producers, operationId) {
 
     return producers;
 }
+
+/**
+ * Catalog-level routing: records sharing a canonicalKey keep ALL provider
+ * entries (the producers tree stays winner-only). Each record gets the same
+ * `routes` array; SOURCE_PRIORITY marks the preferred route (design §9.3).
+ * Manual / HuggingFace sources have no priority and always form singletons.
+ * @param {object[]} records - Fresh CortexModel records.
+ * @returns {object[]} The same records with `routes` attached.
+ */
+export function attachCatalogRoutes(records) {
+    const groups = new Map();
+    for (const record of records) {
+        if (!record?.canonicalKey || !record?.source) continue;
+        const key = record.canonicalKey;
+        if (!groups.has(key)) groups.set(key, []);
+        groups.get(key).push(record);
+    }
+    for (const group of groups.values()) {
+        group.sort((a, b) =>
+            ((SOURCE_PRIORITY[b.source] || 0) - (SOURCE_PRIORITY[a.source] || 0)) ||
+            String(a.id).localeCompare(String(b.id)));
+        const routes = group.map((record, index) => ({
+            source: record.source,
+            id: record.id,
+            preferred: index === 0,
+            tier: record.tier || null,
+        }));
+        for (const record of group) record.routes = routes;
+    }
+    return records;
+}

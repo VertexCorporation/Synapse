@@ -20,10 +20,41 @@ function kvStore(values = {}) {
 }
 
 test('family/version groups sizes and quants without Default', () => {
-    for (const [id, series, variant] of [['gemma-3-12b-it', 'Gemma 3', '12B Instruct'], ['gemma-7b-it', 'Gemma', '7B Instruct'], ['Qwen3-0.6B', 'Qwen 3', '0.6B'], ['llama-3.1-70b-instruct', 'Llama 3.1', '70B Instruct']]) {
+    for (const [id, series, variant] of [['gemma-3-12b-it', 'Gemma', 'gemma 3 12B Instruct'], ['gemma-7b-it', 'Gemma', 'gemma 7B Instruct'], ['Qwen3-0.6B', 'Qwen', 'Qwen3 0.6B'], ['llama-3.1-70b-instruct', 'Llama', 'llama 3.1 70B Instruct']]) {
         const got = offlineGrouping({ id, url: `https://huggingface.co/a/b/resolve/main/${id}-Q4_K_M.gguf` });
         assert.equal(got.series, series); assert.equal(got.variant, `${variant} (Q4_K_M)`);
     }
+});
+
+test('every supported offline family groups generations and preserves full variants', async () => {
+    const { OFFLINE_FAMILIES, regroupOfflineModels } = await import('../processing/offline.js');
+    const examples = ['Nemotron', 'TinyLlama', 'Gemma', 'Llama', 'Qwen', 'Next',
+        'DeepSeek', 'Mixtral', 'Mistral', 'Phi', 'GPT-OSS', 'Command', 'Aya',
+        'SuperNova', 'Jan', 'Zeta', 'GLM', 'Kimi', 'Granite', 'Ministral',
+        'Magistral', 'Devstral', 'Codestral', 'Pixtral', 'Hermes', 'LFM'];
+    const tree = { Legacy: {} };
+    for (const name of examples) {
+        for (const generation of [2, 3]) {
+            const label = `${name} ${generation} 7B Chat`;
+            tree.Legacy[label] = { Default: { id: label.replaceAll(' ', '-'),
+                type: 'offline', source: 'manual', details: { en: { title: label } } } };
+        }
+    }
+    regroupOfflineModels(tree);
+    const values = entries(tree);
+    assert.deepEqual(new Set(values.map(e => e.s)), OFFLINE_FAMILIES);
+    for (const family of OFFLINE_FAMILIES) {
+        const variants = values.filter(e => e.s === family);
+        assert.equal(variants.length, 2);
+        assert.ok(variants.every(e => e.v.endsWith('7B Chat')));
+    }
+    assert.ok(tree.Meta.Llama['Llama 2 7B Chat']);
+    assert.ok(tree.Meta.Llama['Llama 3 7B Chat']);
+    assert.equal(offlineGrouping({ id: 'jannano128k' }).series, 'Jan');
+    assert.equal(offlineGrouping({ id: 'jan-nano' }).series, 'Jan');
+    const snapshot = structuredClone(tree);
+    regroupOfflineModels(tree);
+    assert.deepEqual(tree, snapshot);
 });
 
 test('one variant per exact standalone quant; ignore auxiliary files and shards', () => {
@@ -151,7 +182,88 @@ test('complete scheduled sync writes dynamic offline alongside unchanged online/
     const kv = kvStore(); const pending = []; const ctx = { waitUntil(p) { pending.push(p); } };
     await syncModels({ MODELS_JSON: kv, OPENROUTER_KEY: 'test' }, ctx); await Promise.all(pending);
     const data = JSON.parse(kv.map.get('list'));
-    assert.equal(entries(data.producers).filter(e => e.model.source === 'huggingface').length, 2);
+    assert.equal(entries(data.producers).filter(e => e.model.source === 'huggingface').length, 1);
     assert.equal(entries(data.producers).find(e => e.model.source === 'openrouter').model.tier, 'standard');
     assert.equal(entries(data.fallback)[0].model.tier, 'fallback');
+});
+
+test('Next 1B and Next 4B share one family without losing sizes, URLs or quants', async()=>{
+    const {regroupOfflineModels}=await import('../processing/offline.js');
+    const first=repositoryVariants(repo({id:'publisher/Next-1B-GGUF',siblings:[file('Next-1B-Q4_K_M.gguf',1048576000)]}));
+    const second=repositoryVariants(repo({id:'publisher/Next-4B-GGUF',siblings:[file('Next-4B-Q8_0.gguf',4194304000)]}));
+    const grouped=mergeOfflineModels({},first,second);
+    regroupOfflineModels(grouped);
+    const values=entries(grouped);
+    assert.deepEqual([...new Set(values.map(e=>e.s))],['Next']);
+    assert.equal(values.length,2);
+    assert.ok(values.some(e=>e.v==='Next 1B (Q4_K_M)'));
+    assert.ok(values.some(e=>e.v==='Next 4B (Q8_0)'));
+    assert.equal(new Set(values.map(e=>e.model.url)).size,2);
+    const original=structuredClone(grouped);regroupOfflineModels(grouped);assert.deepEqual(grouped,original);
+});
+
+// --- Chat-template architecture detection (canonical metadata) -------------
+
+test('inferChatFormat routes every offline family to its correct template', async () => {
+    const { inferChatFormat } = await import('../processing/huggingface-chat.js');
+    const cases = [
+        ['Qwen/Qwen3-0.6B-GGUF', 'chatml'],
+        ['unsloth/Qwen3-Coder-30B-A3B-Instruct-GGUF', 'chatml'],
+        ['bartowski/Meta-Llama-3.1-8B-Instruct-GGUF', 'llama3'],
+        ['TheBloke/Llama-2-7B-Chat-GGUF', 'llama2'],
+        ['TheBloke/Mistral-7B-Instruct-v0.1-GGUF', 'llama2'],
+        ['unsloth/GLM-4.7-Flash-GGUF', 'phi-3_glm'],
+        ['microsoft/Phi-3-mini-4k-instruct-gguf', 'phi-3_glm'],
+        ['microsoft/phi-4-gguf', 'phi-3_glm'],
+        // ChatML families must be matched before the generic Mistral rule.
+        ['NousResearch/Hermes-2-Pro-Mistral-7B-GGUF', 'chatml'],
+        ['google/gemma-2-9b-it-GGUF', 'gemma'],
+    ];
+    for (const [id, expected] of cases) {
+        assert.equal(inferChatFormat(id, []).template, expected, id);
+    }
+    // The [INST] template carries the Llama 2 conversation shape.
+    const llama2 = inferChatFormat('TheBloke/Llama-2-7B-Chat-GGUF', []).tokens;
+    assert.equal(llama2.system_start, '<<SYS>>');
+    assert.equal(llama2.user_start, '[INST]');
+    assert.equal(llama2.user_end, '[/INST]');
+    assert.ok(llama2.stop_generation.includes('\x3c/s\x3e'));
+    // Unknown ids fall back to ChatML, never raw completion.
+    assert.equal(inferChatFormat('totally-unknown-model', []).template, 'chatml');
+});
+
+test('embedding models are never published as offline chat models', () => {
+    assert.equal(eligibleRepository(repo({ id: 'Qwen/Qwen3-Embedding-0.6B-GGUF' })), false);
+    assert.ok(eligibleRepository(repo({ id: 'Qwen/Qwen3-0.6B-GGUF' })));
+});
+
+test('chatFormat refresh reaches already-published HF entries, never manual curation', () => {
+    const fresh = repositoryVariants(repo({ id: 'TheBloke/Llama-2-7B-Chat-GGUF', siblings: [file('llama-2-7b-chat.Q4_K_M.gguf')] }));
+    const stale = structuredClone(fresh);
+    // A frozen, wrongly inferred format (the old default) on a published entry.
+    entries(stale)[0].model.chatFormat = { template: 'chatml', tokens: {} };
+    const manual = { id: 'qwen3-06b', source: 'manual', type: 'offline', details: { en: { title: 'Qwen3 0.6B' } } };
+    const current = mergeOfflineModels(stale, {}, { Qwen: { Qwen: { 'Qwen3 0.6B': manual } } });
+    applyFreshHuggingFaceMetadata(current, fresh);
+    const byId = new Map(entries(current).map(e => [e.model.id, e.model]));
+    assert.equal(byId.get('TheBloke/Llama-2-7B-Chat-GGUF:llama-2-7b-chat.Q4_K_M.gguf').chatFormat.template, 'llama2',
+        'a corrected inference must overwrite the stale published chatFormat');
+    assert.equal(byId.get('qwen3-06b').chatFormat, undefined,
+        'manual (curated) entries are never rewritten by the HF refresh');
+});
+
+test('manual offline models without chatFormat get the inferred family template', async t => {
+    t.mock.method(globalThis, 'fetch', async () => new Response(null, { status: 200 }));
+    const models = [
+        { id: 'gemma-3-12b-it', type: 'offline', producer: 'Google', url: 'https://huggingface.co/a/b/resolve/main/Gemma-Q4_0.gguf', details: { en: { title: 'Gemma 3 12B' } } },
+        { id: 'qwen3-06b', type: 'offline', producer: 'Qwen', chatFormat: { template: 'qwen', tokens: { stop_generation: ['\x3c|im_end|\x3e'] } }, details: { en: { title: 'Qwen3 0.6B' } } },
+    ];
+    const kv = { async list() { return { list_complete: true, keys: models.map((_, i) => ({ name: `model:${i}` })) }; }, async get(k) { return models[Number(k.split(':')[1])]; } };
+    const grouped = await processManualModels(kv, 'test');
+    const byId = new Map(entries(grouped).map(e => [e.model.id, e.model]));
+    assert.equal(byId.get('gemma-3-12b-it').chatFormat.template, 'gemma',
+        'a missing chatFormat is filled from the family inference');
+    assert.equal(byId.get('qwen3-06b').chatFormat.template, 'qwen',
+        'a curated chatFormat is never overwritten by inference');
+    globalThis.fetch.mock.restore();
 });

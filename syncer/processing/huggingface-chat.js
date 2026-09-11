@@ -1,4 +1,6 @@
-// Chat payloads recovered from deployed version 9f2e9f58 (2026-05-17).
+// Chat payloads recovered from deployed version 9f2e9f58 (2026-05-17),
+// extended with the Llama 2 / Mistral [INST] template and GLM / Phi-4
+// routing so every supported offline family gets its correct template.
 const CHAT_TEMPLATES = {
   chatml: {
     template: "chatml",
@@ -24,6 +26,20 @@ const CHAT_TEMPLATES = {
       stop_generation: ["<|eot_id|>", "<|end_of_text|>"]
     }
   },
+  // Llama 2 Chat and Mistral-7B-Instruct (v0.1-v0.3) share the
+  // [INST] / <<SYS>> convention; mirrors the template family already
+  // published for the curated manual entry mistral-7b-instruct-v02.
+  llama2: {
+    template: "llama2",
+    tokens: {
+      system_start: "<<SYS>>",
+      system_end: "<</SYS>>",
+      user_start: "[INST]",
+      user_end: "[/INST]",
+      assistant_end: "</s>",
+      stop_generation: ["</s>", "[INST]", "[/INST]"]
+    }
+  },
   gemma: {
     template: "gemma",
     tokens: {
@@ -34,8 +50,10 @@ const CHAT_TEMPLATES = {
       stop_generation: ["<end_of_turn>", "<eos>"]
     }
   },
+  // Phi-3 and Phi-4 both use the <|role|> + <|end|> convention, and the
+  // GLM 4.x family uses the same token shape - hence the family name.
   "phi-3_glm": {
-    template: "phi3",
+    template: "phi-3_glm",
     tokens: {
       system_start: "<|system|>\n",
       system_end: "<|end|>\n",
@@ -43,17 +61,26 @@ const CHAT_TEMPLATES = {
       user_end: "<|end|>\n",
       assistant_start: "<|assistant|>\n",
       assistant_end: "<|end|>\n",
-      stop_generation: ["<|end|>", "<|endoftext|>"]
+      stop_generation: ["<|end|>", "</s>"]
     }
   }
 };
 export function inferChatFormat(id, tags = []) {
-  const searchString = `${id.toLowerCase()} ${tags.join(" ").toLowerCase()}`;
-  if (searchString.includes("llama-3.2") || searchString.includes("llama-3.1") || searchString.includes("llama-3"))
-    return CHAT_TEMPLATES["llama-3"];
-  if (searchString.includes("gemma-2") || searchString.includes("gemma"))
-    return CHAT_TEMPLATES["gemma"];
-  if (searchString.includes("phi-3"))
-    return CHAT_TEMPLATES["phi-3_glm"];
-  return CHAT_TEMPLATES["chatml"];
+    const searchString = `${id.toLowerCase()} ${tags.join(" ").toLowerCase()}`;
+    if (searchString.includes("llama-3.2") || searchString.includes("llama-3.1") || searchString.includes("llama-3") || searchString.includes("llama3"))
+        return CHAT_TEMPLATES["llama-3"];
+    if (searchString.includes("llama-2") || searchString.includes("llama2"))
+        return CHAT_TEMPLATES["llama2"];
+    if (searchString.includes("gemma-2") || searchString.includes("gemma"))
+        return CHAT_TEMPLATES["gemma"];
+    if (searchString.includes("phi-3") || searchString.includes("phi3") || searchString.includes("phi-4") || searchString.includes("phi4") || searchString.includes("glm"))
+        return CHAT_TEMPLATES["phi-3_glm"];
+    // Hermes and Qwen families are ChatML-trained - check BEFORE the
+    // generic Mistral rule so e.g. "Hermes-2-Pro-Mistral-7B" is not
+    // mis-detected as a [INST] model.
+    if (searchString.includes("hermes") || searchString.includes("qwen") || searchString.includes("chatml"))
+        return CHAT_TEMPLATES["chatml"];
+    if (searchString.includes("mistral"))
+        return CHAT_TEMPLATES["llama2"];
+    return CHAT_TEMPLATES["chatml"];
 }

@@ -6,6 +6,8 @@
  * Implements a highly efficient Cache-First strategy to minimize KV reads.
  */
 
+import { enforceCatalogPolicy } from '../processing/catalog-policy.js';
+import { regroupOfflineModels, deduplicateOfflineModels } from '../processing/offline.js';
 import { DEFAULTS } from '../config.js';
 
 /**
@@ -30,7 +32,7 @@ export async function serveModelsJson(env, request, context) {
     try {
         // FAST PATH: Serve from cache if available
         const cachedResponse = await cache.match(cacheKey);
-        if (cachedResponse) {
+        if (cachedResponse?.headers.get("X-Catalog-Policy") === "5") {
             console.log(`⚡ [${opId}] Cache HIT. Serving from Edge Cache.`);
             return cachedResponse;
         }
@@ -51,6 +53,10 @@ export async function serveModelsJson(env, request, context) {
         }
 
         let data = JSON.parse(listJson);
+        enforceCatalogPolicy(data.producers || {});
+        regroupOfflineModels(data.producers || {});
+        deduplicateOfflineModels(data.producers || {});
+        enforceCatalogPolicy(data.fallback || {});
         const blacklistedIds = new Set(blacklist || []);
 
         // Filter blacklisted models if any
@@ -66,12 +72,18 @@ export async function serveModelsJson(env, request, context) {
                 }
                  if (Object.keys(data.producers[pName]).length === 0) delete data.producers[pName];
             }
+            // The catalog array persists through the absence-grace window, so a
+            // blacklisted model must also be filtered here (design §9.5).
+            if (Array.isArray(data.catalog)) {
+                data.catalog = data.catalog.filter(record => record?.id && !blacklistedIds.has(record.id));
+            }
         }
         
         const responseHeaders = {
+            "X-Catalog-Policy": "5",
             "Content-Type": "application/json; charset=utf-8",
             "Cache-Control": `public, max-age=${DEFAULTS.CACHE_TTL_S}, stale-while-revalidate=${DEFAULTS.STALE_TTL_S}`,
-            "ETag": `"${kvVersion || Date.now()}"`,
+            "ETag": `"families-v5-${kvVersion || Date.now()}"`,
             "Access-Control-Allow-Origin": "*",
         };
         
