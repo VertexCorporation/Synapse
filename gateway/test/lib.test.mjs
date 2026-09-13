@@ -5,7 +5,7 @@ import { monthKey, monthResetAt, parseUsd, roundUsd } from '../lib/quota.js';
 import { generateKey, hashKey, extractCredential, safeEqual, normalizeEmail, KEY_PREFIX } from '../lib/keys.js';
 import { extractUsage, mergeUsage, emptyUsage, UsageScanner, meterStream, contentChars } from '../lib/sse.js';
 import { resolveModel, parseAllowlist, parseAliases, buildUpstreamRequest, clientResponseHeaders, promptText } from '../lib/upstream.js';
-import { pricesFromProperty, catalogEntry, priceFor, costFor, estimateTokens, estimateTokensFromChars, parsePriceOverrides, listPricedModels, BUILTIN_PRICES } from '../lib/pricing.js';
+import { pricesFromProperty, catalogEntry, priceFor, costFor, costFromNeurons, estimateTokens, estimateTokensFromChars, parsePriceOverrides, listPricedModels, BUILTIN_PRICES } from '../lib/pricing.js';
 
 // --- quota ---------------------------------------------------------------------------------------
 
@@ -60,9 +60,9 @@ test('safeEqual and normalizeEmail', () => {
 
 test('extractUsage reads OpenAI usage blocks and counts generated characters', () => {
     assert.deepEqual(extractUsage({ id: 'chatcmpl-1', model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast', choices: [{ message: { role: 'assistant', content: 'Hello!' } }], usage: { prompt_tokens: 10, completion_tokens: 5 } }),
-        { promptTokens: 10, completionTokens: 5, id: 'chatcmpl-1', model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast', chars: 6 });
-    assert.deepEqual(extractUsage({ object: 'list', data: [], usage: { prompt_tokens: 7, total_tokens: 7 } }),
-        { promptTokens: 7, completionTokens: null, id: null, model: null, chars: 0 });
+        { promptTokens: 10, completionTokens: 5, neurons: null, id: 'chatcmpl-1', model: '@cf/meta/llama-3.3-70b-instruct-fp8-fast', chars: 6 });
+    assert.deepEqual(extractUsage({ object: 'list', data: [], usage: { prompt_tokens: 7, total_tokens: 7, neurons: 0.5 } }),
+        { promptTokens: 7, completionTokens: null, neurons: 0.5, id: null, model: null, chars: 0 });
     assert.equal(extractUsage({ foo: 'bar' }), null);
     assert.equal(extractUsage(null), null);
     assert.equal(contentChars({ choices: [{ delta: { content: 'ab' } }, { delta: { content: 'c' } }] }), 3);
@@ -70,9 +70,9 @@ test('extractUsage reads OpenAI usage blocks and counts generated characters', (
 
 test('mergeUsage keeps the first id, accumulates characters and the largest token counts', () => {
     let s = emptyUsage();
-    s = mergeUsage(s, { promptTokens: 7, completionTokens: 1, id: 'a', model: 'm', chars: 2 });
-    s = mergeUsage(s, { promptTokens: null, completionTokens: 40, id: 'b', model: null, chars: 3 });
-    assert.deepEqual(s, { promptTokens: 7, completionTokens: 40, id: 'a', model: 'm', chars: 5 });
+    s = mergeUsage(s, { promptTokens: 7, completionTokens: 1, neurons: null, id: 'a', model: 'm', chars: 2 });
+    s = mergeUsage(s, { promptTokens: null, completionTokens: 40, neurons: 0.25, id: 'b', model: null, chars: 3 });
+    assert.deepEqual(s, { promptTokens: 7, completionTokens: 40, neurons: 0.25, id: 'a', model: 'm', chars: 5 });
 });
 
 test('UsageScanner reads usage from an SSE stream split at arbitrary byte boundaries', () => {
@@ -91,7 +91,7 @@ test('UsageScanner reads usage from an SSE stream split at arbitrary byte bounda
         const scanner = new UsageScanner();
         for (let i = 0; i < bytes.length; i += size) scanner.feed(bytes.slice(i, i + size));
         const summary = scanner.finish();
-        assert.deepEqual(summary, { promptTokens: 12, completionTokens: 2, id: 'c1', model: '@cf/openai/gpt-oss-20b', chars: 5 }, `chunk size ${size}`);
+        assert.deepEqual(summary, { promptTokens: 12, completionTokens: 2, neurons: null, id: 'c1', model: '@cf/openai/gpt-oss-20b', chars: 5 }, `chunk size ${size}`);
     }
 });
 
@@ -106,7 +106,7 @@ test('meterStream passes bytes through unchanged and reports usage when the stre
     const { clientBody, summary } = meterStream(body);
     const received = await new Response(clientBody).text();
     assert.equal(received, chunks.join(''));
-    assert.deepEqual(await summary, { promptTokens: 1, completionTokens: 1, id: 'c5', model: null, chars: 3 });
+    assert.deepEqual(await summary, { promptTokens: 1, completionTokens: 1, neurons: null, id: 'c5', model: null, chars: 3 });
 });
 
 // --- upstream ------------------------------------------------------------------------------------
@@ -200,7 +200,9 @@ test('priceFor prefers overrides, then the live catalog, then the built-in table
     assert.equal(overrides.bad, undefined);
 });
 
-test('costFor and estimateTokens', () => {
+test('costFor, costFromNeurons and estimateTokens', () => {
+    assert.equal(costFromNeurons(1000), 0.011);
+    assert.equal(costFromNeurons(0.07827652152627707), 0.000000861);
     assert.equal(costFor({ inputPerM: 0.293, outputPerM: 2.253 }, 1000, 500), 0.0014195);
     assert.equal(costFor({ inputPerM: 0.012, outputPerM: 0 }, 2_000_000, 0), 0.024);
     assert.equal(estimateTokens('abcdef'), 2);

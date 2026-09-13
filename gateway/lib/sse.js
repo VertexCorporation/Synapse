@@ -29,7 +29,7 @@ export function contentChars(obj) {
 /**
  * Pulls whatever usage information a single JSON object carries.
  * @param {any} obj Parsed JSON (a full response or one SSE event).
- * @returns {{promptTokens: number|null, completionTokens: number|null, id: string|null, model: string|null, chars: number}|null}
+ * @returns {{promptTokens: number|null, completionTokens: number|null, neurons: number|null, id: string|null, model: string|null, chars: number}|null}
  */
 export function extractUsage(obj) {
     if (!obj || typeof obj !== 'object') return null;
@@ -41,6 +41,7 @@ export function extractUsage(obj) {
     return {
         promptTokens: usage ? (num(usage.prompt_tokens) ?? num(usage.input_tokens)) : null,
         completionTokens: usage ? (num(usage.completion_tokens) ?? num(usage.output_tokens)) : null,
+        neurons: usage ? num(usage.neurons) : null,   // Workers AI's own billing unit, when reported
         id,
         model,
         chars,
@@ -56,6 +57,7 @@ export function mergeUsage(summary, fragment) {
     const out = { ...summary };
     if (fragment.promptTokens != null) out.promptTokens = Math.max(out.promptTokens ?? 0, fragment.promptTokens);
     if (fragment.completionTokens != null) out.completionTokens = Math.max(out.completionTokens ?? 0, fragment.completionTokens);
+    if (fragment.neurons != null) out.neurons = Math.max(out.neurons ?? 0, fragment.neurons);
     out.chars += fragment.chars || 0;
     if (!out.id && fragment.id) out.id = fragment.id;
     if (fragment.model) out.model = fragment.model;
@@ -63,7 +65,7 @@ export function mergeUsage(summary, fragment) {
 }
 
 export function emptyUsage() {
-    return { promptTokens: null, completionTokens: null, id: null, model: null, chars: 0 };
+    return { promptTokens: null, completionTokens: null, neurons: null, id: null, model: null, chars: 0 };
 }
 
 /**

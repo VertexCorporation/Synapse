@@ -8,6 +8,16 @@
  * A model with no price anywhere cannot be metered and is refused.
  */
 
+// Workers AI bills in neurons: $0.011 per 1,000 (developers.cloudflare.com/workers-ai/platform/pricing).
+// When a response reports `usage.neurons` that figure is used as-is; the token prices below are the
+// fallback for responses that do not.
+export const USD_PER_NEURON = 0.011 / 1000;
+
+/** USD cost of a request from the neurons Workers AI reported for it. */
+export function costFromNeurons(neurons) {
+    return Math.round(neurons * USD_PER_NEURON * 1e9) / 1e9;
+}
+
 // USD per million tokens: [input, output]. Snapshot taken 2026-09-13.
 export const BUILTIN_PRICES = {
     '@cf/meta/llama-3.2-1b-instruct': [0.027, 0.201],

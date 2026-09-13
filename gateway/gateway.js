@@ -32,7 +32,7 @@ import { monthKey, monthResetAt, parseUsd, roundUsd } from './lib/quota.js';
 import { jsonResponse, errorResponse, handleOptions } from './lib/response.js';
 import { extractUsage, mergeUsage, emptyUsage, meterStream } from './lib/sse.js';
 import { PROXIED_ROUTES, buildUpstreamRequest, clientResponseHeaders, parseAllowlist, parseAliases, resolveModel } from './lib/upstream.js';
-import { fetchCatalog, priceFor, costFor, estimateTokensFromChars, parsePriceOverrides, listPricedModels } from './lib/pricing.js';
+import { fetchCatalog, priceFor, costFor, costFromNeurons, estimateTokensFromChars, parsePriceOverrides, listPricedModels } from './lib/pricing.js';
 
 export { Registry, Ledger };
 
@@ -118,8 +118,10 @@ async function authenticateMember(request, env) {
 // --- Metering ----------------------------------------------------------------------------------
 
 /**
- * Prices a finished request and records it. When the upstream body carried no usage block the
- * token counts are estimated from character counts (generously), never skipped.
+ * Prices a finished request and records it. Workers AI's own `neurons` figure wins when present
+ * (it is exactly what Cloudflare bills); otherwise tokens x the model's list price, and when the
+ * body carried no usage block at all the token counts are estimated from character counts
+ * (generously), never skipped.
  */
 async function settleUsage(env, email, month, summary, model, price, promptChars) {
     let promptTokens = summary.promptTokens;
@@ -127,9 +129,11 @@ async function settleUsage(env, email, month, summary, model, price, promptChars
     let estimated = false;
     if (promptTokens == null) { promptTokens = estimateTokensFromChars(promptChars); estimated = true; }
     if (completionTokens == null) { completionTokens = estimateTokensFromChars(summary.chars); estimated = true; }
-    const cost = costFor(price, promptTokens, completionTokens);
+    const byNeurons = summary.neurons != null;
+    if (byNeurons) estimated = false;
+    const cost = byNeurons ? costFromNeurons(summary.neurons) : costFor(price, promptTokens, completionTokens);
     const usage = await ledgerStub(env, email).settle({ month, costUsd: cost, promptTokens, completionTokens, model, estimated });
-    console.log(`[GATEWAY] ${email} ${model} tokens=${promptTokens}+${completionTokens}${estimated ? ' (estimated)' : ''} cost=${cost.toFixed(6)} month=${month} spent=${usage.spentUsd.toFixed(4)}`);
+    console.log(`[GATEWAY] ${email} ${model} tokens=${promptTokens}+${completionTokens}${byNeurons ? ` neurons=${summary.neurons}` : ''}${estimated ? ' (estimated)' : ''} cost=${cost.toFixed(6)} month=${month} spent=${usage.spentUsd.toFixed(4)}`);
 }
 
 function quotaHeaders(quota, month, cfg) {
