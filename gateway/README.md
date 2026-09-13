@@ -2,7 +2,7 @@
 
 A metered proxy in front of **Cloudflare Workers AI** for the **Array** department.
 
-- **One upstream credential.** The company's `CF_ACCOUNT_ID` + `CF_API_TOKEN` live only in the worker. Members never see them.
+- **One upstream credential.** The Vertex account's `CF_API_TOKEN` lives only in the worker. Members never see it.
 - **One personal key per member.** Admins issue `vxg_...` keys; the worker maps each request to a member.
 - **$25 per member per calendar month** (`MONTHLY_LIMIT_USD`, overridable per member). Workers AI reports token counts, not money, so each response is priced as `tokens × the model's published USD-per-million price`. Prices come from the live Workers AI catalog (`/ai/models/search`, refreshed every 6 h), a `MODEL_PRICES` override, or a built-in snapshot of the pricing page. A model with no known price cannot be metered and is refused. Once a member's month-to-date spend reaches the limit, further requests get `402 budget_exhausted` until the 1st of the next month (`QUOTA_TIMEZONE`, default Europe/Istanbul).
 - **Durable Objects, no KV.** `Registry` (one object) maps key hashes to members and caches the price catalog; `Ledger` (one object per member) keeps the month-by-month ledger. Per-member objects are single-threaded, so concurrent requests cannot lose updates.
@@ -12,9 +12,8 @@ A metered proxy in front of **Cloudflare Workers AI** for the **Array** departme
 ```bash
 cd gateway
 npm install
-npx wrangler login                      # once per machine
-npx wrangler secret put CF_ACCOUNT_ID   # shown by `npx wrangler whoami`
-npx wrangler secret put CF_API_TOKEN    # API token with the "Workers AI - Read" permission
+npx wrangler login                      # once per machine; the Vertex account is pinned in wrangler.toml
+npx wrangler secret put CF_API_TOKEN    # API token with the "Workers AI - Read" permission on the Vertex account
 npx wrangler secret put ADMIN_TOKEN     # any long random string; protects /admin/*
 npm run deploy
 ```

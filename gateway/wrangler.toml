@@ -1,14 +1,17 @@
 name               = "gateway"
 main               = "gateway.js"
 compatibility_date = "2025-11-09"
+# The Vertex account (not a personal one): the worker runs there and bills its Workers AI usage there.
+account_id         = "ca34dd9af5abfcc04f41c6e0cea82da9"
 
 # Secrets (set with `wrangler secret put <NAME>`, never commit them):
-#   CF_ACCOUNT_ID  - the Cloudflare account whose Workers AI is used (also shown by `wrangler whoami`)
-#   CF_API_TOKEN   - an API token with "Workers AI: Read" (the single upstream credential every member shares)
+#   CF_API_TOKEN   - an API token with "Workers AI: Read" on the Vertex account (the single upstream credential every member shares)
 #   ADMIN_TOKEN    - bearer token for the /admin/* routes (Firebase admin ID tokens also work)
 
 [vars]
 FIREBASE_PROJECT_ID = "vertex-ai-1618"
+# Workers AI REST calls go to this account (same as account_id above; kept as a var so the code has it).
+CF_ACCOUNT_ID       = "ca34dd9af5abfcc04f41c6e0cea82da9"
 # Per-member monthly budget in USD.
 MONTHLY_LIMIT_USD   = "25"
 # Calendar month boundaries are computed in this zone.
