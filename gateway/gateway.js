@@ -380,8 +380,14 @@ export default {
         const path = url.pathname.replace(/\/+$/, '') || '/';
 
         try {
-            if (path === '/' && request.method === 'GET') {
-                return jsonResponse({ name: 'Vertex Gateway', version: VERSION, upstream: 'cloudflare-workers-ai', routes: Object.keys(PROXIED_ROUTES).concat(['/v1/me']) }, 200, request);
+            if ((path === '/' || path === '/v1') && request.method === 'GET') {
+                // /v1 is the base URL people paste into tools; answer it with the service card instead of a 404.
+                return jsonResponse({
+                    name: 'Vertex Gateway', version: VERSION, upstream: 'cloudflare-workers-ai',
+                    baseUrl: new URL('/v1', request.url).toString(),
+                    routes: Object.keys(PROXIED_ROUTES).concat(['/v1/me']),
+                    hint: 'Use this as an OpenAI-compatible base URL with your vxg_ key; GET /v1/models lists models, GET /v1/me shows your budget.',
+                }, 200, request);
             }
             if (path === '/health') {
                 return jsonResponse({ ok: true, version: VERSION }, 200, request);
