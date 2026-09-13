@@ -1,27 +1,26 @@
 /*
- * Gateway - Upstream (OpenRouter) plumbing
- * Which /v1 paths are proxied, how the request is rewritten, and the generation-stats fallback
- * used when a response carries no `usage.cost`.
+ * Gateway - Upstream (Cloudflare Workers AI) plumbing
+ * Workers AI exposes OpenAI-compatible chat/completions and embeddings endpoints under
+ * https://api.cloudflare.com/client/v4/accounts/{account}/ai/v1. This module decides which
+ * /v1 paths are proxied and rewrites the incoming request for that endpoint.
  */
 
 // path -> allowed methods. Everything else is refused before touching the budget.
 export const PROXIED_ROUTES = {
     '/v1/chat/completions': ['POST'],
-    '/v1/completions': ['POST'],
-    '/v1/messages': ['POST'],
-    '/v1/responses': ['POST'],
     '/v1/embeddings': ['POST'],
-    '/v1/models': ['GET'],
+    '/v1/models': ['GET'],   // served from the price catalog, never forwarded
 };
 
-// Only GETs that cannot spend money skip the budget check.
-export const FREE_ROUTES = new Set(['/v1/models']);
-
 // Request headers that are forwarded upstream as-is.
-const FORWARDED_REQUEST_HEADERS = ['content-type', 'accept', 'anthropic-version', 'anthropic-beta', 'openai-beta', 'x-stainless-lang'];
+const FORWARDED_REQUEST_HEADERS = ['content-type', 'accept'];
 
 // Response headers dropped before the client sees them (hop-by-hop or misleading behind a proxy).
 const DROPPED_RESPONSE_HEADERS = new Set(['content-length', 'content-encoding', 'transfer-encoding', 'connection', 'set-cookie', 'cf-ray', 'cf-cache-status', 'alt-svc', 'server']);
+
+export function apiBase(env) {
+    return (env.CF_API_BASE || 'https://api.cloudflare.com/client/v4').replace(/\/+$/, '');
+}
 
 export function parseAllowlist(raw) {
     return String(raw || '').split(',').map(s => s.trim()).filter(Boolean);
@@ -51,55 +50,61 @@ export function resolveModel(model, allowlist, aliases) {
 }
 
 /**
+ * Text a request will be billed for on the input side, used only to estimate tokens when the
+ * upstream response carries no usage block. Covers chat `messages` and embeddings `input`.
+ */
+export function promptText(body) {
+    if (!body || typeof body !== 'object') return '';
+    if (Array.isArray(body.messages)) {
+        return body.messages.map(m => typeof m?.content === 'string' ? m.content : JSON.stringify(m?.content ?? '')).join('\n');
+    }
+    if (typeof body.input === 'string') return body.input;
+    if (Array.isArray(body.input)) return body.input.map(x => typeof x === 'string' ? x : JSON.stringify(x)).join('\n');
+    if (typeof body.prompt === 'string') return body.prompt;
+    return '';
+}
+
+/**
  * Builds the upstream fetch for a proxied request.
  * @param {Request} request Incoming request.
  * @param {string} path Normalised path (one of PROXIED_ROUTES).
  * @param {object} env Worker env.
  * @param {object} opts { allowlist, aliases }
- * @returns {Promise<{request: Request, model: string|null, stream: boolean}|{error: string, status: number, code: string}>}
+ * @returns {Promise<{request: Request, model: string|null, stream: boolean, promptChars: number}|{error: string, status: number, code: string}>}
  */
 export async function buildUpstreamRequest(request, path, env, { allowlist, aliases }) {
-    const base = (env.OPENROUTER_BASE || 'https://openrouter.ai').replace(/\/+$/, '');
     const url = new URL(request.url);
-    const target = `${base}/api${path}${url.search}`;
+    const target = `${apiBase(env)}/accounts/${env.CF_ACCOUNT_ID}/ai${path}${url.search}`;
 
     const headers = new Headers();
     for (const name of FORWARDED_REQUEST_HEADERS) {
         const value = request.headers.get(name);
         if (value) headers.set(name, value);
     }
-    headers.set('Authorization', `Bearer ${env.OPENROUTER_KEY}`);
-    if (env.OPENROUTER_REFERER) headers.set('HTTP-Referer', env.OPENROUTER_REFERER);
-    if (env.OPENROUTER_TITLE) headers.set('X-Title', env.OPENROUTER_TITLE);
+    headers.set('Authorization', `Bearer ${env.CF_API_TOKEN}`);
 
-    let body = null;
-    let model = null;
-    let stream = false;
-
-    if (request.method !== 'GET' && request.method !== 'HEAD') {
-        const raw = await request.text();
-        let parsed = null;
-        try { parsed = raw ? JSON.parse(raw) : null; } catch { parsed = null; }
-
-        if (parsed && typeof parsed === 'object' && !Array.isArray(parsed)) {
-            const resolved = resolveModel(parsed.model, allowlist, aliases);
-            if (!resolved.allowed) {
-                return { error: `Model '${parsed.model}' is not available through this gateway.`, status: 403, code: 'model_not_allowed' };
-            }
-            if (resolved.model !== undefined) parsed.model = resolved.model;
-            model = typeof parsed.model === 'string' ? parsed.model : null;
-            stream = parsed.stream === true;
-            body = JSON.stringify(parsed);
-            headers.set('content-type', 'application/json');
-        } else {
-            body = raw; // Not JSON we understand; forward untouched.
-        }
+    const raw = await request.text();
+    let parsed = null;
+    try { parsed = raw ? JSON.parse(raw) : null; } catch { parsed = null; }
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        return { error: 'Body must be a JSON object.', status: 400, code: 'invalid_body' };
     }
 
+    const resolved = resolveModel(parsed.model, allowlist, aliases);
+    if (typeof resolved.model !== 'string' || !resolved.model) {
+        return { error: 'A "model" is required.', status: 400, code: 'model_required' };
+    }
+    if (!resolved.allowed) {
+        return { error: `Model '${parsed.model}' is not available through this gateway.`, status: 403, code: 'model_not_allowed' };
+    }
+    parsed.model = resolved.model;
+    headers.set('content-type', 'application/json');
+
     return {
-        request: new Request(target, { method: request.method, headers, body }),
-        model,
-        stream,
+        request: new Request(target, { method: 'POST', headers, body: JSON.stringify(parsed) }),
+        model: resolved.model,
+        stream: parsed.stream === true,
+        promptChars: promptText(parsed).length,
     };
 }
 
@@ -113,31 +118,4 @@ export function clientResponseHeaders(upstream, extra = {}) {
     });
     for (const [name, value] of Object.entries(extra)) headers.set(name, value);
     return headers;
-}
-
-/**
- * Fallback: asks OpenRouter for the final cost of a generation. Stats can lag the response by a
- * moment, so this retries a few times before giving up.
- * @returns {Promise<number|null>} cost in USD, or null when unavailable.
- */
-export async function lookupGenerationCost(id, env, { attempts = 4, delayMs = 1500 } = {}) {
-    const base = (env.OPENROUTER_BASE || 'https://openrouter.ai').replace(/\/+$/, '');
-    for (let attempt = 1; attempt <= attempts; attempt++) {
-        try {
-            const res = await fetch(`${base}/api/v1/generation?id=${encodeURIComponent(id)}`, {
-                headers: { Authorization: `Bearer ${env.OPENROUTER_KEY}` },
-            });
-            if (res.ok) {
-                const data = await res.json();
-                const cost = data && data.data && typeof data.data.total_cost === 'number' ? data.data.total_cost : null;
-                if (cost != null) return cost;
-            } else if (res.status !== 404) {
-                console.warn(`[GATEWAY] generation lookup for ${id} returned ${res.status}`);
-            }
-        } catch (e) {
-            console.warn(`[GATEWAY] generation lookup for ${id} failed: ${e.message}`);
-        }
-        if (attempt < attempts) await new Promise(r => setTimeout(r, delayMs));
-    }
-    return null;
 }

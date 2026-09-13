@@ -3,22 +3,22 @@ main               = "gateway.js"
 compatibility_date = "2025-11-09"
 
 # Secrets (set with `wrangler secret put <NAME>`, never commit them):
-#   OPENROUTER_KEY  - the single company OpenRouter key every member shares upstream
-#   ADMIN_TOKEN     - bearer token for the /admin/* routes (Firebase admin ID tokens also work)
+#   CF_ACCOUNT_ID  - the Cloudflare account whose Workers AI is used (also shown by `wrangler whoami`)
+#   CF_API_TOKEN   - an API token with "Workers AI: Read" (the single upstream credential every member shares)
+#   ADMIN_TOKEN    - bearer token for the /admin/* routes (Firebase admin ID tokens also work)
 
 [vars]
 FIREBASE_PROJECT_ID = "vertex-ai-1618"
-OPENROUTER_BASE     = "https://openrouter.ai"
-OPENROUTER_REFERER  = "https://vertexishere.com"
-OPENROUTER_TITLE    = "Vertex Array Gateway"
-# Per-member monthly budget in USD (OpenRouter credits are 1:1 with USD).
+# Per-member monthly budget in USD.
 MONTHLY_LIMIT_USD   = "25"
 # Calendar month boundaries are computed in this zone.
 QUOTA_TIMEZONE      = "Europe/Istanbul"
-# Optional: comma-separated model ids or prefixes (e.g. "anthropic/,openai/gpt-4o"). Empty = any model.
+# Optional: comma-separated model ids or prefixes (e.g. "@cf/meta/,@cf/openai/gpt-oss-120b"). Empty = any priced model.
 MODEL_ALLOWLIST     = ""
-# Optional: JSON map rewriting incoming model names, e.g. {"claude-sonnet-4-5":"anthropic/claude-sonnet-4.5"}.
+# Optional: JSON map rewriting incoming model names, e.g. {"llama":"@cf/meta/llama-3.3-70b-instruct-fp8-fast"}.
 MODEL_ALIASES       = ""
+# Optional: JSON price overrides in USD per million tokens, e.g. {"@cf/meta/llama-3.3-70b-instruct-fp8-fast":{"input":0.293,"output":2.253}}.
+MODEL_PRICES        = ""
 
 [durable_objects]
 bindings = [

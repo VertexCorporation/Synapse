@@ -1,8 +1,8 @@
 /*
  * Gateway - Usage extraction
- * Reads OpenRouter usage blocks out of JSON bodies and SSE streams without altering the bytes
- * that flow back to the client. Understands the OpenAI chat/completions shape, the Anthropic
- * messages shape (message_start / message_delta events) and the Responses API shape.
+ * Reads token usage out of OpenAI-shaped JSON bodies and SSE streams without altering the bytes
+ * that flow back to the client. Also counts the characters of generated text so a response that
+ * arrives without a usage block can still be estimated instead of going unbilled.
  */
 
 function num(value) {
@@ -10,53 +10,60 @@ function num(value) {
 }
 
 /**
+ * Characters of assistant text carried by one JSON object (a full response or one SSE chunk).
+ */
+export function contentChars(obj) {
+    if (!obj || !Array.isArray(obj.choices)) return 0;
+    let chars = 0;
+    for (const choice of obj.choices) {
+        const delta = choice?.delta?.content;
+        const message = choice?.message?.content;
+        if (typeof delta === 'string') chars += delta.length;
+        if (typeof message === 'string') chars += message.length;
+        const text = choice?.text;
+        if (typeof text === 'string') chars += text.length;
+    }
+    return chars;
+}
+
+/**
  * Pulls whatever usage information a single JSON object carries.
  * @param {any} obj Parsed JSON (a full response or one SSE event).
- * @returns {{cost: number|null, promptTokens: number|null, completionTokens: number|null, id: string|null, model: string|null}|null}
+ * @returns {{promptTokens: number|null, completionTokens: number|null, id: string|null, model: string|null, chars: number}|null}
  */
 export function extractUsage(obj) {
     if (!obj || typeof obj !== 'object') return null;
-
-    // Anthropic streams wrap the message in `message`; the Responses API wraps it in `response`.
-    const carrier = obj.message && typeof obj.message === 'object' ? obj.message
-        : obj.response && typeof obj.response === 'object' ? obj.response
-        : obj;
-
-    const usage = (carrier.usage && typeof carrier.usage === 'object') ? carrier.usage
-        : (obj.usage && typeof obj.usage === 'object') ? obj.usage
-        : null;
-
-    const id = typeof carrier.id === 'string' ? carrier.id : (typeof obj.id === 'string' ? obj.id : null);
-    const model = typeof carrier.model === 'string' ? carrier.model : (typeof obj.model === 'string' ? obj.model : null);
-
-    if (!usage && !id && !model) return null;
-
+    const usage = obj.usage && typeof obj.usage === 'object' ? obj.usage : null;
+    const id = typeof obj.id === 'string' ? obj.id : null;
+    const model = typeof obj.model === 'string' ? obj.model : null;
+    const chars = contentChars(obj);
+    if (!usage && !id && !model && !chars) return null;
     return {
-        cost: usage ? num(usage.cost) : null,
         promptTokens: usage ? (num(usage.prompt_tokens) ?? num(usage.input_tokens)) : null,
         completionTokens: usage ? (num(usage.completion_tokens) ?? num(usage.output_tokens)) : null,
         id,
         model,
+        chars,
     };
 }
 
 /**
- * Merges a newly seen usage fragment into a running summary. Later values win, except that
- * an id/model is kept once seen and token counts never go down (streams report them cumulatively).
+ * Merges a newly seen usage fragment into a running summary. Token counts never go down
+ * (streams report them cumulatively); characters accumulate; id/model stick once seen.
  */
 export function mergeUsage(summary, fragment) {
     if (!fragment) return summary;
     const out = { ...summary };
-    if (fragment.cost != null) out.cost = fragment.cost;
     if (fragment.promptTokens != null) out.promptTokens = Math.max(out.promptTokens ?? 0, fragment.promptTokens);
     if (fragment.completionTokens != null) out.completionTokens = Math.max(out.completionTokens ?? 0, fragment.completionTokens);
+    out.chars += fragment.chars || 0;
     if (!out.id && fragment.id) out.id = fragment.id;
     if (fragment.model) out.model = fragment.model;
     return out;
 }
 
 export function emptyUsage() {
-    return { cost: null, promptTokens: null, completionTokens: null, id: null, model: null };
+    return { promptTokens: null, completionTokens: null, id: null, model: null, chars: 0 };
 }
 
 /**

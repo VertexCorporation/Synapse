@@ -7,6 +7,7 @@ import { DurableObject } from 'cloudflare:workers';
 
 const KEY_PREFIX = 'key:';
 const MEMBER_PREFIX = 'member:';
+const CATALOG_KEY = 'catalog';
 
 export class Registry extends DurableObject {
     /**
@@ -71,5 +72,17 @@ export class Registry extends DurableObject {
     async listMembers() {
         const map = await this.ctx.storage.list({ prefix: MEMBER_PREFIX });
         return Array.from(map.values()).sort((a, b) => a.email.localeCompare(b.email));
+    }
+
+    // --- Price catalog cache (survives isolate restarts; serves stale data if the CF API is down) ---
+
+    async getCatalog() {
+        return (await this.ctx.storage.get(CATALOG_KEY)) || null;
+    }
+
+    async setCatalog(entries) {
+        const record = { entries, fetchedAt: Date.now() };
+        await this.ctx.storage.put(CATALOG_KEY, record);
+        return record;
     }
 }

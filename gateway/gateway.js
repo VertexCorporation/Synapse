@@ -1,28 +1,27 @@
 /*
  * Vertex Gateway Worker - v1.0
- * A metered proxy in front of OpenRouter for the Array department.
+ * A metered proxy in front of Cloudflare Workers AI for the Array department.
  *
- * One company OpenRouter key stays secret inside the worker. Every member gets a personal gateway
- * key (`vxg_...`); the worker forwards their requests upstream, reads the cost OpenRouter reports
- * for each generation, and stops forwarding once the member's calendar-month spend reaches their
- * budget (MONTHLY_LIMIT_USD, overridable per member). Budgets reset on the 1st of the month in
- * QUOTA_TIMEZONE.
+ * The company's Cloudflare credentials (CF_ACCOUNT_ID + CF_API_TOKEN) stay inside the worker.
+ * Every member gets a personal gateway key (`vxg_...`); the worker forwards their requests to
+ * Workers AI's OpenAI-compatible endpoints, prices each response from the token counts and the
+ * model's published per-million-token price, and stops forwarding once the member's
+ * calendar-month spend reaches their budget (MONTHLY_LIMIT_USD, overridable per member).
+ * Budgets reset on the 1st of the month in QUOTA_TIMEZONE.
  *
  * Routes
  *   GET  /                      service info
  *   GET  /health                liveness
  *   GET  /v1/me                 caller's budget for the current month
- *   POST /v1/chat/completions   } proxied to OpenRouter and metered
- *   POST /v1/completions        }
- *   POST /v1/messages           }  (Anthropic-compatible; accepts x-api-key)
- *   POST /v1/responses          }
- *   POST /v1/embeddings         }
- *   GET  /v1/models             proxied, free
+ *   POST /v1/chat/completions   proxied to Workers AI and metered
+ *   POST /v1/embeddings         proxied to Workers AI and metered
+ *   GET  /v1/models             priced models the gateway can serve (free)
  *   POST   /admin/members            create a member or rotate their key   { email, limitUsd? }
  *   GET    /admin/members            list members with current-month spend (?month=YYYY-MM)
  *   GET    /admin/members/:email     one member with full history
  *   PATCH  /admin/members/:email     { active?, limitUsd? }
  *   DELETE /admin/members/:email     revoke (deactivate) a member
+ *   GET    /admin/catalog            price catalog status (?refresh=1 re-fetches it)
  */
 
 import { Registry } from './durable/registry.js';
@@ -32,16 +31,21 @@ import { generateKey, hashKey, extractCredential, normalizeEmail, KEY_PREFIX } f
 import { monthKey, monthResetAt, parseUsd, roundUsd } from './lib/quota.js';
 import { jsonResponse, errorResponse, handleOptions } from './lib/response.js';
 import { extractUsage, mergeUsage, emptyUsage, meterStream } from './lib/sse.js';
-import { PROXIED_ROUTES, FREE_ROUTES, buildUpstreamRequest, clientResponseHeaders, lookupGenerationCost, parseAllowlist, parseAliases } from './lib/upstream.js';
+import { PROXIED_ROUTES, buildUpstreamRequest, clientResponseHeaders, parseAllowlist, parseAliases, resolveModel } from './lib/upstream.js';
+import { fetchCatalog, priceFor, costFor, estimateTokensFromChars, parsePriceOverrides, listPricedModels } from './lib/pricing.js';
 
 export { Registry, Ledger };
 
 const VERSION = '1.0.0';
 const DEFAULT_LIMIT_USD = 25;
-const MEMBER_CACHE_TTL_MS = 30 * 1000; // revocations take effect within this window
+const MEMBER_CACHE_TTL_MS = 30 * 1000;            // revocations take effect within this window
+const CATALOG_MEMORY_TTL_MS = 10 * 60 * 1000;     // per-isolate cache of the price catalog
+const CATALOG_STALE_MS = 6 * 60 * 60 * 1000;      // re-fetch the catalog from Cloudflare after this
 
 // key hash -> { member, expiresAt } (per isolate)
 const memberCache = new Map();
+// { entries, fetchedAt, checkedAt } (per isolate)
+let catalogCache = null;
 
 function registryStub(env) {
     return env.REGISTRY.get(env.REGISTRY.idFromName('registry'));
@@ -57,11 +61,37 @@ function settings(env) {
         defaultLimitUsd: parseUsd(env.MONTHLY_LIMIT_USD, DEFAULT_LIMIT_USD),
         allowlist: parseAllowlist(env.MODEL_ALLOWLIST),
         aliases: parseAliases(env.MODEL_ALIASES),
+        priceOverrides: parsePriceOverrides(env.MODEL_PRICES),
     };
 }
 
 function limitFor(member, cfg) {
     return typeof member.limitUsd === 'number' ? member.limitUsd : cfg.defaultLimitUsd;
+}
+
+// --- Price catalog -----------------------------------------------------------------------------
+
+/**
+ * Returns the cached Workers AI catalog, refreshing it from Cloudflare when stale. Falls back to
+ * whatever was last stored (or null, which leaves only the built-in price table) if the API fails.
+ */
+async function loadCatalog(env, { force = false } = {}) {
+    const now = Date.now();
+    if (!force && catalogCache && now - catalogCache.checkedAt < CATALOG_MEMORY_TTL_MS) return catalogCache;
+
+    const registry = registryStub(env);
+    let stored = await registry.getCatalog();
+    if (force || !stored || now - stored.fetchedAt > CATALOG_STALE_MS) {
+        try {
+            const entries = await fetchCatalog(env);
+            stored = await registry.setCatalog(entries);
+            console.log(`[GATEWAY] price catalog refreshed: ${entries.length} priced models`);
+        } catch (e) {
+            console.error(`[GATEWAY] price catalog refresh failed: ${e.message}${stored ? ' (serving stored copy)' : ' (built-in prices only)'}`);
+        }
+    }
+    catalogCache = { entries: stored ? stored.entries : null, fetchedAt: stored ? stored.fetchedAt : null, checkedAt: now };
+    return catalogCache;
 }
 
 // --- Member authentication ---------------------------------------------------------------------
@@ -87,71 +117,19 @@ async function authenticateMember(request, env) {
 
 // --- Metering ----------------------------------------------------------------------------------
 
-async function settleUsage(env, email, month, summary, requestedModel) {
-    let cost = summary.cost;
-    if (cost == null && summary.id) {
-        cost = await lookupGenerationCost(summary.id, env);
-    }
-    const usage = await ledgerStub(env, email).settle({
-        month,
-        costUsd: cost,
-        promptTokens: summary.promptTokens,
-        completionTokens: summary.completionTokens,
-        model: summary.model || requestedModel,
-    });
-    console.log(`[GATEWAY] ${email} ${summary.model || requestedModel || '?'} cost=${cost == null ? 'unknown' : cost.toFixed(6)} month=${month} spent=${usage.spentUsd.toFixed(4)}`);
-}
-
-async function handleProxy(request, path, env, ctx, member) {
-    const cfg = settings(env);
-    const month = monthKey(new Date(), cfg.timeZone);
-    const limitUsd = limitFor(member, cfg);
-    const free = FREE_ROUTES.has(path);
-
-    let quota = { spentUsd: 0, limitUsd, remainingUsd: limitUsd };
-    if (!free) {
-        quota = await ledgerStub(env, member.email).authorize({ month, limitUsd });
-        if (!quota.ok) {
-            return errorResponse(
-                request, 402,
-                `Monthly budget exhausted: $${quota.spentUsd.toFixed(2)} of $${limitUsd.toFixed(2)} used. Resets ${monthResetAt(month, cfg.timeZone).toISOString()}.`,
-                'budget_exhausted', 'billing_error', quotaHeaders(quota, month, cfg),
-            );
-        }
-    }
-
-    const built = await buildUpstreamRequest(request, path, env, cfg);
-    if (built.error) {
-        return errorResponse(request, built.status, built.error, built.code, 'invalid_request_error');
-    }
-
-    let upstream;
-    try {
-        upstream = await fetch(built.request);
-    } catch (e) {
-        console.error(`[GATEWAY] upstream fetch failed: ${e.message}`);
-        return errorResponse(request, 502, 'Upstream provider is unreachable.', 'upstream_unreachable', 'api_error');
-    }
-
-    const headers = clientResponseHeaders(upstream, quotaHeaders(quota, month, cfg));
-
-    // Errors (and free routes) cost nothing: pass them straight through.
-    if (free || !upstream.ok || !upstream.body) {
-        return new Response(upstream.body, { status: upstream.status, headers });
-    }
-
-    const contentType = upstream.headers.get('content-type') || '';
-    if (contentType.includes('text/event-stream')) {
-        const { clientBody, summary } = meterStream(upstream.body);
-        ctx.waitUntil(summary.then(s => settleUsage(env, member.email, month, s, built.model)));
-        return new Response(clientBody, { status: upstream.status, headers });
-    }
-
-    const text = await upstream.text();
-    let summary = emptyUsage();
-    try { summary = mergeUsage(summary, extractUsage(JSON.parse(text))); } catch { /* non-JSON success body; unpriced */ }
-    ctx.waitUntil(settleUsage(env, member.email, month, summary, built.model));
-    return new Response(text, { status: upstream.status, headers });
+/**
+ * Prices a finished request and records it. When the upstream body carried no usage block the
+ * token counts are estimated from character counts (generously), never skipped.
+ */
+async function settleUsage(env, email, month, summary, model, price, promptChars) {
+    let promptTokens = summary.promptTokens;
+    let completionTokens = summary.completionTokens;
+    let estimated = false;
+    if (promptTokens == null) { promptTokens = estimateTokensFromChars(promptChars); estimated = true; }
+    if (completionTokens == null) { completionTokens = estimateTokensFromChars(summary.chars); estimated = true; }
+    const cost = costFor(price, promptTokens, completionTokens);
+    const usage = await ledgerStub(env, email).settle({ month, costUsd: cost, promptTokens, completionTokens, model, estimated });
+    console.log(`[GATEWAY] ${email} ${model} tokens=${promptTokens}+${completionTokens}${estimated ? ' (estimated)' : ''} cost=${cost.toFixed(6)} month=${month} spent=${usage.spentUsd.toFixed(4)}`);
 }
 
 function quotaHeaders(quota, month, cfg) {
@@ -160,6 +138,77 @@ function quotaHeaders(quota, month, cfg) {
         'X-Gateway-Budget-Spent-Usd': String(roundUsd(quota.spentUsd)),
         'X-Gateway-Budget-Resets-At': monthResetAt(month, cfg.timeZone).toISOString(),
     };
+}
+
+async function handleProxy(request, path, env, ctx, member) {
+    const cfg = settings(env);
+    const month = monthKey(new Date(), cfg.timeZone);
+    const limitUsd = limitFor(member, cfg);
+
+    const quota = await ledgerStub(env, member.email).authorize({ month, limitUsd });
+    if (!quota.ok) {
+        return errorResponse(
+            request, 402,
+            `Monthly budget exhausted: $${quota.spentUsd.toFixed(2)} of $${limitUsd.toFixed(2)} used. Resets ${monthResetAt(month, cfg.timeZone).toISOString()}.`,
+            'budget_exhausted', 'billing_error', quotaHeaders(quota, month, cfg),
+        );
+    }
+
+    const built = await buildUpstreamRequest(request, path, env, cfg);
+    if (built.error) {
+        return errorResponse(request, built.status, built.error, built.code, 'invalid_request_error');
+    }
+
+    const catalog = await loadCatalog(env);
+    const price = priceFor(built.model, catalog.entries, cfg.priceOverrides);
+    if (!price) {
+        return errorResponse(request, 403, `Model '${built.model}' has no known price on Workers AI, so it cannot be metered. See GET /v1/models for the models this gateway serves.`, 'model_not_priced', 'invalid_request_error');
+    }
+
+    let upstream;
+    try {
+        upstream = await fetch(built.request);
+    } catch (e) {
+        console.error(`[GATEWAY] upstream fetch failed: ${e.message}`);
+        return errorResponse(request, 502, 'Workers AI is unreachable.', 'upstream_unreachable', 'api_error');
+    }
+
+    const headers = clientResponseHeaders(upstream, quotaHeaders(quota, month, cfg));
+
+    // Errors cost nothing: pass them straight through.
+    if (!upstream.ok || !upstream.body) {
+        return new Response(upstream.body, { status: upstream.status, headers });
+    }
+
+    const contentType = upstream.headers.get('content-type') || '';
+    if (contentType.includes('text/event-stream')) {
+        const { clientBody, summary } = meterStream(upstream.body);
+        ctx.waitUntil(summary.then(s => settleUsage(env, member.email, month, s, built.model, price, built.promptChars)));
+        return new Response(clientBody, { status: upstream.status, headers });
+    }
+
+    const text = await upstream.text();
+    let summary = emptyUsage();
+    try { summary = mergeUsage(summary, extractUsage(JSON.parse(text))); } catch { /* non-JSON success body; estimated below */ }
+    ctx.waitUntil(settleUsage(env, member.email, month, summary, built.model, price, built.promptChars));
+    return new Response(text, { status: upstream.status, headers });
+}
+
+async function handleModels(request, env) {
+    const cfg = settings(env);
+    const catalog = await loadCatalog(env);
+    const models = listPricedModels(catalog.entries, cfg.priceOverrides)
+        .filter(m => resolveModel(m.id, cfg.allowlist, {}).allowed)
+        .map(m => ({
+            id: m.id,
+            object: 'model',
+            created: 0,
+            owned_by: 'cloudflare',
+            kind: m.kind,
+            context_window: m.contextWindow,
+            pricing: { currency: 'USD', input_per_million: m.inputPerM, output_per_million: m.outputPerM, source: m.source },
+        }));
+    return jsonResponse({ object: 'list', data: models }, 200, request);
 }
 
 async function handleMe(request, env, member) {
@@ -175,6 +224,7 @@ async function handleMe(request, env, member) {
         remainingUsd: roundUsd(Math.max(0, limitUsd - usage.spentUsd)),
         requests: usage.requests,
         unpricedRequests: usage.unpricedRequests,
+        estimatedRequests: usage.estimatedRequests || 0,
         promptTokens: usage.promptTokens,
         completionTokens: usage.completionTokens,
         byModel: usage.byModel,
@@ -205,6 +255,7 @@ async function memberView(env, record, month, cfg) {
         remainingUsd: roundUsd(Math.max(0, limitUsd - usage.spentUsd)),
         requests: usage.requests,
         unpricedRequests: usage.unpricedRequests,
+        estimatedRequests: usage.estimatedRequests || 0,
         lastAt: usage.lastAt,
     };
 }
@@ -216,7 +267,19 @@ async function handleAdmin(request, path, env) {
     const cfg = settings(env);
     const url = new URL(request.url);
     const registry = registryStub(env);
-    const segments = path.split('/').filter(Boolean); // ['admin', 'members', ':email'?]
+    const segments = path.split('/').filter(Boolean); // ['admin', 'members'|'catalog', ':email'?]
+
+    // GET /admin/catalog
+    if (segments[1] === 'catalog' && !segments[2] && request.method === 'GET') {
+        const catalog = await loadCatalog(env, { force: url.searchParams.get('refresh') === '1' });
+        const models = listPricedModels(catalog.entries, cfg.priceOverrides);
+        return jsonResponse({
+            fetchedAt: catalog.fetchedAt ? new Date(catalog.fetchedAt).toISOString() : null,
+            liveModels: catalog.entries ? catalog.entries.length : 0,
+            pricedModels: models.length,
+            sources: models.reduce((acc, m) => ({ ...acc, [m.source]: (acc[m.source] || 0) + 1 }), {}),
+        }, 200, request);
+    }
 
     if (segments[1] !== 'members') return jsonResponse({ error: 'Not found.' }, 404, request);
     const targetEmail = segments[2] ? normalizeEmail(decodeURIComponent(segments[2])) : null;
@@ -314,7 +377,7 @@ export default {
 
         try {
             if (path === '/' && request.method === 'GET') {
-                return jsonResponse({ name: 'Vertex Gateway', version: VERSION, routes: Object.keys(PROXIED_ROUTES).concat(['/v1/me']) }, 200, request);
+                return jsonResponse({ name: 'Vertex Gateway', version: VERSION, upstream: 'cloudflare-workers-ai', routes: Object.keys(PROXIED_ROUTES).concat(['/v1/me']) }, 200, request);
             }
             if (path === '/health') {
                 return jsonResponse({ ok: true, version: VERSION }, 200, request);
@@ -323,8 +386,8 @@ export default {
                 return await handleAdmin(request, path, env);
             }
 
-            if (!env.OPENROUTER_KEY) {
-                console.error('[GATEWAY] CRITICAL: OPENROUTER_KEY secret is not set.');
+            if (!env.CF_API_TOKEN || !env.CF_ACCOUNT_ID) {
+                console.error('[GATEWAY] CRITICAL: CF_API_TOKEN / CF_ACCOUNT_ID secrets are not set.');
                 return errorResponse(request, 503, 'Gateway is not configured.', 'gateway_unconfigured', 'api_error');
             }
 
@@ -344,6 +407,7 @@ export default {
 
             const { member, error } = await authenticateMember(request, env);
             if (error) return error;
+            if (path === '/v1/models') return await handleModels(request, env);
             return await handleProxy(request, path, env, ctx, member);
         } catch (e) {
             console.error(`[GATEWAY] Unhandled error on ${request.method} ${path}: ${e.message}`, e.stack);

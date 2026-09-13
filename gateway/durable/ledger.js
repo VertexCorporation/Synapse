@@ -18,6 +18,7 @@ function emptyMonth(month) {
         promptTokens: 0,
         completionTokens: 0,
         unpricedRequests: 0,   // requests whose cost could not be determined (counted, not charged)
+        estimatedRequests: 0,  // requests charged from a character-based token estimate (no usage block upstream)
         byModel: {},
         firstAt: null,
         lastAt: null,
@@ -48,9 +49,9 @@ export class Ledger extends DurableObject {
 
     /**
      * Records a finished request.
-     * @param {{month: string, costUsd: number|null, promptTokens?: number|null, completionTokens?: number|null, model?: string|null}} input
+     * @param {{month: string, costUsd: number|null, promptTokens?: number|null, completionTokens?: number|null, model?: string|null, estimated?: boolean}} input
      */
-    async settle({ month, costUsd, promptTokens = null, completionTokens = null, model = null }) {
+    async settle({ month, costUsd, promptTokens = null, completionTokens = null, model = null, estimated = false }) {
         const usage = await this.readMonth(month);
         const now = new Date().toISOString();
         const priced = typeof costUsd === 'number' && Number.isFinite(costUsd) && costUsd >= 0;
@@ -58,6 +59,7 @@ export class Ledger extends DurableObject {
         usage.requests += 1;
         if (priced) usage.spentUsd = roundUsd(usage.spentUsd + costUsd);
         else usage.unpricedRequests += 1;
+        if (priced && estimated) usage.estimatedRequests = (usage.estimatedRequests || 0) + 1;
         if (promptTokens) usage.promptTokens += promptTokens;
         if (completionTokens) usage.completionTokens += completionTokens;
         if (model) {
