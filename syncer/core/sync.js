@@ -25,6 +25,7 @@ import { enforceCatalogPolicy } from '../processing/catalog-policy.js';
 import { hashJson, mergeDeep } from '../utils/helpers.js';
 import { sortCatalog, stripCatalogRaw } from '../processing/normalize/schema.js';
 import { cortexModelFromTreeEntry } from '../processing/normalize/manual.js';
+import { buildMaintainedRealtimeSttRecords } from '../processing/realtime-stt.js';
 
 const LOCK_KEY = "syncer_lock";
 const DATA_WRITE_LOCK_KEY = "data_write_lock";
@@ -121,6 +122,7 @@ export async function syncModels(env, context) {
             ...recordsOf(falResultSettled),
             ...recordsOf(elevenLabsResultSettled),
             ...recordsOf(deepgramResultSettled),
+            ...buildMaintainedRealtimeSttRecords(),
             ...recordsOf(cloudflareResultSettled),
             ...recordsOf(groqResultSettled),
         ];
@@ -131,6 +133,7 @@ export async function syncModels(env, context) {
             fal: healthOf(falResultSettled),
             elevenlabs: healthOf(elevenLabsResultSettled),
             deepgram: healthOf(deepgramResultSettled),
+            assemblyai: true,
             cloudflare: healthOf(cloudflareResultSettled),
             groq: healthOf(groqResultSettled),
             manual: healthOf(manualGroupedSettled),
@@ -156,7 +159,7 @@ export async function syncModels(env, context) {
 
         enforceCatalogPolicy(combinedOnline);
         enforceCatalogPolicy(fallbackGrouped);
-        // Deduplicate across online providers: groq > cloudflare > openrouter > fal > elevenlabs > deepgram
+        // Deduplicate across online providers: groq > cloudflare > openrouter > fal > elevenlabs > deepgram/assemblyai
         // (Manual/HuggingFace offline models are not included yet, ensuring they are NEVER touched or removed)
         const deduplicatedOnline = deduplicateProducers(combinedOnline, opId);
 

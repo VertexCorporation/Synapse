@@ -88,7 +88,7 @@ export function applyFreshOnlineTiers(finalProducers, freshProducers, defaultTie
             for (const model of Object.values(series || {})) {
                 if (!model?.id) continue;
                 const tier = tiers.get(`${model.source}:${model.id}`)
-                    || (model.tier === 'premium' && ['openrouter', 'fal', 'cloudflare', 'groq', 'elevenlabs', 'deepgram'].includes(model.source) ? defaultTier : null);
+                    || (model.tier === 'premium' && ['openrouter', 'fal', 'cloudflare', 'groq', 'elevenlabs', 'deepgram', 'assemblyai'].includes(model.source) ? defaultTier : null);
                 if (tier) model.tier = tier;
             }
         }

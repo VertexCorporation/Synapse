@@ -1,7 +1,7 @@
 import { FAMILY_ASSETS, FAMILY_NAMES, PRODUCER_ASSETS } from '../config/client-assets.js';
 import { ALLOWED_PROVIDER_IDS, PRODUCER_MAP } from '../config.js';
 
-export const RESTRICTED_SOURCES = new Set(['manual', 'openrouter', 'groq', 'cloudflare', 'deepgram', 'elevenlabs', 'fal']);
+export const RESTRICTED_SOURCES = new Set(['manual', 'openrouter', 'groq', 'cloudflare', 'deepgram', 'assemblyai', 'elevenlabs', 'fal']);
 const aliases = { 'deepseek-ai': 'deepseek', runwayml: 'runway', 'meta-llama': 'meta', mistralai: 'mistral', 'mistral-ai': 'mistral',
     stabilityai: 'stable', stability: 'stable', 'stability-ai': 'stable',
     'black-forest-labs': 'flux', blackforestlabs: 'flux', alibaba: 'wan',
@@ -26,7 +26,10 @@ function familyMatch(slug) {
 // asset is sufficient to authorize a model. This also applies to free fallbacks.
 export function matchCatalogModel(source, id) {
     if (!RESTRICTED_SOURCES.has(source) || typeof id !== 'string') return null;
-    if (source === 'elevenlabs') return /^eleven[_-]/i.test(id) ? familyMatch('elevenlabs') : null;
+    if (source === 'elevenlabs') {
+        if (/^scribe(?:[_-]|$)/i.test(id)) return { key: 'scribe', asset: null, series: 'Scribe' };
+        return /^eleven[_-]/i.test(id) ? familyMatch('elevenlabs') : null;
+    }
     if (source === 'deepgram') return familyMatch(id);
     let parts = id.toLowerCase().replace(/^@(?:cf|hf)\//, '').split('/');
     let owner = parts.length > 1 ? parts.shift() : '';

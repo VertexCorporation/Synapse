@@ -58,8 +58,12 @@ export function categoryFromGroqId(id) {
 
 /** ElevenLabs model -> category (TTS, Scribe-style STT, or STS voice conversion). */
 export function categoryFromElevenLabsModel(model, modelId) {
+    // Scribe is a speech-to-text family even when the provider omits the
+    // capability booleans from its model inventory response. Check it before
+    // the historical TTS default so realtime Scribe records enter the same
+    // normalized STT catalog as Deepgram.
+    if (/scribe|speech[-_ ]?to[-_ ]?text|\bstt\b/i.test(String(modelId || '')) || model?.can_do_speech_to_text === true) return 'stt';
     if (model?.can_do_text_to_speech !== false) return 'tts';
-    if (/scribe|stt/i.test(String(modelId || '')) || model?.can_do_speech_to_text) return 'stt';
     if (model?.can_do_voice_conversion) return 'sts'; // speech-to-speech voice conversion
     return 'tts';
 }

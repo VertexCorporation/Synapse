@@ -14,12 +14,16 @@
 import { SOURCE_PRIORITY } from '../../config.js';
 
 export const CATALOG_SOURCES = Object.freeze([
-    'openrouter', 'groq', 'cloudflare', 'fal', 'elevenlabs', 'deepgram', 'manual', 'huggingface',
+    'openrouter', 'groq', 'cloudflare', 'fal', 'elevenlabs', 'deepgram', 'assemblyai', 'manual', 'huggingface',
 ]);
 
 export const CATEGORIES = Object.freeze([
     'chat', 'embedding', 'reranking', 'moderation', 'translation',
     'image-gen', 'image-edit', 'video-gen', 'video-edit', 'audio-gen', 'tts', 'stt', 'sts', 'other',
+]);
+
+export const TASKS = Object.freeze([
+    'realtime_stt',
 ]);
 
 export const INPUT_MODALITIES = Object.freeze(['text', 'image', 'audio', 'video', 'file']);
@@ -53,11 +57,11 @@ export function catalogRecordKey(record) {
 
 /**
  * Creates a full CortexModel skeleton with every fact null and empty containers.
- * @param {{id: string, source: string, canonicalKey: string, category: string}} input
+ * @param {{id: string, source: string, canonicalKey: string, category: string, task?: string|null}} input
  */
-export function createCortexModel({ id, source, canonicalKey, category }) {
+export function createCortexModel({ id, source, canonicalKey, category, task = null }) {
     return {
-        id, source, canonicalKey, category,
+        id, source, canonicalKey, category, task,
         identity: {
             displayName: null, producer: null, producerSlug: null, family: null,
             series: null, variant: null, parameterSize: null, version: null,
@@ -74,6 +78,8 @@ export function createCortexModel({ id, source, canonicalKey, category }) {
             fileInput: null, imageOutput: null, audioOutput: null, videoOutput: null,
             imageGeneration: null, videoGeneration: null, voiceCloning: null,
             moderation: null, translation: null, diarization: null, timestamps: null,
+            realtime: null, automaticLanguageDetection: null, codeSwitching: null,
+            interimResults: null, finalResults: null, vad: null, endpointing: null,
         },
         modalities: { input: [], output: [], architectureModality: null },
         limits: {
@@ -90,6 +96,14 @@ export function createCortexModel({ id, source, canonicalKey, category }) {
         routing: {
             endpointIds: null, defaultEndpoint: null, regions: null, hardware: null,
             isModerated: null, languages: null, rateNotes: null, catalogMatch: null,
+        },
+        audio: {
+            formats: null, sampleRates: null, channels: null, pcm: null,
+        },
+        performance: {
+            firstTranscriptLatencyMs: null, finalTranscriptLatencyMs: null,
+            noTranscriptRate: null, socketFailureRate: null,
+            providerFailureRate: null, fallbackRate: null,
         },
         executionModes: {
             supportsInteractive: null,
@@ -117,12 +131,18 @@ const TRACKED_PATHS = [
     'capabilities.imageOutput', 'capabilities.audioOutput', 'capabilities.videoOutput',
     'capabilities.imageGeneration', 'capabilities.videoGeneration', 'capabilities.voiceCloning',
     'capabilities.moderation', 'capabilities.translation', 'capabilities.diarization', 'capabilities.timestamps',
+    'capabilities.realtime', 'capabilities.automaticLanguageDetection', 'capabilities.codeSwitching',
+    'capabilities.interimResults', 'capabilities.finalResults', 'capabilities.vad', 'capabilities.endpointing',
     'modalities.input', 'modalities.output', 'modalities.architectureModality',
     'limits.contextTokens', 'limits.maxOutputTokens', 'limits.maxInputCharacters', 'limits.estimatedGenerationSeconds',
     'pricing.inputPerToken', 'pricing.outputPerToken', 'pricing.free', 'pricing.perCharacter', 'pricing.costFactor',
     'reasoning.supported', 'reasoning.mandatory', 'reasoning.efforts',
     'executionModes.supportsInteractive', 'executionModes.supportsBatch',
     'routing.languages', 'routing.isModerated', 'routing.endpointIds', 'routing.defaultEndpoint',
+    'audio.formats', 'audio.sampleRates', 'audio.channels', 'audio.pcm',
+    'performance.firstTranscriptLatencyMs', 'performance.finalTranscriptLatencyMs',
+    'performance.noTranscriptRate', 'performance.socketFailureRate',
+    'performance.providerFailureRate', 'performance.fallbackRate',
 ];
 
 function pathGet(obj, path) {
@@ -204,6 +224,9 @@ export function validateCortexModel(record) {
     if (!CATALOG_SOURCES.includes(record.source)) errors.push(`source "${record.source}" is not a catalog source`);
     if (typeof record.canonicalKey !== 'string' || !record.canonicalKey) errors.push('canonicalKey must be a non-empty string');
     if (!CATEGORIES.includes(record.category)) errors.push(`category "${record.category}" is not one of ${CATEGORIES.join(', ')}`);
+    if (record.task !== undefined && record.task !== null && !TASKS.includes(record.task)) {
+        errors.push(`task "${record.task}" is not one of ${TASKS.join(', ')}`);
+    }
     if (record.limits?.contextTokens !== undefined && record.limits?.contextTokens !== null
         && typeof record.limits.contextTokens !== 'number') errors.push('limits.contextTokens must be number|null');
     for (const [group, field] of [['identity', 'family'], ['capabilities', 'reasoning'], ['capabilities', 'tools'], ['lifecycle', 'deprecated']]) {

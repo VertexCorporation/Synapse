@@ -60,9 +60,10 @@
  * array of the /models document. Unknown facts are absent (null), never 0/false.
  * @typedef {object} CortexModel
  * @property {string} id - Provider-native model id (e.g. "openai/gpt-oss-120b", "@cf/meta/llama-3.3-70b").
- * @property {('openrouter'|'groq'|'cloudflare'|'fal'|'elevenlabs'|'deepgram'|'manual'|'huggingface')} source
+ * @property {('openrouter'|'groq'|'cloudflare'|'fal'|'elevenlabs'|'deepgram'|'assemblyai'|'manual'|'huggingface')} source
  * @property {string} canonicalKey - Cross-provider identity (normalizeModelId output).
  * @property {('chat'|'embedding'|'reranking'|'moderation'|'translation'|'image-gen'|'image-edit'|'video-gen'|'video-edit'|'audio-gen'|'tts'|'stt'|'other')} category
+ * @property {('realtime_stt'|null)} [task] - Normalized execution role.
  * @property {object} identity - Company / series / variant placement (never client-inferred).
  * @property {string} [identity.displayName]
  * @property {string} [identity.producer] - Company display name (tree top level).
@@ -78,6 +79,8 @@
  * @property {object} [pricing] - Normalized per-token USD prices + free flag.
  * @property {object} [reasoning] - supported/mandatory/efforts/defaultEffort.
  * @property {object} [routing] - endpointIds/defaultEndpoint/languages/isModerated/catalogMatch.
+ * @property {object} [audio] - Accepted realtime audio formats, rates, channels and PCM support.
+ * @property {object} [performance] - Observed latency, failure, no-transcript and fallback metrics.
  * @property {object} [parameters] - Supported request parameters (provider-declared booleans).
  * @property {{providerFields: number, inferredFields: number, unknownFields: number, quality: number}} metadataQuality
  * @property {string} [firstSeenAt] - Bookkeeping (day precision).

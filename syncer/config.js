@@ -33,7 +33,7 @@ export const GROQ_URL = "https://api.groq.com/openai/v1/models";
 
 /**
  * Provider priority for deduplication:
- * groq > cloudflare > openrouter > fal > elevenlabs > deepgram
+ * groq > cloudflare > openrouter > fal > elevenlabs > deepgram/assemblyai
  */
 export const SOURCE_PRIORITY = Object.freeze({
     groq: 6,
@@ -42,6 +42,7 @@ export const SOURCE_PRIORITY = Object.freeze({
     fal: 3,
     elevenlabs: 2,
     deepgram: 1,
+    assemblyai: 1,
 });
 
 /**
@@ -82,6 +83,7 @@ export const PRODUCER_MAP = {
     "fal-ai": "Fal AI",
     "elevenlabs": "ElevenLabs",
     "deepgram": "Deepgram",
+    "assemblyai": "AssemblyAI",
     "cloudflare": "Cloudflare",
     "groq": "Groq",
     "blackforestlabs": "Black Forest Labs",

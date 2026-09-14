@@ -24,7 +24,15 @@ function num(value) {
 export function normalizeElevenLabsModel(model, { identity, canonicalKey, catalogMatch }) {
     const modelId = model.model_id;
     const category = categoryFromElevenLabsModel(model, modelId);
-    const record = createCortexModel({ id: modelId, source: 'elevenlabs', canonicalKey, category });
+    const realtime = category === 'stt' && /realtime/i.test(modelId);
+    const generation = /(?:^|[_ -])v(\d+)(?:$|[_ -])/i.exec(String(modelId || ''))?.[1] || null;
+    const record = createCortexModel({
+        id: modelId,
+        source: 'elevenlabs',
+        canonicalKey,
+        category,
+        task: realtime ? 'realtime_stt' : null,
+    });
 
     record.identity = identityFrom({
         id: modelId,
@@ -32,6 +40,7 @@ export function normalizeElevenLabsModel(model, { identity, canonicalKey, catalo
         producer: identity.producer,
         series: identity.series,
         variant: identity.variant,
+        version: model.version || (generation ? `v${generation}` : null),
     });
 
     record.modalities = {
@@ -52,7 +61,22 @@ export function normalizeElevenLabsModel(model, { identity, canonicalKey, catalo
         speechToText: category === 'stt' || null,
         audioInput: category !== 'tts' || null,
         textOutput: category === 'stt' || null,
+        realtime: realtime || null,
+        automaticLanguageDetection: realtime || null,
+        interimResults: realtime || null,
+        finalResults: realtime || null,
+        vad: realtime || null,
+        endpointing: realtime || null,
     };
+
+    if (realtime) {
+        record.audio = {
+            formats: ['pcm_16000'],
+            sampleRates: [16000],
+            channels: 1,
+            pcm: true,
+        };
+    }
 
     record.pricing = {
         perCharacter: num(model.model_rates?.character_cost_multiplier),
@@ -62,7 +86,7 @@ export function normalizeElevenLabsModel(model, { identity, canonicalKey, catalo
     record.lifecycle.status = model.requires_alpha_access ? 'preview' : null;
 
     record.routing.languages = Array.isArray(model.languages) && model.languages.length
-        ? model.languages.map(l => l.language_id)
+        ? model.languages.map(l => typeof l === 'string' ? l : l?.language_id).filter(Boolean)
         : null;
     record.routing.catalogMatch = catalogMatch ?? null;
 

@@ -3,7 +3,7 @@
  *
  * Module: Model Deduplicator
  * Description: Deduplicates models sharing the same ID across multiple providers.
- * Follows strict priority order: groq > cloudflare > openrouter > fal > elevenlabs > deepgram.
+ * Follows strict priority order: groq > cloudflare > openrouter > fal > elevenlabs > deepgram/assemblyai.
  * HuggingFace / offline (manual) models are completely excluded from deduplication.
  */
 
@@ -44,7 +44,7 @@ export function normalizeModelId(id, source = "") {
 /**
  * Deduplicates online models across the producers tree using source priority.
  * Manual (HuggingFace/offline) models are preserved without modification.
- * Priority: groq (6) > cloudflare (5) > openrouter (4) > fal (3) > elevenlabs (2) > deepgram (1).
+ * Priority: groq (6) > cloudflare (5) > openrouter (4) > fal (3) > elevenlabs (2) > deepgram/assemblyai (1).
  *
  * @param {object} producers - The grouped producers data.
  * @param {string} operationId - Logging operation ID.
@@ -93,7 +93,7 @@ export function deduplicateProducers(producers, operationId) {
     for (const [key, entries] of modelMap.entries()) {
         if (entries.length <= 1) continue;
 
-        // Sort descending by priority: groq (6) > cloudflare (5) > openrouter (4) > fal (3) > elevenlabs (2) > deepgram (1)
+        // Sort descending by priority: groq (6) > cloudflare (5) > openrouter (4) > fal (3) > elevenlabs (2) > deepgram/assemblyai (1)
         entries.sort((a, b) => b.priority - a.priority);
 
         const winner = entries[0];

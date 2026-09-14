@@ -51,7 +51,6 @@ export async function buildGroupedElevenLabsModels(env, operationId, blacklisted
         }
 
         const producer = "ElevenLabs";
-        const series = "Eleven Voice";
         const alarmSeen = new Set();
 
         for (const model of models) {
@@ -65,6 +64,7 @@ export async function buildGroupedElevenLabsModels(env, operationId, blacklisted
             }
 
             const name = (model.name || modelId).trim();
+            const series = match.series || "Eleven Voice";
             const variant = name.replace(/^Eleven\s+/i, "").trim() || name;
 
             // Catalog record: character limits land in limits.maxInputCharacters.
