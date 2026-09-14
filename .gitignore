@@ -19,3 +19,7 @@ yarn-error.log*
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+# Gateway integration test scratch files (generated)
+gateway/test/.env.integration
+gateway/test/.wrangler-state/
