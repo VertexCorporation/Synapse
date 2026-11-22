@@ -7,7 +7,7 @@ import { insertCatalogModel, matchCatalogModel, reportAssetAlarm } from './catal
  * Transforms models into Cortex ProducersData format.
  */
 
-import { PRODUCER_MAP } from '../config.js';
+import { PRODUCER_MAP, RETIRED_CLOUDFLARE_MODEL_IDS } from '../config.js';
 import { fetchWithTimeout } from '../utils/api.js';
 import { normalizeModelId } from './dedup.js';
 import { normalizeCloudflareModel } from './normalize/cloudflare.js';
@@ -107,6 +107,8 @@ export async function buildGroupedCloudflareModels(env, operationId, blacklisted
             for (const item of list) {
                 const modelId = item.name || item.id;
                 if (!modelId) continue;
+                // Retired IDs fail permanently; skip even if the API still lists them.
+                if (RETIRED_CLOUDFLARE_MODEL_IDS.has(modelId.toLowerCase())) continue;
                 if (blacklistedIds && blacklistedIds.has(modelId)) continue;
                 const match = matchCatalogModel('cloudflare', modelId);
                 if (!match) {

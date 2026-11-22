@@ -121,3 +121,33 @@ export const ALLOWED_PROVIDER_IDS = Object.keys(PRODUCER_MAP);
 export const TEXT_COST_LIMIT = +(DEFAULTS.COST_LIMIT);
 export const IMAGE_COST_LIMIT = 0.07;
 export const WEB_SEARCH_COST_LIMIT = 0.07;
+
+// Cloudflare Workers AI models permanently retired on 2026-11-20.
+// Source: https://developers.cloudflare.com/changelog/post/2026-11-05-planned-model-deprecations/
+// Keep explicit IDs: a retired model must not be revived by stale provider/KV data.
+export const RETIRED_CLOUDFLARE_MODEL_IDS = new Set([
+    '@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
+    '@cf/nvidia/nemotron-3-120b-a12b',
+    '@cf/deepseek-ai/deepseek-v4-pro-0813',
+    '@cf/deepseek-ai/deepseek-v4-flash-0731',
+    '@cf/qwen/qwq-32b',
+    '@cf/qwen/qwen3-30b-a3b-fp8',
+    '@cf/moonshotai/kimi-k2.6',
+    '@cf/moonshotai/kimi-k2.7-code',
+    '@cf/zai-org/glm-5.2',
+    '@cf/zai-org/glm-5.3-flash',
+    '@cf/meta-llama/llama-2-7b-chat-hf-lora',
+    '@cf/google/gemma-2b-it-lora',
+    '@cf/google/gemma-7b-it-lora',
+    '@cf/meta/llama-3.1-8b-instruct-fp8',
+    '@cf/meta/llama-3.2-1b-instruct',
+    '@cf/meta/llama-3.2-3b-instruct',
+    '@cf/myshell-ai/melotts',
+    '@cf/stabilityai/stable-diffusion-xl-base-1.0',
+    '@cf/runwayml/stable-diffusion-v1-5-inpainting',
+    '@cf/bytedance/stable-diffusion-xl-lightning',
+    '@cf/lykon/dreamshaper-8-lcm',
+    '@cf/openai/whisper-tiny-en',
+    '@cf/llava-hf/llava-1.5-7b-hf',
+    '@cf/google/embeddinggemma-300m',
+]);
