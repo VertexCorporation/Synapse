@@ -1,3 +1,4 @@
+import { RETIRED_CLOUDFLARE_MODEL_IDS } from '../config.js';
 /*
  * Cortex - Syncer Worker - v7.0 (Modular)
  *
@@ -153,6 +154,7 @@ export function mergeCatalogRecords(freshRecords, oldCatalog, providerHealth, op
 
     for (const fresh of freshRecords) {
         if (!fresh?.id || !fresh?.source) continue;
+        if (fresh.source === 'cloudflare' && RETIRED_CLOUDFLARE_MODEL_IDS.has(fresh.id.toLowerCase())) { pruned++; continue; }
         const key = `${fresh.source}:${fresh.id}`;
         if (freshKeys.has(key)) continue; // duplicate raw entries (e.g. Deepgram versions)
         freshKeys.add(key);
@@ -176,6 +178,8 @@ export function mergeCatalogRecords(freshRecords, oldCatalog, providerHealth, op
     }
 
     for (const [key, old] of oldByKey) {
+        // Explicit retirement overrides the normal three-run grace and failed-provider LKG.
+        if (old.source === 'cloudflare' && RETIRED_CLOUDFLARE_MODEL_IDS.has(old.id.toLowerCase())) { pruned++; continue; }
         if (freshKeys.has(key)) continue;
         const healthy = providerHealth ? providerHealth[old.source] !== false : true;
         if (!healthy) {
