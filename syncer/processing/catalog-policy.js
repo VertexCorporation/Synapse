@@ -1,5 +1,5 @@
 import { FAMILY_ASSETS, FAMILY_NAMES, PRODUCER_ASSETS } from '../config/client-assets.js';
-import { ALLOWED_PROVIDER_IDS, PRODUCER_MAP } from '../config.js';
+import { ALLOWED_PROVIDER_IDS, PRODUCER_MAP, RETIRED_CLOUDFLARE_MODEL_IDS } from '../config.js';
 
 export const RESTRICTED_SOURCES = new Set(['manual', 'openrouter', 'groq', 'cloudflare', 'deepgram', 'assemblyai', 'elevenlabs', 'fal']);
 const aliases = { 'deepseek-ai': 'deepseek', runwayml: 'runway', 'meta-llama': 'meta', mistralai: 'mistral', 'mistral-ai': 'mistral',
@@ -26,6 +26,7 @@ function familyMatch(slug) {
 // asset is sufficient to authorize a model. This also applies to free fallbacks.
 export function matchCatalogModel(source, id) {
     if (!RESTRICTED_SOURCES.has(source) || typeof id !== 'string') return null;
+    if (source === 'cloudflare' && RETIRED_CLOUDFLARE_MODEL_IDS.has(id.toLowerCase())) return null;
     if (source === 'elevenlabs') {
         if (/^scribe(?:[_-]|$)/i.test(id)) return { key: 'scribe', asset: null, series: 'Scribe' };
         return /^eleven[_-]/i.test(id) ? familyMatch('elevenlabs') : null;
