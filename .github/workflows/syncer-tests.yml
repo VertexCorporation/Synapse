@@ -1,0 +1,32 @@
+name: Synapse Syncer Tests
+
+on:
+  pull_request:
+    paths:
+      - 'syncer/**'
+      - '.github/workflows/syncer-tests.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'syncer/**'
+      - '.github/workflows/syncer-tests.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  syncer-tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: syncer/package-lock.json
+      - name: Install pinned dependencies
+        working-directory: syncer
+        run: npm ci
+      - name: Run deterministic syncer test suite
+        working-directory: syncer
+        run: npm test
