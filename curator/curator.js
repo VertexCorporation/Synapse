@@ -68,7 +68,7 @@ export default {
             // --- Protected Routes ---
             const authResult = await verifyAuth(request, env);
             if (!authResult.authorized) {
-                return errorResponse(authResult.error, 403, request);
+                return errorResponse(authResult.error, authResult.status || 403, request);
             }
 
             // --- Granular Update (POST /curated/update-list) ---
