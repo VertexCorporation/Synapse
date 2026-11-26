@@ -5,6 +5,8 @@
 
 import { jwtVerify, importX509 } from 'jose';
 
+const consoleAccessUrl = 'https://europe-west1-vertex-ai-1618.cloudfunctions.net/getMyConsoleAccess';
+
 // --- Caching for Google's Public Keys ---
 let certCache = null;
 let certCacheTimestamp = 0;
@@ -58,19 +60,34 @@ export async function verifyAuth(request, env) {
     };
 
     try {
-        const { payload } = await jwtVerify(token, keyLookup, {
+        await jwtVerify(token, keyLookup, {
+            algorithms: ['RS256'],
             issuer: `https://securetoken.google.com/${env.FIREBASE_PROJECT_ID}`,
             audience: env.FIREBASE_PROJECT_ID,
         });
-
-        if (payload && payload.admin === true) {
-            return { authorized: true, token: payload };
-        }
-
-        return { authorized: false, error: "Token is valid but does not have admin privileges." };
-
     } catch (e) {
-        console.error("Token verification failed:", e.message);
         return { authorized: false, error: "Token verification failed. The token may be expired, malformed, or invalid." };
+    }
+
+    // The Console uses current server-owned Core membership. The old admin
+    // claim neither grants access nor keeps it after server-side revocation.
+    try {
+        const response = await fetch(consoleAccessUrl, {
+            method: 'POST',
+            headers: { 'Authorization': authHeader, 'Content-Type': 'application/json' },
+            body: JSON.stringify({ data: {} }),
+            redirect: 'error',
+            signal: AbortSignal.timeout(12000),
+        });
+        if (response.status === 401 || response.status === 403) {
+            return { authorized: false, error: 'Current Core membership is required.' };
+        }
+        if (!response.ok) throw new Error('Console access lookup failed.');
+        const { result } = await response.json();
+        if (typeof result?.isCore !== 'boolean') throw new Error('Invalid Console access response.');
+        if (result.isCore) return { authorized: true };
+        return { authorized: false, error: 'Current Core membership is required.' };
+    } catch {
+        return { authorized: false, status: 503, error: 'Console access verification is temporarily unavailable.' };
     }
 }
